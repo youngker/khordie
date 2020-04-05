@@ -1,0 +1,2654 @@
+{ Compiled on Sun Apr  5 16:19:58 2020 }
+on init
+  declare $concat_it
+  declare $concat_offset
+  declare $string_it
+  declare $list_it
+  declare $preproc_i
+  declare %empty_notes[50] := (255)
+  declare %empty_keys[7] := (255)
+  declare %notes[50] := (255)
+  declare %sustain_notes[128] := (255)
+  declare $pnum := 0
+  declare $is_sustain := 0
+  declare $key
+  declare $i := 0
+  declare $j := 0
+  declare $k := 0
+  declare $l := 0
+  declare $m := 0
+  declare $n := 0
+  message("")
+  make_perfview
+  set_script_title("Khordie")
+  set_ui_height_px(450)
+  set_ui_color(16777215)
+  declare %note[50]
+  declare ui_label $note0(1, 1) 
+  declare ui_label $note1(1, 1) 
+  declare ui_label $note2(1, 1) 
+  declare ui_label $note3(1, 1) 
+  declare ui_label $note4(1, 1) 
+  declare ui_label $note5(1, 1) 
+  declare ui_label $note6(1, 1) 
+  declare ui_label $note7(1, 1) 
+  declare ui_label $note8(1, 1) 
+  declare ui_label $note9(1, 1) 
+  declare ui_label $note10(1, 1) 
+  declare ui_label $note11(1, 1) 
+  declare ui_label $note12(1, 1) 
+  declare ui_label $note13(1, 1) 
+  declare ui_label $note14(1, 1) 
+  declare ui_label $note15(1, 1) 
+  declare ui_label $note16(1, 1) 
+  declare ui_label $note17(1, 1) 
+  declare ui_label $note18(1, 1) 
+  declare ui_label $note19(1, 1) 
+  declare ui_label $note20(1, 1) 
+  declare ui_label $note21(1, 1) 
+  declare ui_label $note22(1, 1) 
+  declare ui_label $note23(1, 1) 
+  declare ui_label $note24(1, 1) 
+  declare ui_label $note25(1, 1) 
+  declare ui_label $note26(1, 1) 
+  declare ui_label $note27(1, 1) 
+  declare ui_label $note28(1, 1) 
+  declare ui_label $note29(1, 1) 
+  declare ui_label $note30(1, 1) 
+  declare ui_label $note31(1, 1) 
+  declare ui_label $note32(1, 1) 
+  declare ui_label $note33(1, 1) 
+  declare ui_label $note34(1, 1) 
+  declare ui_label $note35(1, 1) 
+  declare ui_label $note36(1, 1) 
+  declare ui_label $note37(1, 1) 
+  declare ui_label $note38(1, 1) 
+  declare ui_label $note39(1, 1) 
+  declare ui_label $note40(1, 1) 
+  declare ui_label $note41(1, 1) 
+  declare ui_label $note42(1, 1) 
+  declare ui_label $note43(1, 1) 
+  declare ui_label $note44(1, 1) 
+  declare ui_label $note45(1, 1) 
+  declare ui_label $note46(1, 1) 
+  declare ui_label $note47(1, 1) 
+  declare ui_label $note48(1, 1) 
+  declare ui_label $note49(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=49)
+    %note[$preproc_i] := get_ui_id($note0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<50)
+    set_control_par_str(%note[$i],$CONTROL_PAR_PICTURE,"note")
+    set_control_par_str(%note[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  declare %sharp[50]
+  declare ui_label $sharp0(1, 1) 
+  declare ui_label $sharp1(1, 1) 
+  declare ui_label $sharp2(1, 1) 
+  declare ui_label $sharp3(1, 1) 
+  declare ui_label $sharp4(1, 1) 
+  declare ui_label $sharp5(1, 1) 
+  declare ui_label $sharp6(1, 1) 
+  declare ui_label $sharp7(1, 1) 
+  declare ui_label $sharp8(1, 1) 
+  declare ui_label $sharp9(1, 1) 
+  declare ui_label $sharp10(1, 1) 
+  declare ui_label $sharp11(1, 1) 
+  declare ui_label $sharp12(1, 1) 
+  declare ui_label $sharp13(1, 1) 
+  declare ui_label $sharp14(1, 1) 
+  declare ui_label $sharp15(1, 1) 
+  declare ui_label $sharp16(1, 1) 
+  declare ui_label $sharp17(1, 1) 
+  declare ui_label $sharp18(1, 1) 
+  declare ui_label $sharp19(1, 1) 
+  declare ui_label $sharp20(1, 1) 
+  declare ui_label $sharp21(1, 1) 
+  declare ui_label $sharp22(1, 1) 
+  declare ui_label $sharp23(1, 1) 
+  declare ui_label $sharp24(1, 1) 
+  declare ui_label $sharp25(1, 1) 
+  declare ui_label $sharp26(1, 1) 
+  declare ui_label $sharp27(1, 1) 
+  declare ui_label $sharp28(1, 1) 
+  declare ui_label $sharp29(1, 1) 
+  declare ui_label $sharp30(1, 1) 
+  declare ui_label $sharp31(1, 1) 
+  declare ui_label $sharp32(1, 1) 
+  declare ui_label $sharp33(1, 1) 
+  declare ui_label $sharp34(1, 1) 
+  declare ui_label $sharp35(1, 1) 
+  declare ui_label $sharp36(1, 1) 
+  declare ui_label $sharp37(1, 1) 
+  declare ui_label $sharp38(1, 1) 
+  declare ui_label $sharp39(1, 1) 
+  declare ui_label $sharp40(1, 1) 
+  declare ui_label $sharp41(1, 1) 
+  declare ui_label $sharp42(1, 1) 
+  declare ui_label $sharp43(1, 1) 
+  declare ui_label $sharp44(1, 1) 
+  declare ui_label $sharp45(1, 1) 
+  declare ui_label $sharp46(1, 1) 
+  declare ui_label $sharp47(1, 1) 
+  declare ui_label $sharp48(1, 1) 
+  declare ui_label $sharp49(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=49)
+    %sharp[$preproc_i] := get_ui_id($sharp0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<50)
+    set_control_par_str(%sharp[$i],$CONTROL_PAR_PICTURE,"sharp")
+    set_control_par_str(%sharp[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  declare %flat[50]
+  declare ui_label $flat0(1, 1) 
+  declare ui_label $flat1(1, 1) 
+  declare ui_label $flat2(1, 1) 
+  declare ui_label $flat3(1, 1) 
+  declare ui_label $flat4(1, 1) 
+  declare ui_label $flat5(1, 1) 
+  declare ui_label $flat6(1, 1) 
+  declare ui_label $flat7(1, 1) 
+  declare ui_label $flat8(1, 1) 
+  declare ui_label $flat9(1, 1) 
+  declare ui_label $flat10(1, 1) 
+  declare ui_label $flat11(1, 1) 
+  declare ui_label $flat12(1, 1) 
+  declare ui_label $flat13(1, 1) 
+  declare ui_label $flat14(1, 1) 
+  declare ui_label $flat15(1, 1) 
+  declare ui_label $flat16(1, 1) 
+  declare ui_label $flat17(1, 1) 
+  declare ui_label $flat18(1, 1) 
+  declare ui_label $flat19(1, 1) 
+  declare ui_label $flat20(1, 1) 
+  declare ui_label $flat21(1, 1) 
+  declare ui_label $flat22(1, 1) 
+  declare ui_label $flat23(1, 1) 
+  declare ui_label $flat24(1, 1) 
+  declare ui_label $flat25(1, 1) 
+  declare ui_label $flat26(1, 1) 
+  declare ui_label $flat27(1, 1) 
+  declare ui_label $flat28(1, 1) 
+  declare ui_label $flat29(1, 1) 
+  declare ui_label $flat30(1, 1) 
+  declare ui_label $flat31(1, 1) 
+  declare ui_label $flat32(1, 1) 
+  declare ui_label $flat33(1, 1) 
+  declare ui_label $flat34(1, 1) 
+  declare ui_label $flat35(1, 1) 
+  declare ui_label $flat36(1, 1) 
+  declare ui_label $flat37(1, 1) 
+  declare ui_label $flat38(1, 1) 
+  declare ui_label $flat39(1, 1) 
+  declare ui_label $flat40(1, 1) 
+  declare ui_label $flat41(1, 1) 
+  declare ui_label $flat42(1, 1) 
+  declare ui_label $flat43(1, 1) 
+  declare ui_label $flat44(1, 1) 
+  declare ui_label $flat45(1, 1) 
+  declare ui_label $flat46(1, 1) 
+  declare ui_label $flat47(1, 1) 
+  declare ui_label $flat48(1, 1) 
+  declare ui_label $flat49(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=49)
+    %flat[$preproc_i] := get_ui_id($flat0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<50)
+    set_control_par_str(%flat[$i],$CONTROL_PAR_PICTURE,"flat")
+    set_control_par_str(%flat[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  declare %natural[50]
+  declare ui_label $natural0(1, 1) 
+  declare ui_label $natural1(1, 1) 
+  declare ui_label $natural2(1, 1) 
+  declare ui_label $natural3(1, 1) 
+  declare ui_label $natural4(1, 1) 
+  declare ui_label $natural5(1, 1) 
+  declare ui_label $natural6(1, 1) 
+  declare ui_label $natural7(1, 1) 
+  declare ui_label $natural8(1, 1) 
+  declare ui_label $natural9(1, 1) 
+  declare ui_label $natural10(1, 1) 
+  declare ui_label $natural11(1, 1) 
+  declare ui_label $natural12(1, 1) 
+  declare ui_label $natural13(1, 1) 
+  declare ui_label $natural14(1, 1) 
+  declare ui_label $natural15(1, 1) 
+  declare ui_label $natural16(1, 1) 
+  declare ui_label $natural17(1, 1) 
+  declare ui_label $natural18(1, 1) 
+  declare ui_label $natural19(1, 1) 
+  declare ui_label $natural20(1, 1) 
+  declare ui_label $natural21(1, 1) 
+  declare ui_label $natural22(1, 1) 
+  declare ui_label $natural23(1, 1) 
+  declare ui_label $natural24(1, 1) 
+  declare ui_label $natural25(1, 1) 
+  declare ui_label $natural26(1, 1) 
+  declare ui_label $natural27(1, 1) 
+  declare ui_label $natural28(1, 1) 
+  declare ui_label $natural29(1, 1) 
+  declare ui_label $natural30(1, 1) 
+  declare ui_label $natural31(1, 1) 
+  declare ui_label $natural32(1, 1) 
+  declare ui_label $natural33(1, 1) 
+  declare ui_label $natural34(1, 1) 
+  declare ui_label $natural35(1, 1) 
+  declare ui_label $natural36(1, 1) 
+  declare ui_label $natural37(1, 1) 
+  declare ui_label $natural38(1, 1) 
+  declare ui_label $natural39(1, 1) 
+  declare ui_label $natural40(1, 1) 
+  declare ui_label $natural41(1, 1) 
+  declare ui_label $natural42(1, 1) 
+  declare ui_label $natural43(1, 1) 
+  declare ui_label $natural44(1, 1) 
+  declare ui_label $natural45(1, 1) 
+  declare ui_label $natural46(1, 1) 
+  declare ui_label $natural47(1, 1) 
+  declare ui_label $natural48(1, 1) 
+  declare ui_label $natural49(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=49)
+    %natural[$preproc_i] := get_ui_id($natural0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<50)
+    set_control_par_str(%natural[$i],$CONTROL_PAR_PICTURE,"natural")
+    set_control_par_str(%natural[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  declare %_key_pos[2*(15-1)*2] := (20+50, 115+33, 20+57, 115+12, 20+64, 115+40, 20+71, 115+19, 20+78, 115+47, 20+85, 115+26, 20+92, 115+54, 20+50, 115+135, 20+57, 115+114, 20+64, 115+142, 20+71, 115+121, 20+78, 115+149, 20+85, 115+128, 20+92, 115+156, 20+50, 115+7, 20+57, 115+28, 20+64, 115, 20+71, 115+21, 20+78, 115+43, 20+85, 115+14, 20+92, ...
+  115+35, 20+50, 115+109, 20+57, 115+130, 20+64, 115+102, 20+71, 115+123, 20+78, 115+145, 20+85, 115+116, 20+92, 115+137)
+  declare const $key_pos__SIZE_D1 := 2
+  declare const $key_pos__SIZE_D2 := 15-1
+  declare const $key_pos__SIZE_D3 := 2
+  declare %flatkey[15-1]
+  declare ui_label $flatkey0(1, 1) 
+  declare ui_label $flatkey1(1, 1) 
+  declare ui_label $flatkey2(1, 1) 
+  declare ui_label $flatkey3(1, 1) 
+  declare ui_label $flatkey4(1, 1) 
+  declare ui_label $flatkey5(1, 1) 
+  declare ui_label $flatkey6(1, 1) 
+  declare ui_label $flatkey7(1, 1) 
+  declare ui_label $flatkey8(1, 1) 
+  declare ui_label $flatkey9(1, 1) 
+  declare ui_label $flatkey10(1, 1) 
+  declare ui_label $flatkey11(1, 1) 
+  declare ui_label $flatkey12(1, 1) 
+  declare ui_label $flatkey13(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=13)
+    %flatkey[$preproc_i] := get_ui_id($flatkey0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<=(15-2))
+    set_control_par_str(%flatkey[$i],$CONTROL_PAR_PICTURE,"flat")
+    set_control_par_str(%flatkey[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%flatkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%flatkey[$i],$CONTROL_PAR_POS_X,%_key_pos[2*(15-1)*0+(2*$i)+0])
+    set_control_par(%flatkey[$i],$CONTROL_PAR_POS_Y,%_key_pos[2*(15-1)*0+(2*$i)+1])
+    inc($i)
+  end while
+  declare %sharpkey[15-1]
+  declare ui_label $sharpkey0(1, 1) 
+  declare ui_label $sharpkey1(1, 1) 
+  declare ui_label $sharpkey2(1, 1) 
+  declare ui_label $sharpkey3(1, 1) 
+  declare ui_label $sharpkey4(1, 1) 
+  declare ui_label $sharpkey5(1, 1) 
+  declare ui_label $sharpkey6(1, 1) 
+  declare ui_label $sharpkey7(1, 1) 
+  declare ui_label $sharpkey8(1, 1) 
+  declare ui_label $sharpkey9(1, 1) 
+  declare ui_label $sharpkey10(1, 1) 
+  declare ui_label $sharpkey11(1, 1) 
+  declare ui_label $sharpkey12(1, 1) 
+  declare ui_label $sharpkey13(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=13)
+    %sharpkey[$preproc_i] := get_ui_id($sharpkey0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<=(15-2))
+    set_control_par_str(%sharpkey[$i],$CONTROL_PAR_PICTURE,"sharp")
+    set_control_par_str(%sharpkey[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%sharpkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%sharpkey[$i],$CONTROL_PAR_POS_X,%_key_pos[2*(15-1)*1+(2*$i)+0])
+    set_control_par(%sharpkey[$i],$CONTROL_PAR_POS_Y,%_key_pos[2*(15-1)*1+(2*$i)+1])
+    inc($i)
+  end while
+  declare %bnotes[128]
+  declare ui_label $bnotes0(1, 1) 
+  declare ui_label $bnotes1(1, 1) 
+  declare ui_label $bnotes2(1, 1) 
+  declare ui_label $bnotes3(1, 1) 
+  declare ui_label $bnotes4(1, 1) 
+  declare ui_label $bnotes5(1, 1) 
+  declare ui_label $bnotes6(1, 1) 
+  declare ui_label $bnotes7(1, 1) 
+  declare ui_label $bnotes8(1, 1) 
+  declare ui_label $bnotes9(1, 1) 
+  declare ui_label $bnotes10(1, 1) 
+  declare ui_label $bnotes11(1, 1) 
+  declare ui_label $bnotes12(1, 1) 
+  declare ui_label $bnotes13(1, 1) 
+  declare ui_label $bnotes14(1, 1) 
+  declare ui_label $bnotes15(1, 1) 
+  declare ui_label $bnotes16(1, 1) 
+  declare ui_label $bnotes17(1, 1) 
+  declare ui_label $bnotes18(1, 1) 
+  declare ui_label $bnotes19(1, 1) 
+  declare ui_label $bnotes20(1, 1) 
+  declare ui_label $bnotes21(1, 1) 
+  declare ui_label $bnotes22(1, 1) 
+  declare ui_label $bnotes23(1, 1) 
+  declare ui_label $bnotes24(1, 1) 
+  declare ui_label $bnotes25(1, 1) 
+  declare ui_label $bnotes26(1, 1) 
+  declare ui_label $bnotes27(1, 1) 
+  declare ui_label $bnotes28(1, 1) 
+  declare ui_label $bnotes29(1, 1) 
+  declare ui_label $bnotes30(1, 1) 
+  declare ui_label $bnotes31(1, 1) 
+  declare ui_label $bnotes32(1, 1) 
+  declare ui_label $bnotes33(1, 1) 
+  declare ui_label $bnotes34(1, 1) 
+  declare ui_label $bnotes35(1, 1) 
+  declare ui_label $bnotes36(1, 1) 
+  declare ui_label $bnotes37(1, 1) 
+  declare ui_label $bnotes38(1, 1) 
+  declare ui_label $bnotes39(1, 1) 
+  declare ui_label $bnotes40(1, 1) 
+  declare ui_label $bnotes41(1, 1) 
+  declare ui_label $bnotes42(1, 1) 
+  declare ui_label $bnotes43(1, 1) 
+  declare ui_label $bnotes44(1, 1) 
+  declare ui_label $bnotes45(1, 1) 
+  declare ui_label $bnotes46(1, 1) 
+  declare ui_label $bnotes47(1, 1) 
+  declare ui_label $bnotes48(1, 1) 
+  declare ui_label $bnotes49(1, 1) 
+  declare ui_label $bnotes50(1, 1) 
+  declare ui_label $bnotes51(1, 1) 
+  declare ui_label $bnotes52(1, 1) 
+  declare ui_label $bnotes53(1, 1) 
+  declare ui_label $bnotes54(1, 1) 
+  declare ui_label $bnotes55(1, 1) 
+  declare ui_label $bnotes56(1, 1) 
+  declare ui_label $bnotes57(1, 1) 
+  declare ui_label $bnotes58(1, 1) 
+  declare ui_label $bnotes59(1, 1) 
+  declare ui_label $bnotes60(1, 1) 
+  declare ui_label $bnotes61(1, 1) 
+  declare ui_label $bnotes62(1, 1) 
+  declare ui_label $bnotes63(1, 1) 
+  declare ui_label $bnotes64(1, 1) 
+  declare ui_label $bnotes65(1, 1) 
+  declare ui_label $bnotes66(1, 1) 
+  declare ui_label $bnotes67(1, 1) 
+  declare ui_label $bnotes68(1, 1) 
+  declare ui_label $bnotes69(1, 1) 
+  declare ui_label $bnotes70(1, 1) 
+  declare ui_label $bnotes71(1, 1) 
+  declare ui_label $bnotes72(1, 1) 
+  declare ui_label $bnotes73(1, 1) 
+  declare ui_label $bnotes74(1, 1) 
+  declare ui_label $bnotes75(1, 1) 
+  declare ui_label $bnotes76(1, 1) 
+  declare ui_label $bnotes77(1, 1) 
+  declare ui_label $bnotes78(1, 1) 
+  declare ui_label $bnotes79(1, 1) 
+  declare ui_label $bnotes80(1, 1) 
+  declare ui_label $bnotes81(1, 1) 
+  declare ui_label $bnotes82(1, 1) 
+  declare ui_label $bnotes83(1, 1) 
+  declare ui_label $bnotes84(1, 1) 
+  declare ui_label $bnotes85(1, 1) 
+  declare ui_label $bnotes86(1, 1) 
+  declare ui_label $bnotes87(1, 1) 
+  declare ui_label $bnotes88(1, 1) 
+  declare ui_label $bnotes89(1, 1) 
+  declare ui_label $bnotes90(1, 1) 
+  declare ui_label $bnotes91(1, 1) 
+  declare ui_label $bnotes92(1, 1) 
+  declare ui_label $bnotes93(1, 1) 
+  declare ui_label $bnotes94(1, 1) 
+  declare ui_label $bnotes95(1, 1) 
+  declare ui_label $bnotes96(1, 1) 
+  declare ui_label $bnotes97(1, 1) 
+  declare ui_label $bnotes98(1, 1) 
+  declare ui_label $bnotes99(1, 1) 
+  declare ui_label $bnotes100(1, 1) 
+  declare ui_label $bnotes101(1, 1) 
+  declare ui_label $bnotes102(1, 1) 
+  declare ui_label $bnotes103(1, 1) 
+  declare ui_label $bnotes104(1, 1) 
+  declare ui_label $bnotes105(1, 1) 
+  declare ui_label $bnotes106(1, 1) 
+  declare ui_label $bnotes107(1, 1) 
+  declare ui_label $bnotes108(1, 1) 
+  declare ui_label $bnotes109(1, 1) 
+  declare ui_label $bnotes110(1, 1) 
+  declare ui_label $bnotes111(1, 1) 
+  declare ui_label $bnotes112(1, 1) 
+  declare ui_label $bnotes113(1, 1) 
+  declare ui_label $bnotes114(1, 1) 
+  declare ui_label $bnotes115(1, 1) 
+  declare ui_label $bnotes116(1, 1) 
+  declare ui_label $bnotes117(1, 1) 
+  declare ui_label $bnotes118(1, 1) 
+  declare ui_label $bnotes119(1, 1) 
+  declare ui_label $bnotes120(1, 1) 
+  declare ui_label $bnotes121(1, 1) 
+  declare ui_label $bnotes122(1, 1) 
+  declare ui_label $bnotes123(1, 1) 
+  declare ui_label $bnotes124(1, 1) 
+  declare ui_label $bnotes125(1, 1) 
+  declare ui_label $bnotes126(1, 1) 
+  declare ui_label $bnotes127(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=127)
+    %bnotes[$preproc_i] := get_ui_id($bnotes0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<128)
+    set_control_par(%bnotes[$i],$CONTROL_PAR_FONT_TYPE,get_font_id("ssfont"))
+    set_control_par_str(%bnotes[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%bnotes[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  declare %line_pos_y[16] := (196-(28*7)+5, 196-(26*7)+5, 196-(24*7)+5, 196-(22*7)+5, 196-(20*7)+5, 196-(18*7)+5, 196-(16*7)+5, 196-(14*7)+5, 196-(12*7)+5, 196+5, 207+(11*7)+5, 207+(13*7)+5, 207+(15*7)+5, 207+(17*7)+5, 207+(19*7)+5, 207+(21*7)+5)
+  declare %line[16]
+  declare ui_label $line0(1, 1) 
+  declare ui_label $line1(1, 1) 
+  declare ui_label $line2(1, 1) 
+  declare ui_label $line3(1, 1) 
+  declare ui_label $line4(1, 1) 
+  declare ui_label $line5(1, 1) 
+  declare ui_label $line6(1, 1) 
+  declare ui_label $line7(1, 1) 
+  declare ui_label $line8(1, 1) 
+  declare ui_label $line9(1, 1) 
+  declare ui_label $line10(1, 1) 
+  declare ui_label $line11(1, 1) 
+  declare ui_label $line12(1, 1) 
+  declare ui_label $line13(1, 1) 
+  declare ui_label $line14(1, 1) 
+  declare ui_label $line15(1, 1) 
+  $preproc_i := 0
+  while ($preproc_i<=15)
+    %line[$preproc_i] := get_ui_id($line0)+$preproc_i
+    inc($preproc_i)
+  end while
+  $i := 0
+  while ($i<16)
+    set_control_par_str(%line[$i],$CONTROL_PAR_PICTURE,"line")
+    set_control_par_str(%line[$i],$CONTROL_PAR_TEXT,"")
+    set_control_par(%line[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%line[$i],$CONTROL_PAR_POS_X,190)
+    set_control_par(%line[$i],$CONTROL_PAR_POS_Y,%line_pos_y[$i])
+    inc($i)
+  end while
+  declare ui_label $key_name(1, 1) 
+  set_control_par(get_ui_id($key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
+  set_control_par(get_ui_id($key_name),$CONTROL_PAR_WIDTH,110)
+  set_control_par(get_ui_id($key_name),$CONTROL_PAR_HEIGHT,25)
+  set_text($key_name,"Key: No Key")
+  hide_part($key_name,$HIDE_PART_BG)
+  move_control_px($key_name,20,84)
+  declare ui_label $staff(1, 1) 
+  set_control_par_str(get_ui_id($staff),$CONTROL_PAR_PICTURE,"staff")
+  set_text($staff,"")
+  move_control_px($staff,20,115)
+  declare ui_label $main(1, 1) 
+  set_control_par(get_ui_id($main),$CONTROL_PAR_FONT_TYPE,get_font_id("font"))
+  set_control_par(get_ui_id($main),$CONTROL_PAR_WIDTH,300)
+  set_control_par(get_ui_id($main),$CONTROL_PAR_HEIGHT,50)
+  set_text($main,"")
+  hide_part($main,$HIDE_PART_BG)
+  move_control_px($main,290,109)
+  declare ui_label $sub(1, 2) 
+  set_control_par(get_ui_id($sub),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
+  set_control_par(get_ui_id($sub),$CONTROL_PAR_WIDTH,300)
+  set_control_par(get_ui_id($sub),$CONTROL_PAR_HEIGHT,200)
+  set_text($sub,"")
+  hide_part($sub,$HIDE_PART_BG)
+  move_control_px($sub,300,159)
+  declare ui_label $sustain(1, 1) 
+  set_control_par(get_ui_id($sustain),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
+  set_control_par(get_ui_id($sustain),$CONTROL_PAR_WIDTH,70)
+  set_control_par(get_ui_id($sustain),$CONTROL_PAR_HEIGHT,30)
+  set_text($sustain,"")
+  hide_part($sustain,$HIDE_PART_BG)
+  move_control_px($sustain,0,350)
+  declare ui_knob $knob(0, 14, 1) 
+  hide_part($knob,$HIDE_PART_VALUE .or. $HIDE_PART_TITLE .or. $HIDE_PART_BG)
+  move_control_px($knob,20,40)
+  declare !keys[15]
+  !keys[0] := "C"
+  !keys[1] := "F"
+  !keys[2] := "Bb"
+  !keys[3] := "Eb"
+  !keys[4] := "Ab"
+  !keys[5] := "Db"
+  !keys[6] := "Gb"
+  !keys[7] := "Cb"
+  !keys[8] := "C#"
+  !keys[9] := "F#"
+  !keys[10] := "B"
+  !keys[11] := "E"
+  !keys[12] := "A"
+  !keys[13] := "D"
+  !keys[14] := "G"
+  declare const $keys__SIZE := 15
+  declare !ckeynotes[36]
+  !ckeynotes[0] := "C"
+  !ckeynotes[1] := "C#"
+  !ckeynotes[2] := "D"
+  !ckeynotes[3] := "Eb"
+  !ckeynotes[4] := "E"
+  !ckeynotes[5] := "F"
+  !ckeynotes[6] := "F#"
+  !ckeynotes[7] := "G"
+  !ckeynotes[8] := "Ab"
+  !ckeynotes[9] := "A"
+  !ckeynotes[10] := "Bb"
+  !ckeynotes[11] := "B"
+  !ckeynotes[12] := "C"
+  !ckeynotes[13] := "Db"
+  !ckeynotes[14] := "D"
+  !ckeynotes[15] := "Eb"
+  !ckeynotes[16] := "E"
+  !ckeynotes[17] := "F"
+  !ckeynotes[18] := "Gb"
+  !ckeynotes[19] := "G"
+  !ckeynotes[20] := "Ab"
+  !ckeynotes[21] := "A"
+  !ckeynotes[22] := "Bb"
+  !ckeynotes[23] := "B"
+  !ckeynotes[24] := "C"
+  !ckeynotes[25] := "C#"
+  !ckeynotes[26] := "D"
+  !ckeynotes[27] := "D#"
+  !ckeynotes[28] := "E"
+  !ckeynotes[29] := "F"
+  !ckeynotes[30] := "F#"
+  !ckeynotes[31] := "G"
+  !ckeynotes[32] := "G#"
+  !ckeynotes[33] := "A"
+  !ckeynotes[34] := "A#"
+  !ckeynotes[35] := "B"
+  declare const $ckeynotes__SIZE := 36
+  declare %keyoffset[180] := (0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, ...
+  0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, ...
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, ...
+  1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, ...
+  1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0)
+  declare const $keyoffset__SIZE := 180
+  declare %translate[10] := (14, 17, 18, 22, 25, 52, 65, 66, 73, 66)
+  declare !keynotes[180]
+  !keynotes[0] := "C"
+  !keynotes[1] := "C#"
+  !keynotes[2] := "D"
+  !keynotes[3] := "Eb"
+  !keynotes[4] := "E"
+  !keynotes[5] := "F"
+  !keynotes[6] := "F#"
+  !keynotes[7] := "G"
+  !keynotes[8] := "Ab"
+  !keynotes[9] := "A"
+  !keynotes[10] := "Bb"
+  !keynotes[11] := "B"
+  !keynotes[12] := "C"
+  !keynotes[13] := "Db"
+  !keynotes[14] := "D"
+  !keynotes[15] := "Eb"
+  !keynotes[16] := "E"
+  !keynotes[17] := "F"
+  !keynotes[18] := "Gb"
+  !keynotes[19] := "G"
+  !keynotes[20] := "Ab"
+  !keynotes[21] := "A"
+  !keynotes[22] := "Bb"
+  !keynotes[23] := "BN"
+  !keynotes[24] := "C"
+  !keynotes[25] := "Db"
+  !keynotes[26] := "D"
+  !keynotes[27] := "Eb"
+  !keynotes[28] := "EN"
+  !keynotes[29] := "F"
+  !keynotes[30] := "Gb"
+  !keynotes[31] := "G"
+  !keynotes[32] := "Ab"
+  !keynotes[33] := "A"
+  !keynotes[34] := "Bb"
+  !keynotes[35] := "BN"
+  !keynotes[36] := "C"
+  !keynotes[37] := "Db"
+  !keynotes[38] := "D"
+  !keynotes[39] := "Eb"
+  !keynotes[40] := "EN"
+  !keynotes[41] := "F"
+  !keynotes[42] := "Gb"
+  !keynotes[43] := "G"
+  !keynotes[44] := "Ab"
+  !keynotes[45] := "AN"
+  !keynotes[46] := "Bb"
+  !keynotes[47] := "BN"
+  !keynotes[48] := "C"
+  !keynotes[49] := "Db"
+  !keynotes[50] := "DN"
+  !keynotes[51] := "Eb"
+  !keynotes[52] := "EN"
+  !keynotes[53] := "F"
+  !keynotes[54] := "Gb"
+  !keynotes[55] := "G"
+  !keynotes[56] := "Ab"
+  !keynotes[57] := "AN"
+  !keynotes[58] := "Bb"
+  !keynotes[59] := "BN"
+  !keynotes[60] := "C"
+  !keynotes[61] := "Db"
+  !keynotes[62] := "DN"
+  !keynotes[63] := "Eb"
+  !keynotes[64] := "EN"
+  !keynotes[65] := "F"
+  !keynotes[66] := "Gb"
+  !keynotes[67] := "GN"
+  !keynotes[68] := "Ab"
+  !keynotes[69] := "AN"
+  !keynotes[70] := "Bb"
+  !keynotes[71] := "BN"
+  !keynotes[72] := "CN"
+  !keynotes[73] := "Db"
+  !keynotes[74] := "DN"
+  !keynotes[75] := "Eb"
+  !keynotes[76] := "EN"
+  !keynotes[77] := "F"
+  !keynotes[78] := "Gb"
+  !keynotes[79] := "GN"
+  !keynotes[80] := "Ab"
+  !keynotes[81] := "AN"
+  !keynotes[82] := "Bb"
+  !keynotes[83] := "Cb"
+  !keynotes[84] := "CN"
+  !keynotes[85] := "Db"
+  !keynotes[86] := "DN"
+  !keynotes[87] := "Eb"
+  !keynotes[88] := "Fb"
+  !keynotes[89] := "FN"
+  !keynotes[90] := "Gb"
+  !keynotes[91] := "GN"
+  !keynotes[92] := "Ab"
+  !keynotes[93] := "AN"
+  !keynotes[94] := "Bb"
+  !keynotes[95] := "Cb"
+  !keynotes[96] := "B#"
+  !keynotes[97] := "C#"
+  !keynotes[98] := "DN"
+  !keynotes[99] := "D#"
+  !keynotes[100] := "EN"
+  !keynotes[101] := "E#"
+  !keynotes[102] := "F#"
+  !keynotes[103] := "GN"
+  !keynotes[104] := "G#"
+  !keynotes[105] := "AN"
+  !keynotes[106] := "A#"
+  !keynotes[107] := "BN"
+  !keynotes[108] := "CN"
+  !keynotes[109] := "C#"
+  !keynotes[110] := "DN"
+  !keynotes[111] := "D#"
+  !keynotes[112] := "EN"
+  !keynotes[113] := "E#"
+  !keynotes[114] := "F#"
+  !keynotes[115] := "GN"
+  !keynotes[116] := "G#"
+  !keynotes[117] := "AN"
+  !keynotes[118] := "A#"
+  !keynotes[119] := "B"
+  !keynotes[120] := "CN"
+  !keynotes[121] := "C#"
+  !keynotes[122] := "DN"
+  !keynotes[123] := "D#"
+  !keynotes[124] := "E"
+  !keynotes[125] := "FN"
+  !keynotes[126] := "F#"
+  !keynotes[127] := "GN"
+  !keynotes[128] := "G#"
+  !keynotes[129] := "AN"
+  !keynotes[130] := "A#"
+  !keynotes[131] := "B"
+  !keynotes[132] := "CN"
+  !keynotes[133] := "C#"
+  !keynotes[134] := "DN"
+  !keynotes[135] := "D#"
+  !keynotes[136] := "E"
+  !keynotes[137] := "FN"
+  !keynotes[138] := "F#"
+  !keynotes[139] := "GN"
+  !keynotes[140] := "G#"
+  !keynotes[141] := "A"
+  !keynotes[142] := "A#"
+  !keynotes[143] := "B"
+  !keynotes[144] := "CN"
+  !keynotes[145] := "C#"
+  !keynotes[146] := "D"
+  !keynotes[147] := "D#"
+  !keynotes[148] := "E"
+  !keynotes[149] := "FN"
+  !keynotes[150] := "F#"
+  !keynotes[151] := "GN"
+  !keynotes[152] := "G#"
+  !keynotes[153] := "A"
+  !keynotes[154] := "A#"
+  !keynotes[155] := "B"
+  !keynotes[156] := "CN"
+  !keynotes[157] := "C#"
+  !keynotes[158] := "D"
+  !keynotes[159] := "D#"
+  !keynotes[160] := "E"
+  !keynotes[161] := "FN"
+  !keynotes[162] := "F#"
+  !keynotes[163] := "G"
+  !keynotes[164] := "G#"
+  !keynotes[165] := "A"
+  !keynotes[166] := "A#"
+  !keynotes[167] := "B"
+  !keynotes[168] := "C"
+  !keynotes[169] := "C#"
+  !keynotes[170] := "D"
+  !keynotes[171] := "D#"
+  !keynotes[172] := "E"
+  !keynotes[173] := "FN"
+  !keynotes[174] := "F#"
+  !keynotes[175] := "G"
+  !keynotes[176] := "G#"
+  !keynotes[177] := "A"
+  !keynotes[178] := "A#"
+  !keynotes[179] := "B"
+  declare const $keynotes__SIZE := 180
+  declare !chord_names[198]
+  !chord_names[0] := "Octave"
+  !chord_names[1] := "minor 2nd"
+  !chord_names[2] := "Major 2nd"
+  !chord_names[3] := "minor 3rd"
+  !chord_names[4] := "Major 3rd"
+  !chord_names[5] := "Perfect 4th"
+  !chord_names[6] := "Tritone"
+  !chord_names[7] := "Perfect 5th"
+  !chord_names[8] := "minor 6th"
+  !chord_names[9] := "Major 6th"
+  !chord_names[10] := "minor 7th"
+  !chord_names[11] := "Major 7th"
+  !chord_names[12] := "Maj(add2)"
+  !chord_names[13] := "Sus2"
+  !chord_names[14] := "min7(no5)"
+  !chord_names[15] := "dim"
+  !chord_names[16] := "min"
+  !chord_names[17] := "7(no5)"
+  !chord_names[18] := "Maj7(no5)"
+  !chord_names[19] := "Maj(b5)"
+  !chord_names[20] := ""
+  !chord_names[21] := "Aug"
+  !chord_names[22] := "7sus4(no5)"
+  !chord_names[23] := "Sus4"
+  !chord_names[24] := "7(no3)"
+  !chord_names[25] := "Maj7(no3)"
+  !chord_names[26] := "7b9(no5)"
+  !chord_names[27] := "Maj(add b9)"
+  !chord_names[28] := "(#9)"
+  !chord_names[29] := "7sus4(b9)"
+  !chord_names[30] := "min9"
+  !chord_names[31] := "min(add2)"
+  !chord_names[32] := "Maj(add b5)"
+  !chord_names[33] := "min6/9"
+  !chord_names[34] := "7(9)"
+  !chord_names[35] := "Maj9 no 5th"
+  !chord_names[36] := "Maj(add2)"
+  !chord_names[37] := "6/9"
+  !chord_names[38] := "9sus4"
+  !chord_names[39] := "min6"
+  !chord_names[40] := "Maj6"
+  !chord_names[41] := "7Sus2"
+  !chord_names[42] := "Maj7 Sus2"
+  !chord_names[43] := "6/9(no3)"
+  !chord_names[44] := "7#9(no5)"
+  !chord_names[45] := "(add#9)"
+  !chord_names[46] := "min7(4)"
+  !chord_names[47] := "min(add4/11)"
+  !chord_names[48] := "Maj6"
+  !chord_names[49] := "min7b5"
+  !chord_names[50] := "dim(Maj7)"
+  !chord_names[51] := "dim7"
+  !chord_names[52] := "min7"
+  !chord_names[53] := "minMaj7"
+  !chord_names[54] := "min6"
+  !chord_names[55] := "dim(Maj7#5)"
+  !chord_names[56] := "dim(Maj7)"
+  !chord_names[57] := "min7(13)"
+  !chord_names[58] := "minMaj7(13)"
+  !chord_names[59] := "7(add4)"
+  !chord_names[60] := "7b5"
+  !chord_names[61] := "Maj7b5"
+  !chord_names[62] := "Maj(add b5)"
+  !chord_names[63] := "min6"
+  !chord_names[64] := "7"
+  !chord_names[65] := "Maj7"
+  !chord_names[66] := "Maj6"
+  !chord_names[67] := "7#5"
+  !chord_names[68] := "Maj7#5"
+  !chord_names[69] := "7(13 no5)"
+  !chord_names[70] := "Maj7(13)"
+  !chord_names[71] := "dim(Maj7)"
+  !chord_names[72] := "7Sus4"
+  !chord_names[73] := "Maj7 Sus4"
+  !chord_names[74] := "min(add4/11)"
+  !chord_names[75] := "(add#9)"
+  !chord_names[76] := "7sus4(13)"
+  !chord_names[77] := "7(#9#9)"
+  !chord_names[78] := "7sus4(b9b3)"
+  !chord_names[79] := "minb9"
+  !chord_names[80] := "7(b9b5)"
+  !chord_names[81] := "7(b9)"
+  !chord_names[82] := "7(b9#5)"
+  !chord_names[83] := "13(b9)"
+  !chord_names[84] := "7sus4(b9)"
+  !chord_names[85] := "7sus4(b9b13)"
+  !chord_names[86] := "13sus(b9)"
+  !chord_names[87] := "min9(11)"
+  !chord_names[88] := "minMaj9(11)"
+  !chord_names[89] := "min(add2/4)"
+  !chord_names[90] := "min6/9/11"
+  !chord_names[91] := "min9(b5)"
+  !chord_names[92] := "dimMaj7(9)"
+  !chord_names[93] := "dim7(9)"
+  !chord_names[94] := "min9"
+  !chord_names[95] := "min(Maj9)"
+  !chord_names[96] := "minMaj7(9)"
+  !chord_names[97] := "min6/9"
+  !chord_names[98] := "dimMaj9(#5)"
+  !chord_names[99] := "minMaj9(13)"
+  !chord_names[100] := "9sus4(add3)"
+  !chord_names[101] := "9(#11)"
+  !chord_names[102] := "Maj9(b5)"
+  !chord_names[103] := "Maj7(add2,#11)"
+  !chord_names[104] := "6/9(#11)"
+  !chord_names[105] := "9"
+  !chord_names[106] := "Maj9"
+  !chord_names[107] := "6/9"
+  !chord_names[108] := "9(#5)"
+  !chord_names[109] := "Maj9(#5)"
+  !chord_names[110] := "9(13)"
+  !chord_names[111] := "Maj9(13)"
+  !chord_names[112] := "min11(b5)"
+  !chord_names[113] := "9sus4"
+  !chord_names[114] := "Maj9sus4"
+  !chord_names[115] := "9sus4(b13)"
+  !chord_names[116] := "13sus"
+  !chord_names[117] := "7(#9b5)"
+  !chord_names[118] := "7(#9)"
+  !chord_names[119] := "7(#9#5)"
+  !chord_names[120] := "13(#9)"
+  !chord_names[121] := "min7b5(11)"
+  !chord_names[122] := "dimMaj7(11)"
+  !chord_names[123] := "dim7(11)"
+  !chord_names[124] := "min7(11)"
+  !chord_names[125] := "min7(#11)"
+  !chord_names[126] := "min7b5(b13)"
+  !chord_names[127] := "dim7(add #5)"
+  !chord_names[128] := "dim7(add M7)"
+  !chord_names[129] := "min7(13)"
+  !chord_names[130] := "minMaj7(13)"
+  !chord_names[131] := "7(add11)"
+  !chord_names[132] := "7(#11)"
+  !chord_names[133] := "Maj7(#11)"
+  !chord_names[134] := "6(#11)"
+  !chord_names[135] := "Maj7(b5#5)"
+  !chord_names[136] := "13#11"
+  !chord_names[137] := "Maj7(add #5)"
+  !chord_names[138] := "13(no 9)"
+  !chord_names[139] := "Maj13(no9)"
+  !chord_names[140] := "7(b9#9b5)"
+  !chord_names[141] := "7(b9#9)"
+  !chord_names[142] := "7(b9#9#5)"
+  !chord_names[143] := "7sus(b9#9b13)"
+  !chord_names[144] := "min7b5(b9b13)"
+  !chord_names[145] := "7(b9#11)"
+  !chord_names[146] := "7(b9b5b13)"
+  !chord_names[147] := "13(b9#11)"
+  !chord_names[148] := "7b9b13(add5)"
+  !chord_names[149] := "13(b9)"
+  !chord_names[150] := "13sus(b9)"
+  !chord_names[151] := "min7b5(9,11)"
+  !chord_names[152] := "dimMaj7(9/11)"
+  !chord_names[153] := "dim7(9/11)"
+  !chord_names[154] := "min9(11)"
+  !chord_names[155] := "min9/11(Maj7)"
+  !chord_names[156] := "min6/9(11)"
+  !chord_names[157] := "min9(11,13)"
+  !chord_names[158] := "minMaj11(13)"
+  !chord_names[159] := "dimM9(#5)"
+  !chord_names[160] := "min9(13)"
+  !chord_names[161] := "min(Maj9/13)"
+  !chord_names[162] := "13sus4(add3)"
+  !chord_names[163] := "9(#11)"
+  !chord_names[164] := "Maj9(#11)"
+  !chord_names[165] := "6/9(#11)"
+  !chord_names[166] := "9(#5b5)"
+  !chord_names[167] := "Maj9(b5#5)"
+  !chord_names[168] := "9(13)#11"
+  !chord_names[169] := "Maj13(#11)"
+  !chord_names[170] := "9(13)"
+  !chord_names[171] := "Maj9(13)"
+  !chord_names[172] := "13sus"
+  !chord_names[173] := "7(#9#11)"
+  !chord_names[174] := "7(#9#11b13)"
+  !chord_names[175] := "13(#9#11)"
+  !chord_names[176] := "7#9b13(add5)"
+  !chord_names[177] := "13(#9)"
+  !chord_names[178] := "dim7(11b13)"
+  !chord_names[179] := "13sus4(add3)"
+  !chord_names[180] := "7(b9#9#11)"
+  !chord_names[181] := "7alt"
+  !chord_names[182] := "13(b9#9#11)"
+  !chord_names[183] := "7(b9#9b13)"
+  !chord_names[184] := "13(b9#9)"
+  !chord_names[185] := "13(b9#9)"
+  !chord_names[186] := "7sus(b9#9b13)"
+  !chord_names[187] := "7b9#11b13"
+  !chord_names[188] := "13(b9#11)"
+  !chord_names[189] := "dim(add M7,9,11)"
+  !chord_names[190] := "Maj13(9,11)"
+  !chord_names[191] := "Maj13(9,#11)"
+  !chord_names[192] := "13sus4(add3)"
+  !chord_names[193] := "Maj13(add4)"
+  !chord_names[194] := "9(13)#11"
+  !chord_names[195] := "Maj13(#11)"
+  !chord_names[196] := "Maj13(b5#5)"
+  !chord_names[197] := "13(#9#11)"
+  declare %base_chord[198*7] := (0, 255, 255, 255, 255, 255, 255, 0, 1, 255, 255, 255, 255, 255, 0, 2, 255, 255, 255, 255, 255, 0, 3, 255, 255, 255, 255, 255, 0, 4, 255, 255, 255, 255, 255, 0, 5, 255, 255, 255, 255, ...
+  255, 0, 6, 255, 255, 255, 255, 255, 0, 7, 255, 255, 255, 255, 255, 0, 8, 255, 255, 255, 255, 255, 0, 9, 255, 255, 255, 255, 255, 0, 10, 255, 255, 255, 255, 255, 0, 11, 255, 255, ...
+  255, 255, 255, 0, 2, 4, 255, 255, 255, 255, 0, 2, 7, 255, 255, 255, 255, 0, 3, 10, 255, 255, 255, 255, 0, 3, 6, 255, 255, 255, 255, 0, 3, 7, 255, 255, 255, 255, 0, 4, ...
+  10, 255, 255, 255, 255, 0, 4, 11, 255, 255, 255, 255, 0, 4, 6, 255, 255, 255, 255, 0, 4, 7, 255, 255, 255, 255, 0, 4, 8, 255, 255, 255, 255, 0, 5, 10, 255, 255, 255, 255, ...
+  0, 5, 7, 255, 255, 255, 255, 0, 7, 10, 255, 255, 255, 255, 0, 7, 11, 255, 255, 255, 255, 0, 1, 4, 10, 255, 255, 255, 0, 1, 4, 7, 255, 255, 255, 0, 1, 4, 9, 255, ...
+  255, 255, 0, 1, 5, 10, 255, 255, 255, 0, 2, 3, 10, 255, 255, 255, 0, 2, 3, 7, 255, 255, 255, 0, 2, 3, 8, 255, 255, 255, 0, 2, 3, 9, 255, 255, 255, 0, 2, 4, ...
+  10, 255, 255, 255, 0, 2, 4, 11, 255, 255, 255, 0, 2, 4, 7, 255, 255, 255, 0, 2, 4, 9, 255, 255, 255, 0, 2, 5, 10, 255, 255, 255, 0, 2, 5, 8, 255, 255, 255, 0, ...
+  2, 5, 9, 255, 255, 255, 0, 2, 7, 10, 255, 255, 255, 0, 2, 7, 11, 255, 255, 255, 0, 2, 7, 9, 255, 255, 255, 0, 3, 4, 10, 255, 255, 255, 0, 3, 4, 7, 255, 255, ...
+  255, 0, 3, 5, 10, 255, 255, 255, 0, 3, 5, 7, 255, 255, 255, 0, 3, 5, 8, 255, 255, 255, 0, 3, 6, 10, 255, 255, 255, 0, 3, 6, 11, 255, 255, 255, 0, 3, 6, 9, ...
+  255, 255, 255, 0, 3, 7, 10, 255, 255, 255, 0, 3, 7, 11, 255, 255, 255, 0, 3, 7, 9, 255, 255, 255, 0, 3, 8, 11, 255, 255, 255, 0, 3, 8, 9, 255, 255, 255, 0, 3, ...
+  9, 10, 255, 255, 255, 0, 3, 9, 11, 255, 255, 255, 0, 4, 5, 10, 255, 255, 255, 0, 4, 6, 10, 255, 255, 255, 0, 4, 6, 11, 255, 255, 255, 0, 4, 6, 7, 255, 255, 255, ...
+  0, 4, 6, 9, 255, 255, 255, 0, 4, 7, 10, 255, 255, 255, 0, 4, 7, 11, 255, 255, 255, 0, 4, 7, 9, 255, 255, 255, 0, 4, 8, 10, 255, 255, 255, 0, 4, 8, 11, 255, ...
+  255, 255, 0, 4, 9, 10, 255, 255, 255, 0, 4, 9, 11, 255, 255, 255, 0, 5, 6, 9, 255, 255, 255, 0, 5, 7, 10, 255, 255, 255, 0, 5, 7, 11, 255, 255, 255, 0, 5, 8, ...
+  10, 255, 255, 255, 0, 5, 8, 9, 255, 255, 255, 0, 5, 9, 10, 255, 255, 255, 0, 1, 3, 4, 10, 255, 255, 0, 1, 3, 5, 10, 255, 255, 0, 1, 3, 7, 10, 255, 255, 0, ...
+  1, 4, 6, 10, 255, 255, 0, 1, 4, 7, 10, 255, 255, 0, 1, 4, 8, 10, 255, 255, 0, 1, 4, 9, 10, 255, 255, 0, 1, 5, 7, 10, 255, 255, 0, 1, 5, 8, 10, 255, ...
+  255, 0, 1, 5, 9, 10, 255, 255, 0, 2, 3, 5, 10, 255, 255, 0, 2, 3, 5, 11, 255, 255, 0, 2, 3, 5, 7, 255, 255, 0, 2, 3, 5, 9, 255, 255, 0, 2, 3, 6, ...
+  10, 255, 255, 0, 2, 3, 6, 11, 255, 255, 0, 2, 3, 6, 9, 255, 255, 0, 2, 3, 7, 10, 255, 255, 0, 2, 3, 7, 11, 255, 255, 0, 2, 3, 7, 11, 255, 255, 0, 2, ...
+  3, 7, 9, 255, 255, 0, 2, 3, 8, 11, 255, 255, 0, 2, 3, 9, 11, 255, 255, 0, 2, 4, 5, 10, 255, 255, 0, 2, 4, 6, 10, 255, 255, 0, 2, 4, 6, 11, 255, 255, ...
+  0, 2, 4, 6, 7, 255, 255, 0, 2, 4, 6, 9, 255, 255, 0, 2, 4, 7, 10, 255, 255, 0, 2, 4, 7, 11, 255, 255, 0, 2, 4, 7, 9, 255, 255, 0, 2, 4, 8, 10, ...
+  255, 255, 0, 2, 4, 8, 11, 255, 255, 0, 2, 4, 9, 10, 255, 255, 0, 2, 4, 9, 11, 255, 255, 0, 2, 5, 6, 10, 255, 255, 0, 2, 5, 7, 10, 255, 255, 0, 2, 5, ...
+  7, 11, 255, 255, 0, 2, 5, 8, 10, 255, 255, 0, 2, 5, 9, 10, 255, 255, 0, 3, 4, 6, 10, 255, 255, 0, 3, 4, 7, 10, 255, 255, 0, 3, 4, 8, 10, 255, 255, 0, ...
+  3, 4, 9, 10, 255, 255, 0, 3, 5, 6, 10, 255, 255, 0, 3, 5, 6, 11, 255, 255, 0, 3, 5, 6, 9, 255, 255, 0, 3, 5, 7, 10, 255, 255, 0, 3, 6, 7, 10, 255, ...
+  255, 0, 3, 6, 8, 10, 255, 255, 0, 3, 6, 8, 9, 255, 255, 0, 3, 6, 9, 11, 255, 255, 0, 3, 7, 9, 10, 255, 255, 0, 3, 7, 9, 11, 255, 255, 0, 4, 5, 7, ...
+  10, 255, 255, 0, 4, 6, 7, 10, 255, 255, 0, 4, 6, 7, 11, 255, 255, 0, 4, 6, 7, 9, 255, 255, 0, 4, 6, 8, 11, 255, 255, 0, 4, 6, 9, 10, 255, 255, 0, 4, ...
+  7, 8, 11, 255, 255, 0, 4, 7, 9, 10, 255, 255, 0, 4, 7, 9, 11, 255, 255, 0, 1, 3, 4, 6, 10, 255, 0, 1, 3, 4, 7, 10, 255, 0, 1, 3, 4, 8, 10, 255, ...
+  0, 1, 3, 5, 8, 10, 255, 0, 1, 3, 6, 8, 10, 255, 0, 1, 4, 6, 7, 10, 255, 0, 1, 4, 6, 8, 10, 255, 0, 1, 4, 6, 9, 10, 255, 0, 1, 4, 7, 8, ...
+  10, 255, 0, 1, 4, 7, 9, 10, 255, 0, 1, 5, 7, 9, 10, 255, 0, 2, 3, 5, 6, 10, 255, 0, 2, 3, 5, 6, 11, 255, 0, 2, 3, 5, 6, 9, 255, 0, 2, 3, ...
+  5, 7, 10, 255, 0, 2, 3, 5, 7, 11, 255, 0, 2, 3, 5, 7, 9, 255, 0, 2, 3, 5, 9, 10, 255, 0, 2, 3, 5, 9, 11, 255, 0, 2, 3, 6, 8, 11, 255, 0, ...
+  2, 3, 7, 9, 10, 255, 0, 2, 3, 7, 9, 11, 255, 0, 2, 4, 5, 9, 10, 255, 0, 2, 4, 6, 7, 10, 255, 0, 2, 4, 6, 7, 11, 255, 0, 2, 4, 6, 7, 9, ...
+  255, 0, 2, 4, 6, 8, 10, 255, 0, 2, 4, 6, 8, 11, 255, 0, 2, 4, 6, 9, 10, 255, 0, 2, 4, 6, 9, 11, 255, 0, 2, 4, 7, 9, 10, 255, 0, 2, 4, 7, ...
+  9, 11, 255, 0, 2, 5, 7, 9, 10, 255, 0, 3, 4, 6, 7, 10, 255, 0, 3, 4, 6, 8, 10, 255, 0, 3, 4, 6, 9, 10, 255, 0, 3, 4, 7, 8, 10, 255, 0, 3, ...
+  4, 7, 9, 10, 255, 0, 3, 5, 6, 8, 9, 255, 0, 4, 5, 7, 9, 10, 255, 0, 1, 3, 4, 6, 7, 10, 0, 1, 3, 4, 6, 8, 10, 0, 1, 3, 4, 6, 9, 10, ...
+  0, 1, 3, 4, 7, 8, 10, 0, 1, 3, 4, 7, 9, 10, 0, 1, 3, 4, 9, 10, 255, 0, 1, 3, 5, 7, 8, 10, 0, 1, 4, 6, 7, 8, 10, 0, 1, 4, 6, 7, ...
+  9, 10, 0, 2, 3, 5, 6, 9, 11, 0, 2, 3, 5, 7, 9, 10, 0, 2, 3, 6, 7, 9, 10, 0, 2, 4, 5, 7, 9, 10, 0, 2, 4, 5, 7, 9, 11, 0, 2, 4, ...
+  6, 7, 9, 10, 0, 2, 4, 6, 7, 9, 11, 0, 2, 4, 6, 8, 9, 11, 0, 3, 4, 6, 7, 9, 10)
+  declare %signature[12*15] := (0, 0, 0, 0, 0, 0, 3, 3, 5, 3, 3, 3, 3, 3, 0, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, ...
+  3, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 3, 3, 3, 3, 3, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 3, 5, 5, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 2, ...
+  2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  1, 1, 1, 1, 0, 3, 3, 3, 3, 3, 4, 4, 3, 0, 0, 0, 0, 0, 0)
+  declare %note_pos[128*10] := (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 207+(22*7), 207+(22*7), 207+(22*7), 207+(22*7), 60-22, 0, 2, 1, 2, 1, 207+(21*7), 207+(22*7), 207+(21*7), 207+(22*7), 60-19, 1, 2, 2, 2, 2, 207+(21*7), 207+(21*7), 207+(20*7), 207+(21*7), 60-11, 0, 1, ...
+  1, 1, 2, 207+(20*7), 207+(20*7), 207+(20*7), 207+(21*7), 60, 0, 2, 1, 2, 1, 207+(19*7), 207+(20*7), 207+(19*7), 207+(20*7), 60+4, 1, 2, 2, 2, 2, 207+(19*7), 207+(19*7), 207+(19*7), 207+(19*7), 60+12, 0, 1, 2, 1, 2, 207+(18*7), 207+(19*7), 207+(18*7), 207+(19*7), 60+15, 1, 1, ...
+  1, 2, 1, 207+(18*7), 207+(18*7), 207+(17*7), 207+(18*7), 60+23, 0, 2, 2, 2, 2, 207+(17*7), 207+(17*7), 207+(17*7), 207+(18*7), 60+34, 0, 1, 2, 1, 2, 207+(16*7), 207+(17*7), 207+(16*7), 207+(17*7), 60+37, 1, 1, 1, 1, 1, 207+(16*7), 207+(16*7), 207+(16*7), 207+(16*7), 60+45, 0, 2, ...
+  1, 2, 1, 207+(15*7), 207+(16*7), 207+(15*7), 207+(16*7), 60+49, 1, 2, 2, 2, 2, 207+(15*7), 207+(15*7), 207+(15*7), 207+(15*7), 60+57, 0, 1, 2, 1, 2, 207+(14*7), 207+(15*7), 207+(14*7), 207+(15*7), 60+60, 1, 1, 1, 2, 1, 207+(14*7), 207+(14*7), 207+(13*7), 207+(14*7), 60+68, 0, 2, ...
+  2, 2, 2, 207+(13*7), 207+(13*7), 207+(13*7), 207+(14*7), 60+79, 0, 1, 2, 1, 2, 207+(12*7), 207+(13*7), 207+(12*7), 207+(13*7), 60+83, 1, 1, 1, 1, 1, 207+(12*7), 207+(12*7), 207+(12*7), 207+(12*7), 60+91, 0, 2, 1, 2, 1, 207+(11*7), 207+(12*7), 207+(11*7), 207+(12*7), 60+94, 1, 2, ...
+  2, 2, 2, 207+(11*7), 207+(11*7), 207+(10*7), 207+(11*7), 60+102, 0, 0, 0, 0, 2, 207+(10*7), 207+(10*7), 207+(10*7), 207+(11*7), 60+114, 0, 0, 0, 0, 0, 207+(9*7), 207+(10*7), 207+(9*7), 207+(10*7), 60+117, 1, 0, 0, 0, 0, 207+(9*7), 207+(9*7), 207+(9*7), 207+(9*7), 60+125, 0, 0, ...
+  0, 0, 0, 207+(8*7), 207+(9*7), 207+(8*7), 207+(9*7), 60+128, 1, 0, 0, 0, 0, 207+(8*7), 207+(8*7), 207+(8*7), 207+(8*7), 60+136, 0, 0, 0, 0, 0, 207+(7*7), 207+(8*7), 207+(7*7), 207+(8*7), 60+140, 1, 0, 0, 0, 0, 207+(7*7), 207+(7*7), 207+(6*7), 207+(7*7), 60+148, 0, 0, ...
+  0, 0, 0, 207+(6*7), 207+(6*7), 207+(6*7), 207+(7*7), 60+159, 0, 0, 0, 0, 0, 207+(5*7), 207+(6*7), 207+(5*7), 207+(6*7), 60+163, 1, 0, 0, 0, 0, 207+(5*7), 207+(5*7), 207+(5*7), 207+(5*7), 60+171, 0, 0, 0, 0, 0, 207+(4*7), 207+(5*7), 207+(4*7), 207+(5*7), 60+174, 1, 0, ...
+  0, 0, 0, 207+(4*7), 207+(4*7), 207+(3*7), 207+(4*7), 60+182, 0, 0, 0, 0, 0, 207+(3*7), 207+(3*7), 207+(3*7), 207+(4*7), 60+193, 0, 0, 0, 0, 0, 207+(2*7), 207+(3*7), 207+(2*7), 207+(3*7), 60+197, 1, 0, 0, 0, 0, 207+(2*7), 207+(2*7), 207+(2*7), 207+(2*7), 60+205, 0, 0, ...
+  0, 0, 0, 207+7, 207+(2*7), 207+7, 207+(2*7), 60+208, 1, 0, 0, 0, 0, 207+7, 207+7, 207+7, 207+7, 60+216, 0, 0, 0, 0, 0, 207, 207+7, 207, 207+7, 60+220, 1, 0, 0, 2, 0, 207, 207, 196, 207, 60+228, 0, 2, ...
+  2, 2, 2, 196, 196, 196, 207, 60+239, 0, 0, 2, 0, 2, 196-7, 196, 196-7, 196, 60+242, 1, 0, 0, 0, 0, 196-7, 196-7, 196-7, 196-7, 60+250, 0, 0, 0, 0, 0, 196-(2*7), 196-7, 196-(2*7), 196-7, 60+254, 1, 0, ...
+  0, 0, 0, 196-(2*7), 196-(2*7), 196-(3*7), 196-(2*7), 60+262, 0, 0, 0, 0, 0, 196-(3*7), 196-(3*7), 196-(3*7), 196-(2*7), 60+273, 0, 0, 0, 0, 0, 196-(4*7), 196-(3*7), 196-(4*7), 196-(3*7), 60+275, 1, 0, 0, 0, 0, 196-(4*7), 196-(4*7), 196-(4*7), 196-(4*7), 60+283, 0, 0, ...
+  0, 0, 0, 196-(5*7), 196-(4*7), 196-(5*7), 196-(4*7), 60+288, 1, 0, 0, 0, 0, 196-(5*7), 196-(5*7), 196-(5*7), 196-(5*7), 60+296, 0, 0, 0, 0, 0, 196-(6*7), 196-(5*7), 196-(6*7), 196-(5*7), 60+299, 1, 0, 0, 0, 0, 196-(6*7), 196-(6*7), 196-(7*7), 196-(6*7), 60+307, 0, 0, ...
+  0, 0, 0, 196-(7*7), 196-(7*7), 196-(7*7), 196-(6*7), 60+317, 0, 0, 0, 0, 0, 196-(8*7), 196-(7*7), 196-(8*7), 196-(7*7), 60+322, 1, 0, 0, 0, 0, 196-(8*7), 196-(8*7), 196-(8*7), 196-(8*7), 60+330, 0, 0, 0, 0, 0, 196-(9*7), 196-(8*7), 196-(9*7), 196-(8*7), 60+334, 1, 0, ...
+  0, 0, 0, 196-(9*7), 196-(9*7), 196-(10*7), 196-(9*7), 60+342, 0, 0, 0, 0, 0, 196-(10*7), 196-(10*7), 196-(10*7), 196-(9*7), 60+353, 0, 0, 0, 0, 0, 196-(11*7), 196-(10*7), 196-(11*7), 196-(10*7), 60+356, 1, 0, 0, 0, 0, 196-(11*7), 196-(11*7), 196-(11*7), 196-(11*7), 60+364, 0, 2, ...
+  0, 2, 0, 196-(12*7), 196-(11*7), 196-(12*7), 196-(11*7), 60+368, 1, 2, 2, 2, 2, 196-(12*7), 196-(12*7), 196-(12*7), 196-(12*7), 60+376, 0, 3, 2, 3, 2, 196-(13*7), 196-(12*7), 196-(13*7), 196-(12*7), 60+379, 1, 3, 3, 2, 3, 196-(13*7), 196-(13*7), 196-(14*7), 196-(13*7), 60+387, 0, 2, ...
+  2, 2, 2, 196-(14*7), 196-(14*7), 196-(14*7), 196-(13*7), 60+397, 0, 3, 2, 3, 2, 196-(15*7), 196-(14*7), 196-(15*7), 196-(14*7), 60+400, 1, 3, 3, 3, 3, 196-(15*7), 196-(15*7), 196-(15*7), 196-(15*7), 60+408, 0, 2, 3, 2, 3, 196-(16*7), 196-(15*7), 196-(16*7), 196-(15*7), 60+411, 1, 2, ...
+  2, 2, 2, 196-(16*7), 196-(16*7), 196-(17*7), 196-(16*7), 60+419, 0, 3, 3, 3, 2, 196-(17*7), 196-(17*7), 196-(17*7), 196-(16*7), 60+430, 0, 2, 3, 2, 3, 196-(18*7), 196-(17*7), 196-(18*7), 196-(17*7), 60+433, 1, 2, 2, 2, 2, 196-(18*7), 196-(18*7), 196-(18*7), 196-(18*7), 60+441, 0, 3, ...
+  2, 3, 2, 196-(19*7), 196-(18*7), 196-(19*7), 196-(18*7), 60+444, 1, 3, 3, 3, 3, 196-(19*7), 196-(19*7), 196-(19*7), 196-(19*7), 60+452, 0, 2, 3, 2, 3, 196-(20*7), 196-(19*7), 196-(20*7), 196-(19*7), 60+455, 1, 2, 2, 2, 2, 196-(20*7), 196-(20*7), 196-(21*7), 196-(20*7), 60+463, 0, 3, ...
+  3, 3, 2, 196-(21*7), 196-(21*7), 196-(21*7), 196-(20*7), 60+474, 0, 2, 3, 2, 3, 196-(22*7), 196-(21*7), 196-(22*7), 196-(21*7), 60+477, 1, 2, 2, 2, 2, 196-(22*7), 196-(22*7), 196-(22*7), 196-(22*7), 60+485, 0, 3, 2, 3, 2, 196-(23*7), 196-(22*7), 196-(23*7), 196-(22*7), 60+489, 1, 3, ...
+  3, 2, 3, 196-(23*7), 196-(23*7), 196-(24*7), 196-(23*7), 60+497, 0, 2, 2, 2, 2, 196-(24*7), 196-(24*7), 196-(24*7), 196-(23*7), 60+508, 0, 3, 2, 3, 2, 196-(25*7), 196-(24*7), 196-(25*7), 196-(24*7), 60+511, 1, 3, 3, 3, 3, 196-(25*7), 196-(25*7), 196-(25*7), 196-(25*7), 60+519, 0, 2, ...
+  3, 2, 3, 196-(26*7), 196-(25*7), 196-(26*7), 196-(25*7), 60+522, 1, 2, 2, 2, 2, 196-(26*7), 196-(26*7), 196-(26*7), 196-(26*7), 60+530, 0, 3, 2, 3, 2, 196-(27*7), 196-(26*7), 196-(27*7), 196-(26*7), 60+533, 1, 3, 3, 2, 3, 196-(27*7), 196-(27*7), 196-(28*7), 196-(27*7), 60+541, 0, 2, ...
+  2, 2, 2, 196-(28*7), 196-(28*7), 196-(28*7), 196-(27*7), 60+552, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+  declare %position[50] := (1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, ...
+  2, 3, 2, 1, 2, 3, 2, 1, 2)
+  declare %all_chord[12*198*7]
+  $i := 0
+  while ($i<12)
+    $j := 0
+    while ($j<198)
+      $k := 0
+      while ($k<7)
+        declare %temp_chord[7] := (255)
+        if (%base_chord[$j*7+$k] # 255)
+          %temp_chord[$k] := (%base_chord[$j*7+$k]+$i) mod 12
+        else
+          %temp_chord[$k] := 255
+        end if
+        if ($k=(7-1))
+          sort(%temp_chord,0)
+          $l := 0
+          while ($l<7)
+            %all_chord[$i*198*7+($j*7)+$l] := %temp_chord[$l]
+            inc($l)
+          end while
+        end if
+        inc($k)
+      end while
+      inc($j)
+    end while
+    inc($i)
+  end while
+  pgs_create_key(SUSTAIN_RELEASE,1)
+  pgs_create_key(KEY_PRESSED,1)
+  declare $_break := 0
+  declare $_show := 0
+  declare %_baselist[7] := (0)
+  declare %_chordlist[7] := (0)
+  declare $_divide := 0
+  declare $_ckey := 0
+  declare $_chord0__active := 0
+  declare $_chord0__bot_chordbase := 0
+  declare $_chord0__top_chordbase := 0
+  declare $_chord0__bot_keycount := 0
+  declare $_chord0__top_keycount := 0
+  declare %_chord0__bot_chordindex[12*2] := (255)
+  declare !_chord0__bot_chordname[12]
+  declare %_chord0__top_chordindex[12*2] := (255)
+  declare !_chord0__top_chordname[12]
+  declare @_chord0__last_topchord
+  declare @_chord0__last_botchord
+  declare %_chord0__bot_chord[7] := (255)
+  declare %_chord0__top_chord[7] := (255)
+  declare $_chord0__topindex := 0
+  declare $_chord1__active := 0
+  declare $_chord1__bot_chordbase := 0
+  declare $_chord1__top_chordbase := 0
+  declare $_chord1__bot_keycount := 0
+  declare $_chord1__top_keycount := 0
+  declare %_chord1__bot_chordindex[12*2] := (255)
+  declare !_chord1__bot_chordname[12]
+  declare %_chord1__top_chordindex[12*2] := (255)
+  declare !_chord1__top_chordname[12]
+  declare @_chord1__last_topchord
+  declare @_chord1__last_botchord
+  declare %_chord1__bot_chord[7] := (255)
+  declare %_chord1__top_chord[7] := (255)
+  declare $_chord1__topindex := 0
+  declare $_chord2__active := 0
+  declare $_chord2__bot_chordbase := 0
+  declare $_chord2__top_chordbase := 0
+  declare $_chord2__bot_keycount := 0
+  declare $_chord2__top_keycount := 0
+  declare %_chord2__bot_chordindex[12*2] := (255)
+  declare !_chord2__bot_chordname[12]
+  declare %_chord2__top_chordindex[12*2] := (255)
+  declare !_chord2__top_chordname[12]
+  declare @_chord2__last_topchord
+  declare @_chord2__last_botchord
+  declare %_chord2__bot_chord[7] := (255)
+  declare %_chord2__top_chord[7] := (255)
+  declare $_chord2__topindex := 0
+  declare $_chord3__active := 0
+  declare $_chord3__bot_chordbase := 0
+  declare $_chord3__top_chordbase := 0
+  declare $_chord3__bot_keycount := 0
+  declare $_chord3__top_keycount := 0
+  declare %_chord3__bot_chordindex[12*2] := (255)
+  declare !_chord3__bot_chordname[12]
+  declare %_chord3__top_chordindex[12*2] := (255)
+  declare !_chord3__top_chordname[12]
+  declare @_chord3__last_topchord
+  declare @_chord3__last_botchord
+  declare %_chord3__bot_chord[7] := (255)
+  declare %_chord3__top_chord[7] := (255)
+  declare $_chord3__topindex := 0
+  declare $_chord4__active := 0
+  declare $_chord4__bot_chordbase := 0
+  declare $_chord4__top_chordbase := 0
+  declare $_chord4__bot_keycount := 0
+  declare $_chord4__top_keycount := 0
+  declare %_chord4__bot_chordindex[12*2] := (255)
+  declare !_chord4__bot_chordname[12]
+  declare %_chord4__top_chordindex[12*2] := (255)
+  declare !_chord4__top_chordname[12]
+  declare @_chord4__last_topchord
+  declare @_chord4__last_botchord
+  declare %_chord4__bot_chord[7] := (255)
+  declare %_chord4__top_chord[7] := (255)
+  declare $_chord4__topindex := 0
+  declare $_chord5__active := 0
+  declare $_chord5__bot_chordbase := 0
+  declare $_chord5__top_chordbase := 0
+  declare $_chord5__bot_keycount := 0
+  declare $_chord5__top_keycount := 0
+  declare %_chord5__bot_chordindex[12*2] := (255)
+  declare !_chord5__bot_chordname[12]
+  declare %_chord5__top_chordindex[12*2] := (255)
+  declare !_chord5__top_chordname[12]
+  declare @_chord5__last_topchord
+  declare @_chord5__last_botchord
+  declare %_chord5__bot_chord[7] := (255)
+  declare %_chord5__top_chord[7] := (255)
+  declare $_chord5__topindex := 0
+  declare $_chord6__active := 0
+  declare $_chord6__bot_chordbase := 0
+  declare $_chord6__top_chordbase := 0
+  declare $_chord6__bot_keycount := 0
+  declare $_chord6__top_keycount := 0
+  declare %_chord6__bot_chordindex[12*2] := (255)
+  declare !_chord6__bot_chordname[12]
+  declare %_chord6__top_chordindex[12*2] := (255)
+  declare !_chord6__top_chordname[12]
+  declare @_chord6__last_topchord
+  declare @_chord6__last_botchord
+  declare %_chord6__bot_chord[7] := (255)
+  declare %_chord6__top_chord[7] := (255)
+  declare $_chord6__topindex := 0
+  declare %_ref_chord[7]
+  declare %_snotes[50] := (255)
+  declare %_dnotes[50] := (255)
+  declare %_tnotes[50*2] := (255)
+  declare %_line_pos[4] := (0, -2, 5, 12)
+  declare $_index := 0
+  declare $_prev_index := 0
+  declare $_current := 0
+  declare $_previous := 0
+  declare $_n_search := 0
+  declare $_pline
+  declare $_pos
+end on
+
+function update_notes
+  $concat_it := 0
+  while ($concat_it<num_elements(%empty_notes))
+    %notes[$concat_it] := %empty_notes[$concat_it]
+    inc($concat_it)
+  end while
+  $pnum := 0
+  $i := 0
+  while ($i<128)
+    if (%KEY_DOWN[$i]=1)
+      %notes[$pnum] := $i
+      inc($pnum)
+    end if
+    inc($i)
+  end while
+end function
+
+function remove_all_notes
+  $i := 0
+  while ($i<50)
+    set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  $i := 0
+  while ($i<16)
+    set_control_par(%line[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+end function
+
+function display_notes
+  call remove_all_notes
+  if ($is_sustain=1)
+    $concat_offset := 0
+    $concat_it := 0
+    while ($concat_it<num_elements(%notes))
+      %_tnotes[$concat_it+$concat_offset] := %notes[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_offset := $concat_offset+num_elements(%notes)
+    $concat_it := 0
+    while ($concat_it<num_elements(%_snotes))
+      %_tnotes[$concat_it+$concat_offset] := %_snotes[$concat_it]
+      inc($concat_it)
+    end while
+    sort(%_tnotes,0)
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_notes))
+      %_dnotes[$concat_it] := %empty_notes[$concat_it]
+      inc($concat_it)
+    end while
+    $i := 0
+    while ($i<50)
+      if (search(%_dnotes,%_tnotes[$i])=-1 and (%_tnotes[$i] # 255))
+        %_dnotes[$i] := %_tnotes[$i]
+      end if
+      inc($i)
+    end while
+    sort(%_dnotes,0)
+  else
+    $concat_it := 0
+    while ($concat_it<num_elements(%notes))
+      %_dnotes[$concat_it] := %notes[$concat_it]
+      inc($concat_it)
+    end while
+  end if
+  $concat_it := 0
+  while ($concat_it<num_elements(%_dnotes))
+    %_snotes[$concat_it] := %_dnotes[$concat_it]
+    inc($concat_it)
+  end while
+  $_index := 0
+  $_prev_index := 0
+  $_current := 0
+  $_previous := 0
+  $j := 0
+  $n := 0
+  $i := 0
+  while ($i<num_elements(%_dnotes))
+    if (%_dnotes[$i] # 255)
+      select ($key)
+        case 0
+          if (%signature[%_dnotes[$i] mod 12*15+$key]=1)
+            $_index := 1
+          else
+            $_index := 0
+          end if
+        case 1 to 7
+          if (%signature[%_dnotes[$i] mod 12*15+$key]=4)
+            $_index := 2
+          else
+            $_index := 0
+          end if
+        case 8 to 14
+          if (%signature[%_dnotes[$i] mod 12*15+$key]=5)
+            $_index := 3
+          else
+            $_index := 1
+          end if
+      end select
+      $_current := %_dnotes[$i]*10+4+$_index
+      if ($i>0)
+        select ($key)
+          case 0
+            if (%signature[%_dnotes[$i-1] mod 12*15+$key]=1)
+              $_prev_index := 1
+            else
+              $_prev_index := 0
+            end if
+          case 1 to 7
+            if (%signature[%_dnotes[$i-1] mod 12*15+$key]=4)
+              $_prev_index := 2
+            else
+              $_prev_index := 0
+            end if
+          case 8 to 14
+            if (%signature[%_dnotes[$i-1] mod 12*15+$key]=5)
+              $_prev_index := 3
+            else
+              $_prev_index := 1
+            end if
+        end select
+        $_previous := %_dnotes[$i-1]*10+4+$_prev_index
+      end if
+      select (%signature[%_dnotes[$i] mod 12*15+$key])
+        case 1
+          set_control_par(%sharp[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+          set_control_par(%sharp[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-4)
+          set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+          inc($j)
+        case 2
+          set_control_par(%flat[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+          set_control_par(%flat[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-6)
+          set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+          inc($j)
+        case 3
+          set_control_par(%natural[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+          set_control_par(%natural[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-3)
+          set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+          inc($j)
+      end select
+      $_n_search := 0
+      if ($i>0 and (%note_pos[$_previous]=%note_pos[$_current]))
+        set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+20)
+      else
+        if ($i>0 and (%note_pos[$_previous]=(%note_pos[$_current]+7)))
+          $k := $i
+          while ($k>=0)
+            if (get_control_par(%note[$k],$CONTROL_PAR_POS_Y)=(%note_pos[$_current]+7) and (get_control_par(%note[$k],$CONTROL_PAR_POS_X)=200))
+              $_n_search := 1
+            end if
+            dec($k)
+          end while
+          if ($_n_search=1)
+            set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+12)
+          else
+            set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
+          end if
+        else
+          set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
+        end if
+      end if
+      $_pline := %note_pos[%_dnotes[$i]*10+$_index]
+      if ($_pline # 0)
+        $_pos := %note_pos[$_current]+%_line_pos[$_pline]
+        if ($_pos=%line_pos_y[9])
+          set_control_par(%line[9],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        else
+          if (%line_pos_y[0]<=$_pos and ($_pos<=%line_pos_y[8]))
+            $l := 0
+            while ($l<=8)
+              if (%note_pos[$_current]+%_line_pos[$_pline]<=%line_pos_y[$l])
+                set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+              end if
+              inc($l)
+            end while
+          else
+            if (%line_pos_y[10]<=$_pos and ($_pos<=%line_pos_y[15]))
+              $l := 10
+              while ($l<=15)
+                if (%note_pos[$_current]+%_line_pos[$_pline]>=%line_pos_y[$l])
+                  set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+                end if
+                inc($l)
+              end while
+            end if
+          end if
+        end if
+      end if
+      set_control_par(%note[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current])
+      set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+    end if
+    inc($i)
+  end while
+end function
+
+function remove_all_chord
+  set_text($main,"")
+  set_text($sub,"")
+end function
+
+function display_chord
+  call remove_all_chord
+  if ($pnum<=1)
+    exit
+  end if
+  $_break := 0
+  $_show := 0
+  $_divide := 0
+  $_ckey := 0
+  $i := 0
+  while ($i<7)
+    %_baselist[$i] := 255
+    %_chordlist[$i] := 255
+    inc($i)
+  end while
+  select ($key)
+    case 0
+      $_ckey := 0
+    case 1 to 7
+      $_ckey := 1
+    case 8 to 14
+      $_ckey := 2
+  end select
+  $_chord0__active := 0
+  $_chord0__bot_chordbase := 0
+  $_chord0__top_chordbase := 0
+  $_chord0__bot_keycount := 0
+  $_chord0__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord0__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord0__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord0__last_topchord := ""
+  @_chord0__last_botchord := ""
+  $_chord0__topindex := 0
+  $_chord1__active := 0
+  $_chord1__bot_chordbase := 0
+  $_chord1__top_chordbase := 0
+  $_chord1__bot_keycount := 0
+  $_chord1__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord1__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord1__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord1__last_topchord := ""
+  @_chord1__last_botchord := ""
+  $_chord1__topindex := 0
+  $_chord2__active := 0
+  $_chord2__bot_chordbase := 0
+  $_chord2__top_chordbase := 0
+  $_chord2__bot_keycount := 0
+  $_chord2__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord2__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord2__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord2__last_topchord := ""
+  @_chord2__last_botchord := ""
+  $_chord2__topindex := 0
+  $_chord3__active := 0
+  $_chord3__bot_chordbase := 0
+  $_chord3__top_chordbase := 0
+  $_chord3__bot_keycount := 0
+  $_chord3__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord3__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord3__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord3__last_topchord := ""
+  @_chord3__last_botchord := ""
+  $_chord3__topindex := 0
+  $_chord4__active := 0
+  $_chord4__bot_chordbase := 0
+  $_chord4__top_chordbase := 0
+  $_chord4__bot_keycount := 0
+  $_chord4__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord4__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord4__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord4__last_topchord := ""
+  @_chord4__last_botchord := ""
+  $_chord4__topindex := 0
+  $_chord5__active := 0
+  $_chord5__bot_chordbase := 0
+  $_chord5__top_chordbase := 0
+  $_chord5__bot_keycount := 0
+  $_chord5__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord5__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord5__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord5__last_topchord := ""
+  @_chord5__last_botchord := ""
+  $_chord5__topindex := 0
+  $_chord6__active := 0
+  $_chord6__bot_chordbase := 0
+  $_chord6__top_chordbase := 0
+  $_chord6__bot_keycount := 0
+  $_chord6__top_keycount := 0
+  $string_it := 0
+  while ($string_it<12)
+    !_chord6__bot_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  $string_it := 0
+  while ($string_it<12)
+    !_chord6__top_chordname[$string_it] := ""
+    inc($string_it)
+  end while
+  @_chord6__last_topchord := ""
+  @_chord6__last_botchord := ""
+  $_chord6__topindex := 0
+  if (0=0)
+    $_divide := $pnum
+  else
+    $_divide := 0+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord0__active := 1
+    $_chord0__bot_chordbase := %notes[0] mod 12
+    $_chord0__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord0__last_topchord := ""
+    @_chord0__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord0__top_chordindex[$i] := 255
+      %_chord0__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord0__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord0__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord0__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord0__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord0__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord0__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord0__top_chord,%notes[$i] mod 12)=-1))
+        %_chord0__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord0__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord0__bot_chord,0)
+    sort(%_chord0__top_chord,0)
+  end if
+  if (1=0)
+    $_divide := $pnum
+  else
+    $_divide := 1+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord1__active := 1
+    $_chord1__bot_chordbase := %notes[0] mod 12
+    $_chord1__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord1__last_topchord := ""
+    @_chord1__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord1__top_chordindex[$i] := 255
+      %_chord1__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord1__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord1__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord1__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord1__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord1__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord1__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord1__top_chord,%notes[$i] mod 12)=-1))
+        %_chord1__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord1__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord1__bot_chord,0)
+    sort(%_chord1__top_chord,0)
+  end if
+  if (2=0)
+    $_divide := $pnum
+  else
+    $_divide := 2+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord2__active := 1
+    $_chord2__bot_chordbase := %notes[0] mod 12
+    $_chord2__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord2__last_topchord := ""
+    @_chord2__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord2__top_chordindex[$i] := 255
+      %_chord2__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord2__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord2__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord2__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord2__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord2__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord2__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord2__top_chord,%notes[$i] mod 12)=-1))
+        %_chord2__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord2__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord2__bot_chord,0)
+    sort(%_chord2__top_chord,0)
+  end if
+  if (3=0)
+    $_divide := $pnum
+  else
+    $_divide := 3+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord3__active := 1
+    $_chord3__bot_chordbase := %notes[0] mod 12
+    $_chord3__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord3__last_topchord := ""
+    @_chord3__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord3__top_chordindex[$i] := 255
+      %_chord3__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord3__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord3__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord3__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord3__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord3__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord3__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord3__top_chord,%notes[$i] mod 12)=-1))
+        %_chord3__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord3__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord3__bot_chord,0)
+    sort(%_chord3__top_chord,0)
+  end if
+  if (4=0)
+    $_divide := $pnum
+  else
+    $_divide := 4+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord4__active := 1
+    $_chord4__bot_chordbase := %notes[0] mod 12
+    $_chord4__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord4__last_topchord := ""
+    @_chord4__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord4__top_chordindex[$i] := 255
+      %_chord4__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord4__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord4__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord4__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord4__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord4__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord4__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord4__top_chord,%notes[$i] mod 12)=-1))
+        %_chord4__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord4__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord4__bot_chord,0)
+    sort(%_chord4__top_chord,0)
+  end if
+  if (5=0)
+    $_divide := $pnum
+  else
+    $_divide := 5+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord5__active := 1
+    $_chord5__bot_chordbase := %notes[0] mod 12
+    $_chord5__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord5__last_topchord := ""
+    @_chord5__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord5__top_chordindex[$i] := 255
+      %_chord5__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord5__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord5__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord5__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord5__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord5__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord5__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord5__top_chord,%notes[$i] mod 12)=-1))
+        %_chord5__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord5__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord5__bot_chord,0)
+    sort(%_chord5__top_chord,0)
+  end if
+  if (6=0)
+    $_divide := $pnum
+  else
+    $_divide := 6+2
+  end if
+  if ($pnum>=$_divide)
+    $_chord6__active := 1
+    $_chord6__bot_chordbase := %notes[0] mod 12
+    $_chord6__top_chordbase := %notes[$pnum-$_divide] mod 12
+    @_chord6__last_topchord := ""
+    @_chord6__last_botchord := ""
+    $i := 0
+    while ($i<(12*2))
+      %_chord6__top_chordindex[$i] := 255
+      %_chord6__bot_chordindex[$i] := 255
+      inc($i)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord6__bot_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $concat_it := 0
+    while ($concat_it<num_elements(%empty_keys))
+      %_chord6__top_chord[$concat_it] := %empty_keys[$concat_it]
+      inc($concat_it)
+    end while
+    $_chord6__topindex := 0
+    if ($pnum-$_divide<=7)
+      $n := 0
+    else
+      $n := $pnum-$_divide-7
+    end if
+    $i := 0+$n
+    while ($i<($pnum-$_divide))
+      if (%notes[$i] # 255 and (search(%_chord6__bot_chord,%notes[$i] mod 12)=-1))
+        %_chord6__bot_chord[$i-$n] := %notes[$i] mod 12
+      end if
+      inc($_chord6__bot_keycount)
+      inc($i)
+    end while
+    $i := $pnum-$_divide
+    while ($i<($pnum-$_divide+7))
+      if (%notes[$i] # 255 and (search(%_chord6__top_chord,%notes[$i] mod 12)=-1))
+        %_chord6__top_chord[$i-($pnum-$_divide)] := %notes[$i] mod 12
+      end if
+      inc($_chord6__top_keycount)
+      inc($i)
+    end while
+    sort(%_chord6__bot_chord,0)
+    sort(%_chord6__top_chord,0)
+  end if
+  $k := %notes[0] mod 12
+  $i := 0
+  while ($i<12)
+    $j := 0
+    while ($j<198)
+      $l := 0
+      while ($l<7)
+        %_ref_chord[$l] := %all_chord[$k*198*7+($j*7)+$l]
+        inc($l)
+      end while
+      if ($_chord0__active=1)
+        if (array_equal(%_chord0__bot_chord,%_ref_chord))
+          %_chord0__bot_chordindex[$k] := $k
+          %_chord0__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord0__bot_keycount=1))
+            !_chord0__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord0__bot_chordbase=$k)
+              !_chord0__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord0__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord0__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord0__top_chord,%_ref_chord))
+          %_chord0__top_chordindex[$k] := $k
+          %_chord0__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord0__top_keycount=1))
+            !_chord0__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord0__top_chordbase=$k or (0 # 0))
+              !_chord0__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord0__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord0__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord1__active=1)
+        if (array_equal(%_chord1__bot_chord,%_ref_chord))
+          %_chord1__bot_chordindex[$k] := $k
+          %_chord1__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord1__bot_keycount=1))
+            !_chord1__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord1__bot_chordbase=$k)
+              !_chord1__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord1__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord1__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord1__top_chord,%_ref_chord))
+          %_chord1__top_chordindex[$k] := $k
+          %_chord1__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord1__top_keycount=1))
+            !_chord1__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord1__top_chordbase=$k or (1 # 0))
+              !_chord1__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord1__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord1__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord2__active=1)
+        if (array_equal(%_chord2__bot_chord,%_ref_chord))
+          %_chord2__bot_chordindex[$k] := $k
+          %_chord2__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord2__bot_keycount=1))
+            !_chord2__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord2__bot_chordbase=$k)
+              !_chord2__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord2__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord2__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord2__top_chord,%_ref_chord))
+          %_chord2__top_chordindex[$k] := $k
+          %_chord2__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord2__top_keycount=1))
+            !_chord2__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord2__top_chordbase=$k or (2 # 0))
+              !_chord2__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord2__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord2__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord3__active=1)
+        if (array_equal(%_chord3__bot_chord,%_ref_chord))
+          %_chord3__bot_chordindex[$k] := $k
+          %_chord3__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord3__bot_keycount=1))
+            !_chord3__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord3__bot_chordbase=$k)
+              !_chord3__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord3__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord3__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord3__top_chord,%_ref_chord))
+          %_chord3__top_chordindex[$k] := $k
+          %_chord3__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord3__top_keycount=1))
+            !_chord3__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord3__top_chordbase=$k or (3 # 0))
+              !_chord3__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord3__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord3__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord4__active=1)
+        if (array_equal(%_chord4__bot_chord,%_ref_chord))
+          %_chord4__bot_chordindex[$k] := $k
+          %_chord4__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord4__bot_keycount=1))
+            !_chord4__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord4__bot_chordbase=$k)
+              !_chord4__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord4__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord4__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord4__top_chord,%_ref_chord))
+          %_chord4__top_chordindex[$k] := $k
+          %_chord4__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord4__top_keycount=1))
+            !_chord4__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord4__top_chordbase=$k or (4 # 0))
+              !_chord4__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord4__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord4__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord5__active=1)
+        if (array_equal(%_chord5__bot_chord,%_ref_chord))
+          %_chord5__bot_chordindex[$k] := $k
+          %_chord5__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord5__bot_keycount=1))
+            !_chord5__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord5__bot_chordbase=$k)
+              !_chord5__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord5__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord5__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord5__top_chord,%_ref_chord))
+          %_chord5__top_chordindex[$k] := $k
+          %_chord5__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord5__top_keycount=1))
+            !_chord5__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord5__top_chordbase=$k or (5 # 0))
+              !_chord5__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord5__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord5__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      if ($_chord6__active=1)
+        if (array_equal(%_chord6__bot_chord,%_ref_chord))
+          %_chord6__bot_chordindex[$k] := $k
+          %_chord6__bot_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord6__bot_keycount=1))
+            !_chord6__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord6__bot_chordbase=$k)
+              !_chord6__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord6__bot_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord6__bot_chordbase]
+            end if
+          end if
+        end if
+        if (array_equal(%_chord6__top_chord,%_ref_chord))
+          %_chord6__top_chordindex[$k] := $k
+          %_chord6__top_chordindex[$k+12] := $j
+          if ($j=0 and ($_chord6__top_keycount=1))
+            !_chord6__top_chordname[$k] := !ckeynotes[$_ckey*12+$k]
+          else
+            if ($_chord6__top_chordbase=$k or (6 # 0))
+              !_chord6__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j]
+            else
+              !_chord6__top_chordname[$k] := !ckeynotes[$_ckey*12+$k] & " " & !chord_names[$j] & " / " & !ckeynotes[$_ckey*12+$_chord6__top_chordbase]
+            end if
+          end if
+        end if
+      end if
+      inc($j)
+    end while
+    $k := ($k+1) mod 12
+    if ($i=(12-1))
+      if ($_chord0__active=1)
+        $_show := 0
+        if (%_chord0__top_chordindex[$_chord0__top_chordbase] # 255)
+          @_chord0__last_topchord := !_chord0__top_chordname[$_chord0__top_chordbase]
+          $_chord0__topindex := $_chord0__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord0__top_chordindex[($_chord0__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord0__topindex := ($_chord0__top_chordbase+$n) mod 12
+              @_chord0__last_topchord := !_chord0__top_chordname[$_chord0__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (0=0))
+            @_chord0__last_topchord := !ckeynotes[$_ckey*12+$_chord0__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord0__bot_chordindex[$_chord0__bot_chordbase] # 255)
+          @_chord0__last_botchord := !_chord0__bot_chordname[$_chord0__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord0__bot_chordindex[($_chord0__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord0__last_botchord := !_chord0__bot_chordname[($_chord0__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord0__last_botchord := !ckeynotes[$_ckey*12+$_chord0__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<0)
+            if (%_chord0__top_chordindex[$_chord0__topindex]=%_baselist[$n] and (%_chord0__top_chordindex[$_chord0__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[0] := %_chord0__top_chordindex[$_chord0__topindex]
+            %_chordlist[0] := %_chord0__top_chordindex[$_chord0__topindex+12]
+            if (0=0)
+              add_text_line($main,@_chord0__last_topchord)
+            else
+              add_text_line($sub,@_chord0__last_topchord & " / " & @_chord0__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord1__active=1)
+        $_show := 0
+        if (%_chord1__top_chordindex[$_chord1__top_chordbase] # 255)
+          @_chord1__last_topchord := !_chord1__top_chordname[$_chord1__top_chordbase]
+          $_chord1__topindex := $_chord1__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord1__top_chordindex[($_chord1__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord1__topindex := ($_chord1__top_chordbase+$n) mod 12
+              @_chord1__last_topchord := !_chord1__top_chordname[$_chord1__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (1=0))
+            @_chord1__last_topchord := !ckeynotes[$_ckey*12+$_chord1__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord1__bot_chordindex[$_chord1__bot_chordbase] # 255)
+          @_chord1__last_botchord := !_chord1__bot_chordname[$_chord1__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord1__bot_chordindex[($_chord1__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord1__last_botchord := !_chord1__bot_chordname[($_chord1__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord1__last_botchord := !ckeynotes[$_ckey*12+$_chord1__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<1)
+            if (%_chord1__top_chordindex[$_chord1__topindex]=%_baselist[$n] and (%_chord1__top_chordindex[$_chord1__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[1] := %_chord1__top_chordindex[$_chord1__topindex]
+            %_chordlist[1] := %_chord1__top_chordindex[$_chord1__topindex+12]
+            if (1=0)
+              add_text_line($main,@_chord1__last_topchord)
+            else
+              add_text_line($sub,@_chord1__last_topchord & " / " & @_chord1__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord2__active=1)
+        $_show := 0
+        if (%_chord2__top_chordindex[$_chord2__top_chordbase] # 255)
+          @_chord2__last_topchord := !_chord2__top_chordname[$_chord2__top_chordbase]
+          $_chord2__topindex := $_chord2__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord2__top_chordindex[($_chord2__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord2__topindex := ($_chord2__top_chordbase+$n) mod 12
+              @_chord2__last_topchord := !_chord2__top_chordname[$_chord2__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (2=0))
+            @_chord2__last_topchord := !ckeynotes[$_ckey*12+$_chord2__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord2__bot_chordindex[$_chord2__bot_chordbase] # 255)
+          @_chord2__last_botchord := !_chord2__bot_chordname[$_chord2__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord2__bot_chordindex[($_chord2__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord2__last_botchord := !_chord2__bot_chordname[($_chord2__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord2__last_botchord := !ckeynotes[$_ckey*12+$_chord2__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<2)
+            if (%_chord2__top_chordindex[$_chord2__topindex]=%_baselist[$n] and (%_chord2__top_chordindex[$_chord2__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[2] := %_chord2__top_chordindex[$_chord2__topindex]
+            %_chordlist[2] := %_chord2__top_chordindex[$_chord2__topindex+12]
+            if (2=0)
+              add_text_line($main,@_chord2__last_topchord)
+            else
+              add_text_line($sub,@_chord2__last_topchord & " / " & @_chord2__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord3__active=1)
+        $_show := 0
+        if (%_chord3__top_chordindex[$_chord3__top_chordbase] # 255)
+          @_chord3__last_topchord := !_chord3__top_chordname[$_chord3__top_chordbase]
+          $_chord3__topindex := $_chord3__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord3__top_chordindex[($_chord3__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord3__topindex := ($_chord3__top_chordbase+$n) mod 12
+              @_chord3__last_topchord := !_chord3__top_chordname[$_chord3__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (3=0))
+            @_chord3__last_topchord := !ckeynotes[$_ckey*12+$_chord3__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord3__bot_chordindex[$_chord3__bot_chordbase] # 255)
+          @_chord3__last_botchord := !_chord3__bot_chordname[$_chord3__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord3__bot_chordindex[($_chord3__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord3__last_botchord := !_chord3__bot_chordname[($_chord3__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord3__last_botchord := !ckeynotes[$_ckey*12+$_chord3__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<3)
+            if (%_chord3__top_chordindex[$_chord3__topindex]=%_baselist[$n] and (%_chord3__top_chordindex[$_chord3__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[3] := %_chord3__top_chordindex[$_chord3__topindex]
+            %_chordlist[3] := %_chord3__top_chordindex[$_chord3__topindex+12]
+            if (3=0)
+              add_text_line($main,@_chord3__last_topchord)
+            else
+              add_text_line($sub,@_chord3__last_topchord & " / " & @_chord3__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord4__active=1)
+        $_show := 0
+        if (%_chord4__top_chordindex[$_chord4__top_chordbase] # 255)
+          @_chord4__last_topchord := !_chord4__top_chordname[$_chord4__top_chordbase]
+          $_chord4__topindex := $_chord4__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord4__top_chordindex[($_chord4__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord4__topindex := ($_chord4__top_chordbase+$n) mod 12
+              @_chord4__last_topchord := !_chord4__top_chordname[$_chord4__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (4=0))
+            @_chord4__last_topchord := !ckeynotes[$_ckey*12+$_chord4__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord4__bot_chordindex[$_chord4__bot_chordbase] # 255)
+          @_chord4__last_botchord := !_chord4__bot_chordname[$_chord4__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord4__bot_chordindex[($_chord4__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord4__last_botchord := !_chord4__bot_chordname[($_chord4__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord4__last_botchord := !ckeynotes[$_ckey*12+$_chord4__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<4)
+            if (%_chord4__top_chordindex[$_chord4__topindex]=%_baselist[$n] and (%_chord4__top_chordindex[$_chord4__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[4] := %_chord4__top_chordindex[$_chord4__topindex]
+            %_chordlist[4] := %_chord4__top_chordindex[$_chord4__topindex+12]
+            if (4=0)
+              add_text_line($main,@_chord4__last_topchord)
+            else
+              add_text_line($sub,@_chord4__last_topchord & " / " & @_chord4__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord5__active=1)
+        $_show := 0
+        if (%_chord5__top_chordindex[$_chord5__top_chordbase] # 255)
+          @_chord5__last_topchord := !_chord5__top_chordname[$_chord5__top_chordbase]
+          $_chord5__topindex := $_chord5__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord5__top_chordindex[($_chord5__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord5__topindex := ($_chord5__top_chordbase+$n) mod 12
+              @_chord5__last_topchord := !_chord5__top_chordname[$_chord5__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (5=0))
+            @_chord5__last_topchord := !ckeynotes[$_ckey*12+$_chord5__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord5__bot_chordindex[$_chord5__bot_chordbase] # 255)
+          @_chord5__last_botchord := !_chord5__bot_chordname[$_chord5__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord5__bot_chordindex[($_chord5__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord5__last_botchord := !_chord5__bot_chordname[($_chord5__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord5__last_botchord := !ckeynotes[$_ckey*12+$_chord5__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<5)
+            if (%_chord5__top_chordindex[$_chord5__topindex]=%_baselist[$n] and (%_chord5__top_chordindex[$_chord5__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[5] := %_chord5__top_chordindex[$_chord5__topindex]
+            %_chordlist[5] := %_chord5__top_chordindex[$_chord5__topindex+12]
+            if (5=0)
+              add_text_line($main,@_chord5__last_topchord)
+            else
+              add_text_line($sub,@_chord5__last_topchord & " / " & @_chord5__last_botchord)
+            end if
+          end if
+        end if
+      end if
+      if ($_chord6__active=1)
+        $_show := 0
+        if (%_chord6__top_chordindex[$_chord6__top_chordbase] # 255)
+          @_chord6__last_topchord := !_chord6__top_chordname[$_chord6__top_chordbase]
+          $_chord6__topindex := $_chord6__top_chordbase
+          $_show := 1
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord6__top_chordindex[($_chord6__top_chordbase+$n) mod 12] # 255 and ($_break=0))
+              $_chord6__topindex := ($_chord6__top_chordbase+$n) mod 12
+              @_chord6__last_topchord := !_chord6__top_chordname[$_chord6__topindex]
+              $_break := 1
+              $_show := 1
+            end if
+            inc($n)
+          end while
+          if ($_break=0 and (6=0))
+            @_chord6__last_topchord := !ckeynotes[$_ckey*12+$_chord6__top_chordbase] & " n.c."
+            $_show := 1
+          end if
+        end if
+        if (%_chord6__bot_chordindex[$_chord6__bot_chordbase] # 255)
+          @_chord6__last_botchord := !_chord6__bot_chordname[$_chord6__bot_chordbase]
+        else
+          $_break := 0
+          $n := 1
+          while ($n<=12)
+            if (%_chord6__bot_chordindex[($_chord6__bot_chordbase+$n) mod 12] # 255 and ($_break=0))
+              @_chord6__last_botchord := !_chord6__bot_chordname[($_chord6__bot_chordbase+$n) mod 12]
+              $_break := 1
+            end if
+            inc($n)
+          end while
+          if ($_show=1 and ($_break=0))
+            @_chord6__last_botchord := !ckeynotes[$_ckey*12+$_chord6__bot_chordbase] & " n.c."
+          end if
+        end if
+        if ($_show=1)
+          $n := 0
+          while ($n<6)
+            if (%_chord6__top_chordindex[$_chord6__topindex]=%_baselist[$n] and (%_chord6__top_chordindex[$_chord6__topindex+12]=%_chordlist[$n]))
+              $_show := 0
+            end if
+            inc($n)
+          end while
+          if ($_show=1)
+            %_baselist[6] := %_chord6__top_chordindex[$_chord6__topindex]
+            %_chordlist[6] := %_chord6__top_chordindex[$_chord6__topindex+12]
+            if (6=0)
+              add_text_line($main,@_chord6__last_topchord)
+            else
+              add_text_line($sub,@_chord6__last_topchord & " / " & @_chord6__last_botchord)
+            end if
+          end if
+        end if
+      end if
+    end if
+    inc($i)
+  end while
+end function
+
+on note
+  ignore_event($EVENT_ID)
+  set_key_color($EVENT_NOTE,$KEY_COLOR_LIGHT_ORANGE)
+  pgs_set_key_val(KEY_PRESSED,0,1)
+  call update_notes
+  if (%keyoffset[$key*12+($EVENT_NOTE mod 12)]=1 and (%note_pos[$EVENT_NOTE*10+9]=0))
+    set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_X,%note_pos[$EVENT_NOTE*10+8]-4)
+  else
+    set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_X,%note_pos[$EVENT_NOTE*10+8])
+  end if
+  if (%note_pos[$EVENT_NOTE*10+9]=0)
+    set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_Y,430)
+  else
+    set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_Y,430-10)
+  end if
+  set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,!keynotes[$key*12+($EVENT_NOTE mod 12)])
+  if ($is_sustain=1)
+    %sustain_notes[$EVENT_NOTE] := 255
+  end if
+end on
+
+on release
+  ignore_event($EVENT_ID)
+  if ($is_sustain=0)
+    set_key_color($EVENT_NOTE,$KEY_COLOR_INACTIVE)
+    pgs_set_key_val(KEY_PRESSED,0,1)
+    call update_notes
+    set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,"")
+  else
+    %sustain_notes[$EVENT_NOTE] := $EVENT_NOTE
+  end if
+end on
+
+on controller
+  if ($CC_NUM=64)
+    if (%CC[64]=127)
+      $is_sustain := 1
+      set_text($sustain,"Sustain")
+      $i := 0
+      while ($i<128)
+        %sustain_notes[$i] := 255
+        inc($i)
+      end while
+    else
+      $is_sustain := 0
+      set_text($sustain,"")
+      pgs_set_key_val(SUSTAIN_RELEASE,0,1)
+      $i := 0
+      while ($i<128)
+        if (%sustain_notes[$i] # 255)
+          set_key_color(%sustain_notes[$i],$KEY_COLOR_INACTIVE)
+          set_control_par_str(%bnotes[$i],$CONTROL_PAR_TEXT,"")
+        end if
+        inc($i)
+      end while
+    end if
+  end if
+end on
+
+on pgs_changed
+  if (pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_PRESSED))
+    if (pgs_get_key_val(SUSTAIN_RELEASE,0)=1)
+      pgs_set_key_val(SUSTAIN_RELEASE,0,0)
+      call update_notes
+      call display_notes
+      call display_chord
+    else
+      if (pgs_get_key_val(KEY_PRESSED,0)=1)
+        wait(100000)
+        reset_ksp_timer
+        call display_notes
+        call display_chord
+      end if
+    end if
+  end if
+end on
+
+on ui_control($knob)
+  $key := get_control_par(get_ui_id($knob),$CONTROL_PAR_VALUE)
+  set_knob_label($knob,!keys[$key])
+  $i := 0
+  while ($i<14)
+    set_control_par(%flatkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    set_control_par(%sharpkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    inc($i)
+  end while
+  set_text($key_name,"Key: " & !keys[$key])
+  if ($key<8)
+    $i := 0
+    while ($i<$key)
+      set_control_par(%flatkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      set_control_par(%flatkey[7+$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      inc($i)
+    end while
+  else
+    $i := 0
+    while ($i<=(14-$key))
+      set_control_par(%sharpkey[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      set_control_par(%sharpkey[7+$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      inc($i)
+    end while
+  end if
+end on
+
