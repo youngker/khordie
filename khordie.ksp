@@ -26,7 +26,7 @@ define NC := " n.c."
 define KEYTIME := 100000
 
 on init
-    //activate_logger("C:/log.nka")
+    //activate_logger("C:/Users/youngker/log.nka")
 
     declare empty_notes[AVAILABLE_NUM] := (0xFF)
     declare empty_keys[NUM_OF_KEY] := (0xFF)
@@ -75,10 +75,10 @@ on init
     end for
 
     declare key_pos[2, NUM_OF_KEYS-1, 2] := (...
-        STAFF_X+50,STAFF_Y+33, STAFF_X+57,STAFF_Y+12, STAFF_X+64,STAFF_Y+40, STAFF_X+71,STAFF_Y+19,STAFF_X+78,STAFF_Y+47, STAFF_X+85,STAFF_Y+26, STAFF_X+92,STAFF_Y+54,...
-        STAFF_X+50,STAFF_Y+135,STAFF_X+57,STAFF_Y+114,STAFF_X+64,STAFF_Y+142,STAFF_X+71,STAFF_Y+121,STAFF_X+78,STAFF_Y+149,STAFF_X+85,STAFF_Y+128,STAFF_X+92,STAFF_Y+156,...
-        STAFF_X+50,STAFF_Y+7,  STAFF_X+57,STAFF_Y+28, STAFF_X+64,STAFF_Y,  STAFF_X+71,STAFF_Y+21,STAFF_X+78,STAFF_Y+43, STAFF_X+85,STAFF_Y+14,STAFF_X+92,STAFF_Y+35,...
-        STAFF_X+50,STAFF_Y+109,STAFF_X+57,STAFF_Y+130,STAFF_X+64,STAFF_Y+102, STAFF_X+71,STAFF_Y+123,STAFF_X+78,STAFF_Y+145,STAFF_X+85,STAFF_Y+116,STAFF_X+92,STAFF_Y+137)
+        STAFF_X+50,STAFF_Y+23, STAFF_X+57,STAFF_Y+2,  STAFF_X+64,STAFF_Y+30, STAFF_X+71,STAFF_Y+9,  STAFF_X+78,STAFF_Y+37, STAFF_X+85,STAFF_Y+16, STAFF_X+92,STAFF_Y+44,...
+        STAFF_X+50,STAFF_Y+125,STAFF_X+57,STAFF_Y+104,STAFF_X+64,STAFF_Y+132,STAFF_X+71,STAFF_Y+111,STAFF_X+78,STAFF_Y+139,STAFF_X+85,STAFF_Y+118,STAFF_X+92,STAFF_Y+146,...
+        STAFF_X+50,STAFF_Y+1,  STAFF_X+57,STAFF_Y+22, STAFF_X+64,STAFF_Y-6,  STAFF_X+71,STAFF_Y+15, STAFF_X+78,STAFF_Y+37, STAFF_X+85,STAFF_Y+8,  STAFF_X+92,STAFF_Y+29,...
+        STAFF_X+50,STAFF_Y+103,STAFF_X+57,STAFF_Y+124,STAFF_X+64,STAFF_Y+96, STAFF_X+71,STAFF_Y+117,STAFF_X+78,STAFF_Y+139,STAFF_X+85,STAFF_Y+110,STAFF_X+92,STAFF_Y+131)
 
     declare ui_label flatkey[NUM_OF_KEYS-1] (1,1)
     for i := 0 to NUM_OF_KEYS - 2
@@ -159,7 +159,13 @@ on init
     hide_part(knob,HIDE_PART_VALUE .or. HIDE_PART_TITLE .or. HIDE_PART_BG)
     move_control_px(knob, 20, 40)
 
-    declare !keys[] := ("C","F","Bb","Eb","Ab","Db","Gb","Cb","C#","F#","B","E","A","D","G")
+    declare !keys[] := ("C maj/a min",   "F maj/d min",   "Bb maj/g min",  "Eb maj/c min",  ...
+                        "Ab maj/f min",  "Db maj/bb min", "Gb maj/eb min", "Cb maj/g# min", ...
+                        "C# maj/bb min", "F# maj/d# min", "B maj/g# min",  "E maj/c# min",  ...
+                        "A maj/f# min",  "D maj/b min",   "G maj/e min")
+
+    declare key_to_index[] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
+    declare major[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1)
 
     declare !ckeynotes [] := ("C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B",...
                               "C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B",...
@@ -180,9 +186,6 @@ on init
                             1,1,0,1,0,1,1,1,1,0,1,0,...
                             1,1,0,1,0,1,1,0,1,0,1,0,...
                             0,1,0,1,0,1,1,0,1,0,1,0)
-
-    declare translate[10] := (14, 17, 18, 22, 25,...
-                              52, 65, 66, 73, 66)
 
     declare !keynotes[] := ("C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B",...
                             "C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","BN",...
@@ -776,7 +779,7 @@ on init
     pgs_create_key(SUSTAIN_RELEASE, 1)
     pgs_create_key(KEY_PRESSED, 1)
 //    SET_CONDITION(NO_SYS_SCRIPT_PEDAL)
-
+    color_key(0)
 end on
 
 function remove_all_notes
@@ -868,17 +871,17 @@ function display_notes
             select signature[(dnotes[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
                 case 1
                     sharp[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    sharp[i]->pos_y := note_pos[current] - 4
+                    sharp[i]->pos_y := note_pos[current] - 10
                     sharp[i]->hide := HIDE_PART_NOTHING
                     inc(j)
                 case 2
                     flat[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    flat[i]->pos_y := note_pos[current] - 6
+                    flat[i]->pos_y := note_pos[current] - 16
                     flat[i]->hide := HIDE_PART_NOTHING
                     inc(j)
                 case 3
                     natural[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    natural[i]->pos_y := note_pos[current] - 3
+                    natural[i]->pos_y := note_pos[current] - 10
                     natural[i]->hide := HIDE_PART_NOTHING
                     inc(j)
             end select
@@ -1141,9 +1144,25 @@ function display_chord
     end for
 end function
 
+function color_key (ks)
+    for i := 24 to 108
+        set_key_color(i, KEY_COLOR_INACTIVE)
+    end for
+    for i := 24 to 108
+        j := major[(i - key_to_index[ks]) mod NUM_OF_NOTE]
+        if j = 1
+            set_key_color(i, KEY_COLOR_WARM_YELLOW)
+        end if
+    end for
+end function
+
 on note
     ignore_event(EVENT_ID)
-    set_key_color(EVENT_NOTE, KEY_COLOR_LIGHT_ORANGE)
+    if get_key_color(EVENT_NOTE) = KEY_COLOR_WARM_YELLOW or get_key_color(EVENT_NOTE) = KEY_COLOR_BLUE
+        set_key_color(EVENT_NOTE, KEY_COLOR_BLUE)
+    else
+        set_key_color(EVENT_NOTE, KEY_COLOR_RED)
+    end if
     pgs_set_key_val(KEY_PRESSED, 0, 1)
     call update_notes
     if keyoffset[key*NUM_OF_NOTE+(EVENT_NOTE mod NUM_OF_NOTE)] = 1 and note_pos[EVENT_NOTE*NOTE_INDEX+9] = 0
@@ -1165,7 +1184,11 @@ end on
 on release
     ignore_event(EVENT_ID)
     if is_sustain = 0
-        set_key_color(EVENT_NOTE, KEY_COLOR_INACTIVE)
+        if get_key_color(EVENT_NOTE) = KEY_COLOR_BLUE
+            set_key_color(EVENT_NOTE, KEY_COLOR_WARM_YELLOW)
+        else
+            set_key_color(EVENT_NOTE, KEY_COLOR_INACTIVE)
+        end if
         pgs_set_key_val(KEY_PRESSED, 0, 1)
         call update_notes
         bnotes[EVENT_NOTE]->text := ""
@@ -1188,7 +1211,13 @@ on controller
             pgs_set_key_val(SUSTAIN_RELEASE,0,1)
             for i := 0 to NUM_OF_ALL_KEY - 1
                 if sustain_notes[i] # 0xFF
-                    set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
+                    if get_key_color(sustain_notes[i]) = KEY_COLOR_BLUE
+                        set_key_color(sustain_notes[i], KEY_COLOR_WARM_YELLOW)
+                        sustain_notes[i] := 0xFF
+                    else
+                        set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
+                        sustain_notes[i] := 0xFF
+                    end if
                     bnotes[i]->text := ""
                 end if
             end for
@@ -1216,12 +1245,13 @@ end on
 
 on ui_control(knob)
     key := get_control_par(get_ui_id(knob), CONTROL_PAR_VALUE)
+    color_key(key)
     set_knob_label(knob, !keys[key])
     for i := 0 to 14 - 1
         flatkey[i]->hide := HIDE_PART_BG
         sharpkey[i]->hide := HIDE_PART_BG
     end for
-    set_text(key_name, "Key: " & !keys[key])
+    set_text(key_name, !keys[key])
     if key < 8
         for i := 0 to key - 1
             flatkey[i]->hide := HIDE_PART_NOTHING
