@@ -35,6 +35,7 @@ on init
     declare pnum := 0
     declare is_sustain := 0
     declare key
+    declare scale
     declare i := 0
     declare j := 0
     declare k := 0
@@ -118,14 +119,6 @@ on init
         line[i]->pos_y := line_pos_y[i]
     end for
 
-    declare ui_label key_name(1,1)
-    set_control_par(get_ui_id(key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
-    set_control_par(get_ui_id(key_name),$CONTROL_PAR_WIDTH, 110)
-    set_control_par(get_ui_id(key_name),$CONTROL_PAR_HEIGHT, 25)
-    set_text(key_name, "Key: C / a")
-    hide_part(key_name, $HIDE_PART_BG)
-    move_control_px(key_name, 20, 64)
-
     declare ui_label staff(1,1)
     set_control_par_str(get_ui_id(staff),$CONTROL_PAR_PICTURE, "staff")
     set_text(staff, "")
@@ -155,17 +148,49 @@ on init
     hide_part(sustain,$HIDE_PART_BG)
     move_control_px(sustain, 0, 350)
 
-    declare ui_knob knob (0, 14, 1)
-    hide_part(knob,HIDE_PART_VALUE .or. HIDE_PART_TITLE .or. HIDE_PART_BG)
-    move_control_px(knob, 30, 20)
+    declare ui_label key_name(1,1)
+    set_control_par(get_ui_id(key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
+    set_control_par(get_ui_id(key_name),$CONTROL_PAR_WIDTH, 110)
+    set_control_par(get_ui_id(key_name),$CONTROL_PAR_HEIGHT, 25)
+    set_text(key_name, "C / a")
+    hide_part(key_name, $HIDE_PART_BG)
+    move_control_px(key_name, 40, 28)
+
+    declare ui_label scale_name(1,1)
+    set_control_par(get_ui_id(scale_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
+    set_control_par(get_ui_id(scale_name),$CONTROL_PAR_WIDTH, 110)
+    set_control_par(get_ui_id(scale_name),$CONTROL_PAR_HEIGHT, 25)
+    set_text(scale_name, "Ionian")
+    hide_part(scale_name, $HIDE_PART_BG)
+    move_control_px(scale_name, 40, 68)
+
+    declare ui_knob key_knob (0, 14, 1)
+    hide_part(key_knob,HIDE_PART_VALUE .or. HIDE_PART_TITLE .or. HIDE_PART_BG)
+    move_control_px(key_knob, 10, 20)
+
+    declare ui_knob scale_knob (0, 8, 1)
+    hide_part(scale_knob,HIDE_PART_VALUE .or. HIDE_PART_TITLE .or. HIDE_PART_BG)
+    move_control_px(scale_knob, 10, 60)
 
     declare !keys[] := ("C / a",   "F / d",   "Bb / g",  "Eb / c",  ...
                         "Ab / f",  "Db / bb", "Gb / eb", "Cb / g#", ...
                         "C# / bb", "F# / d#", "B / g#",  "E / c#",  ...
                         "A / f#",  "D / b",   "G / e")
 
+    declare !scales[] := ("Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian", "Whole tone", "Pentatonic")
+
     declare key_to_index[] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
-    declare major[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1)
+
+                       {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11}
+    declare scale_array[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1,... {Ionian}
+                              1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0,... {Dorian}
+                              1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,... {Phrygian}
+                              1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1,... {Lydian}
+                              1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0,... {Mixolydian}
+                              1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0,... {Aeolian}
+                              1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0,... {Locrian}
+                              1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,... {Whole tone}
+                              1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0)    {Pentatonic}
 
     declare !ckeynotes [] := ("C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B",...
                               "C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B",...
@@ -779,7 +804,7 @@ on init
     pgs_create_key(SUSTAIN_RELEASE, 1)
     pgs_create_key(KEY_CHANGED, 1)
 //    SET_CONDITION(NO_SYS_SCRIPT_PEDAL)
-    color_key(0)
+    color_key(0, 0)
 end on
 
 function remove_all_notes
@@ -1142,9 +1167,9 @@ function display_chord
     iterate_macro(display_chord) := 0 to 6
 end function
 
-function color_key (ks)
+function color_key (k, s)
     for i := 24 to 108
-        j := major[(i - key_to_index[ks]) mod NUM_OF_NOTE]
+        j := scale_array[NUM_OF_NOTE * s + (i - key_to_index[k]) mod NUM_OF_NOTE]
         if j = 1
             set_key_color(i, KEY_COLOR_WARM_YELLOW)
         else
@@ -1240,15 +1265,16 @@ on pgs_changed
     end if
 end on
 
-on ui_control(knob)
-    key := get_control_par(get_ui_id(knob), CONTROL_PAR_VALUE)
-    color_key(key)
-    set_knob_label(knob, !keys[key])
+on ui_control(key_knob)
+    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
+    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
+    color_key(key, scale)
+    set_knob_label(key_knob, !keys[key])
     for i := 0 to 14 - 1
         flatkey[i]->hide := HIDE_PART_BG
         sharpkey[i]->hide := HIDE_PART_BG
     end for
-    set_text(key_name, "Key: " & !keys[key])
+    set_text(key_name, !keys[key])
     if key < 8
         for i := 0 to key - 1
             flatkey[i]->hide := HIDE_PART_NOTHING
@@ -1260,4 +1286,12 @@ on ui_control(knob)
             sharpkey[7+i]->hide := HIDE_PART_NOTHING
         end for
     end if
+end on
+
+on ui_control(scale_knob)
+    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
+    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
+    color_key(key, scale)
+    set_knob_label(scale_knob, !scales[scale])
+    set_text(scale_name, !scales[scale])
 end on
