@@ -26,7 +26,7 @@ define NC := " n.c."
 define KEYTIME := 100000
 
 on init
-    //activate_logger("C:/Users/youngker/log.nka")
+    activate_logger("C:/Users/youngker/log.nka")
 
     declare empty_notes[AVAILABLE_NUM] := (0xFF)
     declare empty_keys[NUM_OF_KEY] := (0xFF)
@@ -122,9 +122,9 @@ on init
     set_control_par(get_ui_id(key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
     set_control_par(get_ui_id(key_name),$CONTROL_PAR_WIDTH, 110)
     set_control_par(get_ui_id(key_name),$CONTROL_PAR_HEIGHT, 25)
-    set_text(key_name, "Key: No Key")
+    set_text(key_name, "Key: C / a")
     hide_part(key_name, $HIDE_PART_BG)
-    move_control_px(key_name, 20, 84)
+    move_control_px(key_name, 20, 64)
 
     declare ui_label staff(1,1)
     set_control_par_str(get_ui_id(staff),$CONTROL_PAR_PICTURE, "staff")
@@ -157,12 +157,12 @@ on init
 
     declare ui_knob knob (0, 14, 1)
     hide_part(knob,HIDE_PART_VALUE .or. HIDE_PART_TITLE .or. HIDE_PART_BG)
-    move_control_px(knob, 20, 40)
+    move_control_px(knob, 30, 20)
 
-    declare !keys[] := ("C maj/a min",   "F maj/d min",   "Bb maj/g min",  "Eb maj/c min",  ...
-                        "Ab maj/f min",  "Db maj/bb min", "Gb maj/eb min", "Cb maj/g# min", ...
-                        "C# maj/bb min", "F# maj/d# min", "B maj/g# min",  "E maj/c# min",  ...
-                        "A maj/f# min",  "D maj/b min",   "G maj/e min")
+    declare !keys[] := ("C / a",   "F / d",   "Bb / g",  "Eb / c",  ...
+                        "Ab / f",  "Db / bb", "Gb / eb", "Cb / g#", ...
+                        "C# / bb", "F# / d#", "B / g#",  "E / c#",  ...
+                        "A / f#",  "D / b",   "G / e")
 
     declare key_to_index[] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
     declare major[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1)
@@ -777,7 +777,7 @@ on init
     end for
 
     pgs_create_key(SUSTAIN_RELEASE, 1)
-    pgs_create_key(KEY_PRESSED, 1)
+    pgs_create_key(KEY_CHANGED, 1)
 //    SET_CONDITION(NO_SYS_SCRIPT_PEDAL)
     color_key(0)
 end on
@@ -954,7 +954,7 @@ macro make_chord(#n#)
     else
        divide := #n# + 2
     end if
-    if pnum >= divide
+    if pnum > divide or #n# = 0
         chord#n#.active := 1
         chord#n#.bot_chordbase := notes[0] mod NUM_OF_NOTE
         chord#n#.top_chordbase := notes[pnum - divide] mod NUM_OF_NOTE
@@ -1028,11 +1028,12 @@ end macro
 macro display_chord(#n#)
     if chord#n#.active = 1
         show := 0
-        print(#n# & "bottom index (" & chord#n#.bot_chordbase & ") " & "(0)" & chord#n#.bot_chordindex[0] & ",(1)" & chord#n#.bot_chordindex[1] & ",(2)" & chord#n#.bot_chordindex[2] & ",(3)" & chord#n#.bot_chordindex[3] & ",(4)" & chord#n#.bot_chordindex[4] & ",(5)" & chord#n#.bot_chordindex[5] & ",(6)" & chord#n#.bot_chordindex[6] & ",(7)" & chord#n#.bot_chordindex[7] & ",(8)" & chord#n#.bot_chordindex[8] & ",(9)" & chord#n#.bot_chordindex[9] & ",(10)"& chord#n#.bot_chordindex[10] & ",(11)" & chord#n#.bot_chordindex[11])
-        print(#n# & "bottom chord (" & chord#n#.bot_chordbase & ") " & "(0)" & !chord#n#.bot_chordname[0] & ",(1)" & !chord#n#.bot_chordname[1] & ",(2)" & !chord#n#.bot_chordname[2] & ",(3)" & !chord#n#.bot_chordname[3] & ",(4)" & !chord#n#.bot_chordname[4] & ",(5)" & !chord#n#.bot_chordname[5] & ",(6)" & !chord#n#.bot_chordname[6] & ",(7)" & !chord#n#.bot_chordname[7] & ",(8)" & !chord#n#.bot_chordname[8] & ",(9)" & !chord#n#.bot_chordname[9] & ",(10)"& !chord#n#.bot_chordname[10] & ",(11)" & !chord#n#.bot_chordname[11])
-        print(#n# & "top index1 (" & chord#n#.top_chordbase & ") " & "(0)" & chord#n#.top_chordindex[0] & ",(1)" & chord#n#.top_chordindex[1] & ",(2)" & chord#n#.top_chordindex[2] & ",(3)" & chord#n#.top_chordindex[3] & ",(4)" & chord#n#.top_chordindex[4] & ",(5)" & chord#n#.top_chordindex[5] & ",(6)" & chord#n#.top_chordindex[6] & ",(7)" & chord#n#.top_chordindex[7] & ",(8)" & chord#n#.top_chordindex[8] & ",(9)" & chord#n#.top_chordindex[9] & ",(10)"& chord#n#.top_chordindex[10] & ",(11)" & chord#n#.top_chordindex[11])
-        print(#n# & "top index2 (" & chord#n#.top_chordbase & ") " & "(12)" & chord#n#.top_chordindex[12] & ",(13)" & chord#n#.top_chordindex[13] & ",(14)" & chord#n#.top_chordindex[14] & ",(15)" & chord#n#.top_chordindex[15] & ",(16)" & chord#n#.top_chordindex[16] & ",(17)" & chord#n#.top_chordindex[17] & ",(18)" & chord#n#.top_chordindex[18] & ",(19)" & chord#n#.top_chordindex[19] & ",(20)" & chord#n#.top_chordindex[20] & ",(21)" & chord#n#.top_chordindex[21] & ",(22)"& chord#n#.top_chordindex[22] & ",(23)" & chord#n#.top_chordindex[23])
-        print(#n# & "top chord (" & chord#n#.top_chordbase & ") " & "(0)" & !chord#n#.top_chordname[0] & ",(1)" & !chord#n#.top_chordname[1] & ",(2)" & !chord#n#.top_chordname[2] & ",(3)" & !chord#n#.top_chordname[3] & ",(4)" & !chord#n#.top_chordname[4] & ",(5)" & !chord#n#.top_chordname[5] & ",(6)" & !chord#n#.top_chordname[6] & ",(7)" & !chord#n#.top_chordname[7] & ",(8)" & !chord#n#.top_chordname[8] & ",(9)" & !chord#n#.top_chordname[9] & ",(10)"& !chord#n#.top_chordname[10] & ",(11)" & !chord#n#.top_chordname[11])
+        print(#n# & " bottom index1 (" & chord#n#.bot_chordbase & ") " & "(0)" & chord#n#.bot_chordindex[0] & ",(1)" & chord#n#.bot_chordindex[1] & ",(2)" & chord#n#.bot_chordindex[2] & ",(3)" & chord#n#.bot_chordindex[3] & ",(4)" & chord#n#.bot_chordindex[4] & ",(5)" & chord#n#.bot_chordindex[5] & ",(6)" & chord#n#.bot_chordindex[6] & ",(7)" & chord#n#.bot_chordindex[7] & ",(8)" & chord#n#.bot_chordindex[8] & ",(9)" & chord#n#.bot_chordindex[9] & ",(10)"& chord#n#.bot_chordindex[10] & ",(11)" & chord#n#.bot_chordindex[11])
+        print(#n# & " bottom index2 (" & chord#n#.bot_chordbase & ") " & "(12)" & chord#n#.bot_chordindex[12] & ",(13)" & chord#n#.bot_chordindex[13] & ",(14)" & chord#n#.bot_chordindex[14] & ",(15)" & chord#n#.bot_chordindex[15] & ",(16)" & chord#n#.bot_chordindex[16] & ",(17)" & chord#n#.bot_chordindex[17] & ",(18)" & chord#n#.bot_chordindex[18] & ",(19)" & chord#n#.bot_chordindex[19] & ",(20)" & chord#n#.bot_chordindex[20] & ",(21)" & chord#n#.bot_chordindex[21] & ",(22)"& chord#n#.bot_chordindex[22] & ",(23)" & chord#n#.bot_chordindex[23])
+        print(#n# & " bottom chord (" & chord#n#.bot_chordbase & ") " & "(0)" & !chord#n#.bot_chordname[0] & ",(1)" & !chord#n#.bot_chordname[1] & ",(2)" & !chord#n#.bot_chordname[2] & ",(3)" & !chord#n#.bot_chordname[3] & ",(4)" & !chord#n#.bot_chordname[4] & ",(5)" & !chord#n#.bot_chordname[5] & ",(6)" & !chord#n#.bot_chordname[6] & ",(7)" & !chord#n#.bot_chordname[7] & ",(8)" & !chord#n#.bot_chordname[8] & ",(9)" & !chord#n#.bot_chordname[9] & ",(10)"& !chord#n#.bot_chordname[10] & ",(11)" & !chord#n#.bot_chordname[11])
+        print(#n# & " top index1 (" & chord#n#.top_chordbase & ") " & "(0)" & chord#n#.top_chordindex[0] & ",(1)" & chord#n#.top_chordindex[1] & ",(2)" & chord#n#.top_chordindex[2] & ",(3)" & chord#n#.top_chordindex[3] & ",(4)" & chord#n#.top_chordindex[4] & ",(5)" & chord#n#.top_chordindex[5] & ",(6)" & chord#n#.top_chordindex[6] & ",(7)" & chord#n#.top_chordindex[7] & ",(8)" & chord#n#.top_chordindex[8] & ",(9)" & chord#n#.top_chordindex[9] & ",(10)"& chord#n#.top_chordindex[10] & ",(11)" & chord#n#.top_chordindex[11])
+        print(#n# & " top index2 (" & chord#n#.top_chordbase & ") " & "(12)" & chord#n#.top_chordindex[12] & ",(13)" & chord#n#.top_chordindex[13] & ",(14)" & chord#n#.top_chordindex[14] & ",(15)" & chord#n#.top_chordindex[15] & ",(16)" & chord#n#.top_chordindex[16] & ",(17)" & chord#n#.top_chordindex[17] & ",(18)" & chord#n#.top_chordindex[18] & ",(19)" & chord#n#.top_chordindex[19] & ",(20)" & chord#n#.top_chordindex[20] & ",(21)" & chord#n#.top_chordindex[21] & ",(22)"& chord#n#.top_chordindex[22] & ",(23)" & chord#n#.top_chordindex[23])
+        print(#n# & " top chord (" & chord#n#.top_chordbase & ") " & "(0)" & !chord#n#.top_chordname[0] & ",(1)" & !chord#n#.top_chordname[1] & ",(2)" & !chord#n#.top_chordname[2] & ",(3)" & !chord#n#.top_chordname[3] & ",(4)" & !chord#n#.top_chordname[4] & ",(5)" & !chord#n#.top_chordname[5] & ",(6)" & !chord#n#.top_chordname[6] & ",(7)" & !chord#n#.top_chordname[7] & ",(8)" & !chord#n#.top_chordname[8] & ",(9)" & !chord#n#.top_chordname[9] & ",(10)"& !chord#n#.top_chordname[10] & ",(11)" & !chord#n#.top_chordname[11])
 
         if chord#n#.top_chordindex[chord#n#.top_chordbase] # 0xFF
             @chord#n#.last_topchord := !chord#n#.top_chordname[chord#n#.top_chordbase]
@@ -1069,8 +1070,8 @@ macro display_chord(#n#)
             end if
         end if
 
-        print("baselist : " & baselist[0] & " " & baselist[1] & " " & baselist[2] & " " & baselist[3] & " " & baselist[4] & " " & baselist[5] & " "& baselist[6])
-        print("chordlist : " & chordlist[0] & " " & chordlist[1] & " " & chordlist[2] & " " & chordlist[3] & " " & chordlist[4] & " " & chordlist[5] & " "& chordlist[6])
+        print(#n# & " baselist : " & baselist[0] & " " & baselist[1] & " " & baselist[2] & " " & baselist[3] & " " & baselist[4] & " " & baselist[5] & " "& baselist[6])
+        print(#n# & " chordlist : " & chordlist[0] & " " & chordlist[1] & " " & chordlist[2] & " " & chordlist[3] & " " & chordlist[4] & " " & chordlist[5] & " "& chordlist[6])
         print ("(" & #n# & ") Top: " & @chord#n#.last_topchord & " Bottom: " & @chord#n#.last_botchord)
 
         if show = 1
@@ -1078,7 +1079,6 @@ macro display_chord(#n#)
             for n := 0 to #n# - 1
                 print("->" & chord#n#.top_chordindex[chord#n#.topindex] & " == " & baselist[n] & " , " & chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE] & " == " & chordlist[n])
                 if chord#n#.top_chordindex[chord#n#.topindex] = baselist[n] and chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE] = chordlist[n]
-                    print( "-->" & chord#n#.top_chordindex[chord#n#.topindex] & " == " & baselist[n] & " , " & chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE] & " == " & chordlist[n])
                     print("already exist")
                     show := 0
                 end if
@@ -1137,21 +1137,18 @@ function display_chord
             iterate_macro(search_chord) := 0 to 6
         end for
         k := (k + 1) mod NUM_OF_NOTE
-        if i = NUM_OF_NOTE - 1
-            iterate_macro(display_chord) := 0 to 6
-        end if
-        print(k & " search chord : " & KSP_TIMER & " - " & NI_CALLBACK_ID)
+        print(k & " search chord time: " & KSP_TIMER & " - " & NI_CALLBACK_ID)
     end for
+    iterate_macro(display_chord) := 0 to 6
 end function
 
 function color_key (ks)
     for i := 24 to 108
-        set_key_color(i, KEY_COLOR_INACTIVE)
-    end for
-    for i := 24 to 108
         j := major[(i - key_to_index[ks]) mod NUM_OF_NOTE]
         if j = 1
             set_key_color(i, KEY_COLOR_WARM_YELLOW)
+        else
+            set_key_color(i, KEY_COLOR_INACTIVE)
         end if
     end for
 end function
@@ -1163,7 +1160,7 @@ on note
     else
         set_key_color(EVENT_NOTE, KEY_COLOR_RED)
     end if
-    pgs_set_key_val(KEY_PRESSED, 0, 1)
+    pgs_set_key_val(KEY_CHANGED, 0, 1)
     call update_notes
     if keyoffset[key*NUM_OF_NOTE+(EVENT_NOTE mod NUM_OF_NOTE)] = 1 and note_pos[EVENT_NOTE*NOTE_INDEX+9] = 0
         bnotes[EVENT_NOTE]->pos_x := note_pos[EVENT_NOTE*NOTE_INDEX+8] - 4
@@ -1189,7 +1186,7 @@ on release
         else
             set_key_color(EVENT_NOTE, KEY_COLOR_INACTIVE)
         end if
-        pgs_set_key_val(KEY_PRESSED, 0, 1)
+        pgs_set_key_val(KEY_CHANGED, 0, 1)
         call update_notes
         bnotes[EVENT_NOTE]->text := ""
     else
@@ -1226,15 +1223,15 @@ on controller
 end on
 
 on pgs_changed
-    if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_PRESSED)
+    if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_CHANGED)
         if pgs_get_key_val(SUSTAIN_RELEASE, 0) = 1
-            //print("on pgs_changed : SUSTAIN_RELEASE ================== : " & NI_CALLBACK_ID)
+            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & NI_CALLBACK_ID)
             pgs_set_key_val(SUSTAIN_RELEASE, 0, 0)
             call update_notes
             call display_notes
             call display_chord
-        else if pgs_get_key_val(KEY_PRESSED, 0) = 1
-            //print("on pgs_changed : KEY_PRESSED ================== : " & NI_CALLBACK_ID)
+        else if pgs_get_key_val(KEY_CHANGED, 0) = 1
+            print("on pgs_changed : KEY_CHANGED ================== : " & NI_CALLBACK_ID)
             wait(KEYTIME)
             reset_ksp_timer
             call display_notes
@@ -1251,7 +1248,7 @@ on ui_control(knob)
         flatkey[i]->hide := HIDE_PART_BG
         sharpkey[i]->hide := HIDE_PART_BG
     end for
-    set_text(key_name, !keys[key])
+    set_text(key_name, "Key: " & !keys[key])
     if key < 8
         for i := 0 to key - 1
             flatkey[i]->hide := HIDE_PART_NOTHING
