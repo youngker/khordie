@@ -1,5 +1,5 @@
 define AVAILABLE_NUM:= 50
-define NUM_OF_CHORD := 198
+define NUM_OF_CHORD := 205
 define NUM_OF_KEY := 7
 define NUM_OF_NOTE := 12
 define NUM_OF_ALL_KEY := 128
@@ -25,14 +25,18 @@ define SIG_POS_X := 18
 define NC := " n.c."
 define KEYTIME := 100000
 
+struct Status
+    declare length
+    declare notes[AVAILABLE_NUM] := (0xFF)
+end struct
+
 on init
     activate_logger("C:/Users/youngker/log.nka")
 
+    declare &Status status
     declare empty_notes[AVAILABLE_NUM] := (0xFF)
     declare empty_keys[NUM_OF_KEY] := (0xFF)
-    declare notes[AVAILABLE_NUM] := (0xFF)
     declare sustain_notes[NUM_OF_ALL_KEY] := (0xFF)
-    declare pnum := 0
     declare is_sustain := 0
     declare key
     declare scale
@@ -42,6 +46,7 @@ on init
     declare l := 0
     declare m := 0
     declare n := 0
+    declare kstart := 0
 
     message("")
     make_perfview
@@ -190,7 +195,7 @@ on init
 
     declare key_to_index[] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
 
-                       {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11}
+                             {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11}
     declare scale_array[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1,... {Ionian}
                               1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0,... {Dorian}
                               1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,... {Phrygian}
@@ -436,6 +441,13 @@ on init
     chord_names[195] := "Maj13(#11)"
     chord_names[196] := "Maj13(b5#5)"
     chord_names[197] := "13(#9#11)"
+    chord_names[198] := "Ionian"
+    chord_names[199] := "Dorian"
+    chord_names[200] := "Phrygian"
+    chord_names[201] := "Lydian"
+    chord_names[202] := "Mixolydian"
+    chord_names[203] := "Aeolian"
+    chord_names[204] := "Locrian"
 
     declare base_chord[NUM_OF_CHORD*NUM_OF_KEY] := (...
         0,255,255,255,255,255,255,... { 0 }
@@ -635,7 +647,14 @@ on init
         0,2,4,6,7,9,10,... { 194 }
         0,2,4,6,7,9,11,... { 195 }
         0,2,4,6,8,9,11,... { 196 }
-        0,3,4,6,7,9,10) { 197 }
+        0,3,4,6,7,9,10,... { 197 }
+        0,2,4,5,7,9,11,... { 198 }
+        0,2,3,5,7,9,10,... { 199 }
+        0,1,3,5,7,8,10,... { 200 }
+        0,2,4,6,7,9,11,... { 201 }
+        0,2,4,5,7,9,10,... { 202 }
+        0,2,3,5,7,8,10,... { 203 }
+        0,1,3,5,6,8,10)    { 204 }
 
     // "C","F","Bb","Eb","Ab","Db","Gb","Cb","C#","F#","B","E","A","D","G"
     // 0: N/A, 1:#, 2:b, 3:N, 4:Cb,Fb 5:E#,B#
@@ -790,21 +809,18 @@ on init
         1,2,3,2,1,2,3,2,1,2,3,2,...
         1,2)
 
-    declare all_chord[NUM_OF_NOTE*NUM_OF_CHORD*NUM_OF_KEY]
+    declare all_chord[NUM_OF_NOTE*NUM_OF_CHORD]
+    declare temp_chord := 0
+
     for i := 0 to NUM_OF_NOTE - 1
         for j := 0 to NUM_OF_CHORD - 1
+            temp_chord := 0
             for k := 0 to NUM_OF_KEY - 1
-                declare temp_chord[NUM_OF_KEY] := (0xFF)
                 if base_chord[j*NUM_OF_KEY + k] # 0xFF
-                    temp_chord[k] := (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE
-                else
-                    temp_chord[k] := 0xFF
+                    temp_chord := temp_chord .or. sh_left(1b, (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE)
                 end if
                 if k = NUM_OF_KEY - 1
-                    sort(temp_chord, 0)
-                    for l := 0 to NUM_OF_KEY - 1
-                        all_chord[i*NUM_OF_CHORD*NUM_OF_KEY + j*NUM_OF_KEY + l] := temp_chord[l]
-                    end for
+                    all_chord[i*NUM_OF_CHORD + j] := temp_chord
                 end if
             end for
         end for
@@ -816,7 +832,140 @@ on init
     khordie_set_color_piano(0, 0)
 end on
 
-function get_index_by_key (note) -> result
+on note
+    ignore_event(EVENT_ID)
+    pgs_set_key_val(KEY_CHANGED, 0, 1)
+    call khordie_update_active_notes
+    call khordie_show_notes_on_staff
+    khordie_show_piano(EVENT_NOTE, 0)
+    khordie_show_notes(EVENT_NOTE, 0)
+    if is_sustain = 1
+        sustain_notes[EVENT_NOTE] := 0xFF
+    end if
+end on
+
+on release
+    ignore_event(EVENT_ID)
+    if is_sustain = 0
+        pgs_set_key_val(KEY_CHANGED, 0, 1)
+        call khordie_update_active_notes
+        call khordie_show_notes_on_staff
+        khordie_show_piano(EVENT_NOTE, 1)
+        khordie_show_notes(EVENT_NOTE, 1)
+    else
+        sustain_notes[EVENT_NOTE] := EVENT_NOTE
+    end if
+end on
+
+on controller
+    if $CC_NUM = 64
+        ignore_controller
+        if %CC[64] = 127
+            print("on controller 1: " & %CC[64])
+            is_sustain := 1
+            set_text(sustain, "Sustain")
+            for i := 0 to NUM_OF_ALL_KEY - 1
+                sustain_notes[i] := 0xFF
+            end for
+        else
+            print("on controller 2: " & %CC[64])
+            is_sustain := 0
+            set_text(sustain, "")
+            pgs_set_key_val(SUSTAIN_RELEASE,0,1)
+            for i := 0 to NUM_OF_ALL_KEY - 1
+                if sustain_notes[i] # 0xFF
+                    if get_key_color(sustain_notes[i]) = KEY_COLOR_BLUE
+                        set_key_color(sustain_notes[i], KEY_COLOR_WARM_YELLOW)
+                    else
+                        set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
+                    end if
+                    sustain_notes[i] := 0xFF
+                    bnotes[i]->text := ""
+                end if
+            end for
+        end if
+    end if
+end on
+
+on pgs_changed
+    if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_CHANGED)
+        if pgs_get_key_val(SUSTAIN_RELEASE, 0) = 1
+            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & NI_CALLBACK_ID)
+            pgs_set_key_val(SUSTAIN_RELEASE, 0, 0)
+            call khordie_update_active_notes
+            call khordie_show_notes_on_staff
+            call khordie_remove_all_chord
+        else if pgs_get_key_val(KEY_CHANGED, 0) = 1
+            wait(KEYTIME)
+            reset_ksp_timer
+            kstart := KSP_TIMER
+            call khordie_show_chord
+            print("on pgs_changed : KEY_CHANGED ================== : " & KSP_TIMER - kstart)
+        end if
+    end if
+end on
+
+on ui_control(key_knob)
+    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
+    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
+    khordie_set_color_piano(key, scale)
+    set_knob_label(key_knob, keys[key])
+    for i := 0 to 14 - 1
+        flatkey[i]->hide := HIDE_PART_BG
+        sharpkey[i]->hide := HIDE_PART_BG
+    end for
+    set_text(key_name, keys[key])
+    if key < 8
+        for i := 0 to key - 1
+            flatkey[i]->hide := HIDE_PART_NOTHING
+            flatkey[7+i]->hide := HIDE_PART_NOTHING
+        end for
+    else
+        for i := 0 to 14 - key
+            sharpkey[i]->hide := HIDE_PART_NOTHING
+            sharpkey[7+i]->hide := HIDE_PART_NOTHING
+        end for
+    end if
+end on
+
+on ui_control(scale_knob)
+    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
+    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
+    khordie_set_color_piano(key, scale)
+    set_knob_label(scale_knob, scales[scale])
+    set_text(scale_name, scales[scale])
+end on
+
+function khordie_update_active_notes
+    status.notes := concat(empty_notes)
+    status.length := 0
+    for i := 0 to NUM_OF_ALL_KEY - 1
+        if KEY_DOWN[i] = 1
+            status.notes[status.length] := i
+            inc(status.length)
+        end if
+    end for
+end function
+
+function khordie_remove_all_notes
+    for i := 0 to AVAILABLE_NUM - 1
+        note[i]->hide := HIDE_PART_BG
+        sharp[i]->hide := HIDE_PART_BG
+        flat[i]->hide := HIDE_PART_BG
+        natural[i]->hide := HIDE_PART_BG
+    end for
+    for i := 0 to 16 - 1
+        line[i]->hide := HIDE_PART_BG
+        line2[i]->hide := HIDE_PART_BG
+    end for
+end function
+
+function khordie_remove_all_chord
+    set_text(main, "")
+    set_text(sub, "")
+end function
+
+function khordie_get_index_by_key (note) -> result
     select key
         case 0
             if signature[(note mod NUM_OF_NOTE)*NUM_OF_KEYS+key] = 1
@@ -839,6 +988,147 @@ function get_index_by_key (note) -> result
     end select
 end function
 
+function khordie_show_piano (event_note, release)
+    if release = 0
+        if get_key_color(event_note) = KEY_COLOR_WARM_YELLOW or get_key_color(event_note) = KEY_COLOR_BLUE
+            set_key_color(event_note, KEY_COLOR_BLUE)
+        else
+            set_key_color(event_note, KEY_COLOR_RED)
+        end if
+    else
+        if get_key_color(event_note) = KEY_COLOR_BLUE
+            set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
+        else
+            set_key_color(event_note, KEY_COLOR_INACTIVE)
+        end if
+    end if
+end function
+
+function khordie_show_notes (event_note, release)
+    if release = 0
+        if keyoffset[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)] = 1 and note_pos[event_note*NOTE_INDEX+9] = 0
+            bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8] - 4
+        else
+            bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8]
+        end if
+        if note_pos[event_note*NOTE_INDEX+9] = 0
+            bnotes[event_note]->pos_y := PNOTE_POS_Y
+        else
+            bnotes[event_note]->pos_y := PNOTE_POS_Y - 10
+        end if
+        bnotes[event_note]->text := keynotes[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)]
+    else
+        bnotes[event_note]->text := ""
+    end if
+end function
+
+function khordie_show_notes_on_staff
+    call khordie_remove_all_notes
+    declare snotes[AVAILABLE_NUM] := (0xFF)
+    declare dnotes[AVAILABLE_NUM] := (0xFF)
+    declare tnotes[AVAILABLE_NUM*2] := (0xFF)
+    if is_sustain = 1
+        tnotes := concat(status.notes, snotes)
+        sort(tnotes, 0)
+        dnotes := concat(empty_notes)
+        for i := 0 to AVAILABLE_NUM - 1
+            if search(dnotes, tnotes[i]) = -1 and tnotes[i] # 0xFF
+                dnotes[i] := tnotes[i]
+            end if
+        end for
+        sort(dnotes, 0)
+    else
+        dnotes := concat(status.notes)
+    end if
+    snotes := concat(dnotes)
+
+    declare line_pos[4] := (0,-2,5,12)
+    declare index := 0
+    declare prev_index := 0
+    declare current := 0
+    declare previous := 0
+    declare long := 0
+    j := 0
+    n := 0
+    for i := 0 to num_elements(dnotes) - 1
+        if dnotes[i] # 0xFF
+            index := khordie_get_index_by_key(dnotes[i])
+            current := dnotes[i]*NOTE_INDEX+POS_Y+index
+            if i > 0
+                prev_index := khordie_get_index_by_key(dnotes[i-1])
+                previous := dnotes[i-1]*NOTE_INDEX+POS_Y+prev_index
+            end if
+            select signature[(dnotes[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
+                case 1
+                    sharp[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    sharp[i]->pos_y := note_pos[current] - 10
+                    sharp[i]->hide := HIDE_PART_NOTHING
+                    inc(j)
+                case 2
+                    flat[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    flat[i]->pos_y := note_pos[current] - 16
+                    flat[i]->hide := HIDE_PART_NOTHING
+                    inc(j)
+                case 3
+                    natural[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    natural[i]->pos_y := note_pos[current] - 10
+                    natural[i]->hide := HIDE_PART_NOTHING
+                    inc(j)
+            end select
+            declare n_search := 0
+            if i > 0 and note_pos[previous] = note_pos[current]
+                note[i]->pos_x := note[i-1]->pos_x + NOTE_WHOLE_X
+                long := 1
+            else if i > 0 and note_pos[previous] = note_pos[current] + STEP
+                for k := i downto 0
+                    if note[k]->pos_y = note_pos[current] + STEP and note[k]->pos_x = NOTE_POS_X
+                        n_search := 1
+                    end if
+                end for
+                if n_search = 1
+                    note[i]->pos_x := note[i-1]->pos_x + NOTE_HALF_X
+                else
+                    note[i]->pos_x := NOTE_POS_X
+                end if
+            else
+                note[i]->pos_x := NOTE_POS_X
+            end if
+
+            declare pline := note_pos[dnotes[i]*NOTE_INDEX+index]
+            if pline # 0
+                declare pos := note_pos[current] + line_pos[pline]
+                if pos = line_pos_y[9]
+                    line[9]->hide := HIDE_PART_NOTHING
+                    if long = 1
+                        line2[9]->hide := HIDE_PART_NOTHING
+                    end if
+                else if line_pos_y[0] <= pos and pos <= line_pos_y[8]
+                    for l := 0 to 8
+                        if note_pos[current] + line_pos[pline] <= line_pos_y[l]
+                            line[l]->hide := HIDE_PART_NOTHING
+                            if long = 1
+                                line2[l]->hide := HIDE_PART_NOTHING
+                            end if
+                        end if
+                    end for
+                else if line_pos_y[10] <= pos and pos <= line_pos_y[15]
+                    for l := 10 to 15
+                        if note_pos[current] + line_pos[pline] >= line_pos_y[l]
+                            line[l]->hide := HIDE_PART_NOTHING
+                            if long = 1
+                                line2[l]->hide := HIDE_PART_NOTHING
+                            end if
+                        end if
+                    end for
+                end if
+            end if
+            note[i]->pos_y := note_pos[current]
+            note[i]->hide := HIDE_PART_NOTHING
+
+        end if
+    end for
+ end function
+
 macro declare_chord(#n#)
     family chord#n#
         declare active := 0
@@ -852,58 +1142,56 @@ macro declare_chord(#n#)
         declare !top_chordname[NUM_OF_NOTE] := ("")
         declare @last_topchord := ""
         declare @last_botchord := ""
-        declare bot_chord[NUM_OF_KEY] := (0xFF)
-        declare top_chord[NUM_OF_KEY] := (0xFF)
+        declare bot_chord := 0
+        declare top_chord := 0
         declare topindex := 0
     end family
 end macro
 
 macro make_chord(#n#)
     if #n# = 0
-       divide := pnum
+       divide := status.length
     else
        divide := #n# + 2
     end if
-    if pnum > divide or #n# = 0
+    if status.length > divide or #n# = 0
         chord#n#.active := 1
-        chord#n#.bot_chordbase := notes[0] mod NUM_OF_NOTE
-        chord#n#.top_chordbase := notes[pnum - divide] mod NUM_OF_NOTE
+        chord#n#.bot_chordbase := status.notes[0] mod NUM_OF_NOTE
+        chord#n#.top_chordbase := status.notes[status.length - divide] mod NUM_OF_NOTE
         @chord#n#.last_topchord := ""
         @chord#n#.last_botchord := ""
         for i := 0 to NUM_OF_NOTE*2 - 1
             chord#n#.top_chordindex[i] := 0xFF
             chord#n#.bot_chordindex[i] := 0xFF
         end for
-        chord#n#.bot_chord  := concat(empty_keys)
-        chord#n#.top_chord := concat(empty_keys)
+        chord#n#.bot_chord := 0
+        chord#n#.top_chord := 0
         chord#n#.topindex := 0
-        if pnum - divide <= 7
+        if status.length - divide <= 7
             n := 0
         else
-            n := (pnum - divide) - 7
+            n := (status.length - divide) - 7
         end if
-        for i := 0 + n to pnum - divide - 1
-            if notes[i] # 0xFF and search(chord#n#.bot_chord, notes[i] mod NUM_OF_NOTE) = -1
-                chord#n#.bot_chord[i - n] := notes[i] mod NUM_OF_NOTE
+        for i := 0 + n to status.length - divide - 1
+            if status.notes[i] # 0xFF
+                chord#n#.bot_chord := chord#n#.bot_chord .or. sh_left(1b, status.notes[i] mod NUM_OF_NOTE)
             end if
             inc(chord#n#.bot_keycount)
         end for
-        for i := pnum - divide to pnum - divide + 7 - 1
-            if notes[i] # 0xFF and search(chord#n#.top_chord, notes[i] mod NUM_OF_NOTE) = -1
-                chord#n#.top_chord[i-(pnum-divide)] := notes[i] mod NUM_OF_NOTE
+        for i := status.length - divide to status.length - divide + 7 - 1
+            if status.notes[i] # 0xFF
+                chord#n#.top_chord := chord#n#.top_chord .or. sh_left(1b, status.notes[i] mod NUM_OF_NOTE)
             end if
             inc(chord#n#.top_keycount)
         end for
-        sort(chord#n#.bot_chord, 0)
-        sort(chord#n#.top_chord, 0)
-        print(#n# & " create bottom chord : " & chord#n#.bot_chord[0] & " " & chord#n#.bot_chord[1] & " "& chord#n#.bot_chord[2] & " "& chord#n#.bot_chord[3] & " "& chord#n#.bot_chord[4] & " "& chord#n#.bot_chord[5] & " "& chord#n#.bot_chord[6])
-        print(#n# & " create top chord : " & chord#n#.top_chord[0] & " " & chord#n#.top_chord[1] & " "& chord#n#.top_chord[2] & " "& chord#n#.top_chord[3] & " "& chord#n#.top_chord[4] & " "& chord#n#.top_chord[5] & " "& chord#n#.top_chord[6])
+        print(#n# & " create bottom chord : " & chord#n#.bot_chord)
+        print(#n# & " create top chord : " & chord#n#.top_chord)
     end if
 end macro
 
 macro search_chord(#n#)
     if chord#n#.active = 1
-        if array_equal(chord#n#.bot_chord, ref_chord)
+        if chord#n#.bot_chord = ref_chord
             chord#n#.bot_chordindex[k] := k
             chord#n#.bot_chordindex[k+NUM_OF_NOTE] := j
             if j = 0 and chord#n#.bot_keycount = 1
@@ -915,9 +1203,9 @@ macro search_chord(#n#)
                     !chord#n#.bot_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j] & " / " & ckeynotes[ckey*NUM_OF_NOTE+chord#n#.bot_chordbase]
                 end if
             end if
-            print(#n# & " found bottom chord : " & !chord#n#.bot_chordname[k] & " - " & chord#n#.bot_chord[0] & " " & chord#n#.bot_chord[1] & " "& chord#n#.bot_chord[2] & " "& chord#n#.bot_chord[3] & " "& chord#n#.bot_chord[4] & " "& chord#n#.bot_chord[5] & " "& chord#n#.bot_chord[6])
+            print(#n# & " found bottom chord : " & !chord#n#.bot_chordname[k] & " - " & chord#n#.bot_chord)
         end if
-        if array_equal(chord#n#.top_chord, ref_chord)
+        if chord#n#.top_chord = ref_chord
             chord#n#.top_chordindex[k] := k
             chord#n#.top_chordindex[k+NUM_OF_NOTE] := j
 
@@ -930,7 +1218,7 @@ macro search_chord(#n#)
                     !chord#n#.top_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j] & " / " & ckeynotes[ckey*NUM_OF_NOTE+chord#n#.top_chordbase]
                 end if
             end if
-            print(#n# & " found top chord: " & !chord#n#.top_chordname[k] & " - " & chord#n#.top_chord[0] & " " & chord#n#.top_chord[1] & " "& chord#n#.top_chord[2] & " "& chord#n#.top_chord[3] & " "& chord#n#.top_chord[4] & " "& chord#n#.top_chord[5] & " "& chord#n#.top_chord[6])
+            print(#n# & " found top chord: " & !chord#n#.top_chordname[k] & " - " & chord#n#.top_chord)
         end if
     end if
 end macro
@@ -1006,283 +1294,10 @@ macro display_chord(#n#)
     end if
 end macro
 
-on note
-    ignore_event(EVENT_ID)
-    pgs_set_key_val(KEY_CHANGED, 0, 1)
-    call khordie_update_active_notes
-    call khordie_show_notes_on_staff
-    khordie_show_piano(EVENT_NOTE, 0)
-    khordie_show_notes(EVENT_NOTE, 0)
-    if is_sustain = 1
-        sustain_notes[EVENT_NOTE] := 0xFF
-    end if
-end on
-
-on release
-    ignore_event(EVENT_ID)
-    if is_sustain = 0
-        pgs_set_key_val(KEY_CHANGED, 0, 1)
-        call khordie_update_active_notes
-        call khordie_show_notes_on_staff
-        khordie_show_piano(EVENT_NOTE, 1)
-        khordie_show_notes(EVENT_NOTE, 1)
-    else
-        sustain_notes[EVENT_NOTE] := EVENT_NOTE
-    end if
-end on
-
-on controller
-    if $CC_NUM = 64
-        ignore_controller
-        if %CC[64] = 127
-            print("on controller 1: " & %CC[64])
-            is_sustain := 1
-            set_text(sustain, "Sustain")
-            for i := 0 to NUM_OF_ALL_KEY - 1
-                sustain_notes[i] := 0xFF
-            end for
-        else
-            print("on controller 2: " & %CC[64])
-            is_sustain := 0
-            set_text(sustain, "")
-            pgs_set_key_val(SUSTAIN_RELEASE,0,1)
-            for i := 0 to NUM_OF_ALL_KEY - 1
-                if sustain_notes[i] # 0xFF
-                    if get_key_color(sustain_notes[i]) = KEY_COLOR_BLUE
-                        set_key_color(sustain_notes[i], KEY_COLOR_WARM_YELLOW)
-                    else
-                        set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
-                    end if
-                    sustain_notes[i] := 0xFF
-                    bnotes[i]->text := ""
-                end if
-            end for
-        end if
-    end if
-end on
-
-on pgs_changed
-    if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_CHANGED)
-        if pgs_get_key_val(SUSTAIN_RELEASE, 0) = 1
-            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & NI_CALLBACK_ID)
-            pgs_set_key_val(SUSTAIN_RELEASE, 0, 0)
-            call khordie_update_active_notes
-            call khordie_show_notes_on_staff
-            call khordie_remove_all_chord
-        else if pgs_get_key_val(KEY_CHANGED, 0) = 1
-            print("on pgs_changed : KEY_CHANGED ================== : " & NI_CALLBACK_ID)
-            wait(KEYTIME)
-            reset_ksp_timer
-            call khordie_show_chord
-        end if
-    end if
-end on
-
-on ui_control(key_knob)
-    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
-    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
-    khordie_set_color_piano(key, scale)
-    set_knob_label(key_knob, keys[key])
-    for i := 0 to 14 - 1
-        flatkey[i]->hide := HIDE_PART_BG
-        sharpkey[i]->hide := HIDE_PART_BG
-    end for
-    set_text(key_name, keys[key])
-    if key < 8
-        for i := 0 to key - 1
-            flatkey[i]->hide := HIDE_PART_NOTHING
-            flatkey[7+i]->hide := HIDE_PART_NOTHING
-        end for
-    else
-        for i := 0 to 14 - key
-            sharpkey[i]->hide := HIDE_PART_NOTHING
-            sharpkey[7+i]->hide := HIDE_PART_NOTHING
-        end for
-    end if
-end on
-
-on ui_control(scale_knob)
-    key := get_control_par(get_ui_id(key_knob), CONTROL_PAR_VALUE)
-    scale := get_control_par(get_ui_id(scale_knob), CONTROL_PAR_VALUE)
-    khordie_set_color_piano(key, scale)
-    set_knob_label(scale_knob, scales[scale])
-    set_text(scale_name, scales[scale])
-end on
-
-function khordie_update_active_notes
-    notes := concat(empty_notes)
-    pnum := 0
-    for i := 0 to NUM_OF_ALL_KEY - 1
-        if KEY_DOWN[i] = 1
-            notes[pnum] := i
-            inc(pnum)
-        end if
-    end for
-end function
-
-function khordie_remove_all_notes
-    for i := 0 to AVAILABLE_NUM - 1
-        note[i]->hide := HIDE_PART_BG
-        sharp[i]->hide := HIDE_PART_BG
-        flat[i]->hide := HIDE_PART_BG
-        natural[i]->hide := HIDE_PART_BG
-    end for
-    for i := 0 to 16 - 1
-        line[i]->hide := HIDE_PART_BG
-        line2[i]->hide := HIDE_PART_BG
-    end for
-end function
-
-function khordie_remove_all_chord
-    set_text(main, "")
-    set_text(sub, "")
-end function
-
-function khordie_show_piano (event_note, release)
-    if release = 0
-        if get_key_color(event_note) = KEY_COLOR_WARM_YELLOW or get_key_color(event_note) = KEY_COLOR_BLUE
-            set_key_color(event_note, KEY_COLOR_BLUE)
-        else
-            set_key_color(event_note, KEY_COLOR_RED)
-        end if
-    else
-        if get_key_color(event_note) = KEY_COLOR_BLUE
-            set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
-        else
-            set_key_color(event_note, KEY_COLOR_INACTIVE)
-        end if
-    end if
-end function
-
-function khordie_show_notes (event_note, release)
-    if release = 0
-        if keyoffset[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)] = 1 and note_pos[event_note*NOTE_INDEX+9] = 0
-            bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8] - 4
-        else
-            bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8]
-        end if
-        if note_pos[event_note*NOTE_INDEX+9] = 0
-            bnotes[event_note]->pos_y := PNOTE_POS_Y
-        else
-            bnotes[event_note]->pos_y := PNOTE_POS_Y - 10
-        end if
-        bnotes[event_note]->text := keynotes[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)]
-    else
-        bnotes[event_note]->text := ""
-    end if
-end function
-
-function khordie_show_notes_on_staff
-    call khordie_remove_all_notes
-    declare snotes[AVAILABLE_NUM] := (0xFF)
-    declare dnotes[AVAILABLE_NUM] := (0xFF)
-    declare tnotes[AVAILABLE_NUM*2] := (0xFF)
-    if is_sustain = 1
-        tnotes := concat(notes, snotes)
-        sort(tnotes, 0)
-        dnotes := concat(empty_notes)
-        for i := 0 to AVAILABLE_NUM - 1
-            if search(dnotes, tnotes[i]) = -1 and tnotes[i] # 0xFF
-                dnotes[i] := tnotes[i]
-            end if
-        end for
-        sort(dnotes, 0)
-    else
-        dnotes := concat(notes)
-    end if
-    snotes := concat(dnotes)
-
-    declare line_pos[4] := (0,-2,5,12)
-    declare index := 0
-    declare prev_index := 0
-    declare current := 0
-    declare previous := 0
-    declare long := 0
-    j := 0
-    n := 0
-    for i := 0 to num_elements(dnotes) - 1
-        if dnotes[i] # 0xFF
-            index := get_index_by_key(dnotes[i])
-            current := dnotes[i]*NOTE_INDEX+POS_Y+index
-            if i > 0
-                prev_index := get_index_by_key(dnotes[i-1])
-                previous := dnotes[i-1]*NOTE_INDEX+POS_Y+prev_index
-            end if
-            select signature[(dnotes[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
-                case 1
-                    sharp[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    sharp[i]->pos_y := note_pos[current] - 10
-                    sharp[i]->hide := HIDE_PART_NOTHING
-                    inc(j)
-                case 2
-                    flat[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    flat[i]->pos_y := note_pos[current] - 16
-                    flat[i]->hide := HIDE_PART_NOTHING
-                    inc(j)
-                case 3
-                    natural[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    natural[i]->pos_y := note_pos[current] - 10
-                    natural[i]->hide := HIDE_PART_NOTHING
-                    inc(j)
-            end select
-            declare n_search := 0
-            if i > 0 and note_pos[previous] = note_pos[current]
-                note[i]->pos_x := note[i-1]->pos_x + NOTE_WHOLE_X
-                long := 1
-            else if i > 0 and note_pos[previous] = note_pos[current] + STEP
-                for k := i downto 0
-                    if note[k]->pos_y = note_pos[current] + STEP and note[k]->pos_x = NOTE_POS_X
-                        n_search := 1
-                    end if
-                end for
-                if n_search = 1
-                    note[i]->pos_x := note[i-1]->pos_x + NOTE_HALF_X
-                else
-                    note[i]->pos_x := NOTE_POS_X
-                end if
-            else
-                note[i]->pos_x := NOTE_POS_X
-            end if
-
-            declare pline := note_pos[dnotes[i]*NOTE_INDEX+index]
-            if pline # 0
-                declare pos := note_pos[current] + line_pos[pline]
-                if pos = line_pos_y[9]
-                    line[9]->hide := HIDE_PART_NOTHING
-                    if long = 1
-                        line2[9]->hide := HIDE_PART_NOTHING
-                    end if
-                else if line_pos_y[0] <= pos and pos <= line_pos_y[8]
-                    for l := 0 to 8
-                        if note_pos[current] + line_pos[pline] <= line_pos_y[l]
-                            line[l]->hide := HIDE_PART_NOTHING
-                            if long = 1
-                                line2[l]->hide := HIDE_PART_NOTHING
-                            end if
-                        end if
-                    end for
-                else if line_pos_y[10] <= pos and pos <= line_pos_y[15]
-                    for l := 10 to 15
-                        if note_pos[current] + line_pos[pline] >= line_pos_y[l]
-                            line[l]->hide := HIDE_PART_NOTHING
-                            if long = 1
-                                line2[l]->hide := HIDE_PART_NOTHING
-                            end if
-                        end if
-                    end for
-                end if
-            end if
-            note[i]->pos_y := note_pos[current]
-            note[i]->hide := HIDE_PART_NOTHING
-
-        end if
-    end for
- end function
-
 function khordie_show_chord
     call khordie_remove_all_chord
 
-    if pnum <= 1
+    if status.length <= 1
         exit
     end if
 
@@ -1310,25 +1325,21 @@ function khordie_show_chord
     iterate_macro(declare_chord) := 0 to 6
     iterate_macro(make_chord) := 0 to 6
 
-    k := notes[0] mod NUM_OF_NOTE
+    k := status.notes[0] mod NUM_OF_NOTE
     for i := 0 to NUM_OF_NOTE - 1
         for j := 0 to NUM_OF_CHORD - 1
-            declare ref_chord[NUM_OF_KEY]
-            for l := 0 to NUM_OF_KEY - 1
-                ref_chord[l] := all_chord[k*NUM_OF_CHORD*NUM_OF_KEY+j*NUM_OF_KEY+l]
-            end for
+            declare ref_chord := all_chord[k*NUM_OF_CHORD+j]
             iterate_macro(search_chord) := 0 to 6
         end for
+        print(k & " search chord time: " & KSP_TIMER)
         k := (k + 1) mod NUM_OF_NOTE
-        print(k & " search chord time: " & KSP_TIMER & " - " & NI_CALLBACK_ID)
     end for
     iterate_macro(display_chord) := 0 to 6
 end function
 
 function khordie_set_color_piano (k, s)
-    for i := 0 to NUM_OF_ALL_KEY - 1
-        j := scale_array[NUM_OF_NOTE * s + (i - key_to_index[k]) mod NUM_OF_NOTE]
-        if j = 1
+    for i := 20 to NUM_OF_ALL_KEY - 1
+        if scale_array[NUM_OF_NOTE * s + (i - key_to_index[k]) mod NUM_OF_NOTE] = 1
             set_key_color(i, KEY_COLOR_WARM_YELLOW)
         else
             set_key_color(i, KEY_COLOR_INACTIVE)
