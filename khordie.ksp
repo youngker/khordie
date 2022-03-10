@@ -31,11 +31,10 @@ struct Status
 end struct
 
 on init
-    activate_logger("C:/Users/youngker/log.nka")
+    activate_logger("/Users/youngker/log.nka")
 
     declare &Status status
     declare empty_notes[AVAILABLE_NUM] := (0xFF)
-    declare empty_keys[NUM_OF_KEY] := (0xFF)
     declare sustain_notes[NUM_OF_ALL_KEY] := (0xFF)
     declare is_sustain := 0
     declare key
@@ -810,19 +809,17 @@ on init
         1,2)
 
     declare all_chord[NUM_OF_NOTE*NUM_OF_CHORD]
-    declare temp_chord := 0
+    declare temp_chord := 0b
 
     for i := 0 to NUM_OF_NOTE - 1
         for j := 0 to NUM_OF_CHORD - 1
-            temp_chord := 0
+            temp_chord := 0b
             for k := 0 to NUM_OF_KEY - 1
                 if base_chord[j*NUM_OF_KEY + k] # 0xFF
                     temp_chord := temp_chord .or. sh_left(1b, (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE)
                 end if
-                if k = NUM_OF_KEY - 1
-                    all_chord[i*NUM_OF_CHORD + j] := temp_chord
-                end if
             end for
+            all_chord[i*NUM_OF_CHORD + j] := temp_chord
         end for
     end for
 
@@ -890,7 +887,7 @@ end on
 on pgs_changed
     if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_CHANGED)
         if pgs_get_key_val(SUSTAIN_RELEASE, 0) = 1
-            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & NI_CALLBACK_ID)
+            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & $NI_CALLBACK_ID)
             pgs_set_key_val(SUSTAIN_RELEASE, 0, 0)
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
@@ -940,7 +937,7 @@ function khordie_update_active_notes
     status.notes := concat(empty_notes)
     status.length := 0
     for i := 0 to NUM_OF_ALL_KEY - 1
-        if KEY_DOWN[i] = 1
+        if %KEY_DOWN[i] = 1
             status.notes[status.length] := i
             inc(status.length)
         end if
@@ -1129,7 +1126,7 @@ function khordie_show_notes_on_staff
     end for
  end function
 
-macro declare_chord(#n#)
+macro declare_chord (#n#)
     family chord#n#
         declare active := 0
         declare bot_chordbase := 0
@@ -1148,7 +1145,7 @@ macro declare_chord(#n#)
     end family
 end macro
 
-macro make_chord(#n#)
+macro make_chord (#n#)
     if #n# = 0
        divide := status.length
     else
@@ -1189,7 +1186,7 @@ macro make_chord(#n#)
     end if
 end macro
 
-macro search_chord(#n#)
+macro search_chord (#n#)
     if chord#n#.active = 1
         if chord#n#.bot_chord = ref_chord
             chord#n#.bot_chordindex[k] := k
@@ -1223,7 +1220,7 @@ macro search_chord(#n#)
     end if
 end macro
 
-macro display_chord(#n#)
+macro display_chord (#n#)
     if chord#n#.active = 1
         show := 0
         print(#n# & " bottom index1 (" & chord#n#.bot_chordbase & ") " & "(0)" & chord#n#.bot_chordindex[0] & ",(1)" & chord#n#.bot_chordindex[1] & ",(2)" & chord#n#.bot_chordindex[2] & ",(3)" & chord#n#.bot_chordindex[3] & ",(4)" & chord#n#.bot_chordindex[4] & ",(5)" & chord#n#.bot_chordindex[5] & ",(6)" & chord#n#.bot_chordindex[6] & ",(7)" & chord#n#.bot_chordindex[7] & ",(8)" & chord#n#.bot_chordindex[8] & ",(9)" & chord#n#.bot_chordindex[9] & ",(10)"& chord#n#.bot_chordindex[10] & ",(11)" & chord#n#.bot_chordindex[11])
