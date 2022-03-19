@@ -1,5 +1,5 @@
 define AVAILABLE_NUM:= 50
-define NUM_OF_CHORD := 205
+define NUM_OF_CHORD := 197
 define NUM_OF_KEY := 7
 define NUM_OF_NOTE := 12
 define NUM_OF_ALL_KEY := 128
@@ -25,17 +25,11 @@ define SIG_POS_X := 18
 define NC := " n.c."
 define KEYTIME := 100000
 
-struct Status
-    declare length
-    declare notes[AVAILABLE_NUM] := (0xFF)
-end struct
-
 on init
-    activate_logger("/Users/youngker/log.nka")
+    activate_logger("C:/Users/youngker/log.nka")
 
-    declare &Status status
-    declare empty_notes[AVAILABLE_NUM] := (0xFF)
-    declare sustain_notes[NUM_OF_ALL_KEY] := (0xFF)
+    declare empty_notes[AVAILABLE_NUM] := (0xff)
+    declare sustain_notes[NUM_OF_ALL_KEY] := (0xff)
     declare is_sustain := 0
     declare key
     declare scale
@@ -427,233 +421,217 @@ on init
     chord_names[182] := "13(b9#9#11)"
     chord_names[183] := "7(b9#9b13)"
     chord_names[184] := "13(b9#9)"
-    chord_names[185] := "13(b9#9)"
-    chord_names[186] := "7sus(b9#9b13)"
-    chord_names[187] := "7b9#11b13"
-    chord_names[188] := "13(b9#11)"
-    chord_names[189] := "dim(add M7,9,11)"
-    chord_names[190] := "Maj13(9,11)"
-    chord_names[191] := "Maj13(9,#11)"
-    chord_names[192] := "13sus4(add3)"
-    chord_names[193] := "Maj13(add4)"
-    chord_names[194] := "9(13)#11"
-    chord_names[195] := "Maj13(#11)"
-    chord_names[196] := "Maj13(b5#5)"
-    chord_names[197] := "13(#9#11)"
-    chord_names[198] := "Ionian"
-    chord_names[199] := "Dorian"
-    chord_names[200] := "Phrygian"
-    chord_names[201] := "Lydian"
-    chord_names[202] := "Mixolydian"
-    chord_names[203] := "Aeolian"
-    chord_names[204] := "Locrian"
+    chord_names[185] := "7sus(b9#9b13)"
+    chord_names[186] := "7b9#11b13"
+    chord_names[187] := "13(b9#11)"
+    chord_names[188] := "dim(add M7,9,11)"
+    chord_names[189] := "Maj13(9,11)"
+    chord_names[190] := "Maj13(9,#11)"
+    chord_names[191] := "13sus4(add3)"
+    chord_names[192] := "Maj13(add4)"
+    chord_names[193] := "9(13)#11"
+    chord_names[194] := "Maj13(#11)"
+    chord_names[195] := "Maj13(b5#5)"
+    chord_names[196] := "13(#9#11)"
 
     declare base_chord[NUM_OF_CHORD*NUM_OF_KEY] := (...
-        0,255,255,255,255,255,255,... { 0 }
-        0,1,255,255,255,255,255,... { 1 }
-        0,2,255,255,255,255,255,... { 2 }
-        0,3,255,255,255,255,255,... { 3 }
-        0,4,255,255,255,255,255,... { 4 }
-        0,5,255,255,255,255,255,... { 5 }
-        0,6,255,255,255,255,255,... { 6 }
-        0,7,255,255,255,255,255,... { 7 }
-        0,8,255,255,255,255,255,... { 8 }
-        0,9,255,255,255,255,255,... { 9 }
-        0,10,255,255,255,255,255,... { 10 }
-        0,11,255,255,255,255,255,... { 11 }
-        0,2,4,255,255,255,255,... { 12 }
-        0,2,7,255,255,255,255,... { 13 }
-        0,3,10,255,255,255,255,... { 14 }
-        0,3,6,255,255,255,255,... { 15 }
-        0,3,7,255,255,255,255,... { 16 }
-        0,4,10,255,255,255,255,... { 17 }
-        0,4,11,255,255,255,255,... { 18 }
-        0,4,6,255,255,255,255,... { 19 }
-        0,4,7,255,255,255,255,... { 20 }
-        0,4,8,255,255,255,255,... { 21 }
-        0,5,10,255,255,255,255,... { 22 }
-        0,5,7,255,255,255,255,... { 23 }
-        0,7,10,255,255,255,255,... { 24 }
-        0,7,11,255,255,255,255,... { 25 }
-        0,1,4,10,255,255,255,... { 26 }
-        0,1,4,7,255,255,255,... { 27 }
-        0,1,4,9,255,255,255,... { 28 }
-        0,1,5,10,255,255,255,... { 29 }
-        0,2,3,10,255,255,255,... { 30 }
-        0,2,3,7,255,255,255,... { 31 }
-        0,2,3,8,255,255,255,... { 32 }
-        0,2,3,9,255,255,255,... { 33 }
-        0,2,4,10,255,255,255,... { 34 }
-        0,2,4,11,255,255,255,... { 35 }
-        0,2,4,7,255,255,255,... { 36 }
-        0,2,4,9,255,255,255,... { 37 }
-        0,2,5,10,255,255,255,... { 38 }
-        0,2,5,8,255,255,255,... { 39 }
-        0,2,5,9,255,255,255,... { 40 }
-        0,2,7,10,255,255,255,... { 41 }
-        0,2,7,11,255,255,255,... { 42 }
-        0,2,7,9,255,255,255,... { 43 }
-        0,3,4,10,255,255,255,... { 44 }
-        0,3,4,7,255,255,255,... { 45 }
-        0,3,5,10,255,255,255,... { 46 }
-        0,3,5,7,255,255,255,... { 47 }
-        0,3,5,8,255,255,255,... { 48 }
-        0,3,6,10,255,255,255,... { 49 }
-        0,3,6,11,255,255,255,... { 50 }
-        0,3,6,9,255,255,255,... { 51 }
-        0,3,7,10,255,255,255,... { 52 }
-        0,3,7,11,255,255,255,... { 53 }
-        0,3,7,9,255,255,255,... { 54 }
-        0,3,8,11,255,255,255,... { 55 }
-        0,3,8,9,255,255,255,... { 56 }
-        0,3,9,10,255,255,255,... { 57 }
-        0,3,9,11,255,255,255,... { 58 }
-        0,4,5,10,255,255,255,... { 59 }
-        0,4,6,10,255,255,255,... { 60 }
-        0,4,6,11,255,255,255,... { 61 }
-        0,4,6,7,255,255,255,... { 62 }
-        0,4,6,9,255,255,255,... { 63 }
-        0,4,7,10,255,255,255,... { 64 }
-        0,4,7,11,255,255,255,... { 65 }
-        0,4,7,9,255,255,255,... { 66 }
-        0,4,8,10,255,255,255,... { 67 }
-        0,4,8,11,255,255,255,... { 68 }
-        0,4,9,10,255,255,255,... { 69 }
-        0,4,9,11,255,255,255,... { 70 }
-        0,5,6,9,255,255,255,... { 71 }
-        0,5,7,10,255,255,255,... { 72 }
-        0,5,7,11,255,255,255,... { 73 }
-        0,5,8,10,255,255,255,... { 74 }
-        0,5,8,9,255,255,255,... { 75 }
-        0,5,9,10,255,255,255,... { 76 }
-        0,1,3,4,10,255,255,... { 77 }
-        0,1,3,5,10,255,255,... { 78 }
-        0,1,3,7,10,255,255,... { 79 }
-        0,1,4,6,10,255,255,... { 80 }
-        0,1,4,7,10,255,255,... { 81 }
-        0,1,4,8,10,255,255,... { 82 }
-        0,1,4,9,10,255,255,... { 83 }
-        0,1,5,7,10,255,255,... { 84 }
-        0,1,5,8,10,255,255,... { 85 }
-        0,1,5,9,10,255,255,... { 86 }
-        0,2,3,5,10,255,255,... { 87 }
-        0,2,3,5,11,255,255,... { 88 }
-        0,2,3,5,7,255,255,... { 89 }
-        0,2,3,5,9,255,255,... { 90 }
-        0,2,3,6,10,255,255,... { 91 }
-        0,2,3,6,11,255,255,... { 92 }
-        0,2,3,6,9,255,255,... { 93 }
-        0,2,3,7,10,255,255,... { 94 }
-        0,2,3,7,11,255,255,... { 95 }
-        0,2,3,7,11,255,255,... { 96 }
-        0,2,3,7,9,255,255,... { 97 }
-        0,2,3,8,11,255,255,... { 98 }
-        0,2,3,9,11,255,255,... { 99 }
-        0,2,4,5,10,255,255,... { 100 }
-        0,2,4,6,10,255,255,... { 101 }
-        0,2,4,6,11,255,255,... { 102 }
-        0,2,4,6,7,255,255,... { 103 }
-        0,2,4,6,9,255,255,... { 104 }
-        0,2,4,7,10,255,255,... { 105 }
-        0,2,4,7,11,255,255,... { 106 }
-        0,2,4,7,9,255,255,... { 107 }
-        0,2,4,8,10,255,255,... { 108 }
-        0,2,4,8,11,255,255,... { 109 }
-        0,2,4,9,10,255,255,... { 110 }
-        0,2,4,9,11,255,255,... { 111 }
-        0,2,5,6,10,255,255,... { 112 }
-        0,2,5,7,10,255,255,... { 113 }
-        0,2,5,7,11,255,255,... { 114 }
-        0,2,5,8,10,255,255,... { 115 }
-        0,2,5,9,10,255,255,... { 116 }
-        0,3,4,6,10,255,255,... { 117 }
-        0,3,4,7,10,255,255,... { 118 }
-        0,3,4,8,10,255,255,... { 119 }
-        0,3,4,9,10,255,255,... { 120 }
-        0,3,5,6,10,255,255,... { 121 }
-        0,3,5,6,11,255,255,... { 122 }
-        0,3,5,6,9,255,255,... { 123 }
-        0,3,5,7,10,255,255,... { 124 }
-        0,3,6,7,10,255,255,... { 125 }
-        0,3,6,8,10,255,255,... { 126 }
-        0,3,6,8,9,255,255,... { 127 }
-        0,3,6,9,11,255,255,... { 128 }
-        0,3,7,9,10,255,255,... { 129 }
-        0,3,7,9,11,255,255,... { 130 }
-        0,4,5,7,10,255,255,... { 131 }
-        0,4,6,7,10,255,255,... { 132 }
-        0,4,6,7,11,255,255,... { 133 }
-        0,4,6,7,9,255,255,... { 134 }
-        0,4,6,8,11,255,255,... { 135 }
-        0,4,6,9,10,255,255,... { 136 }
-        0,4,7,8,11,255,255,... { 137 }
-        0,4,7,9,10,255,255,... { 138 }
-        0,4,7,9,11,255,255,... { 139 }
-        0,1,3,4,6,10,255,... { 140 }
-        0,1,3,4,7,10,255,... { 141 }
-        0,1,3,4,8,10,255,... { 142 }
-        0,1,3,5,8,10,255,... { 143 }
-        0,1,3,6,8,10,255,... { 144 }
-        0,1,4,6,7,10,255,... { 145 }
-        0,1,4,6,8,10,255,... { 146 }
-        0,1,4,6,9,10,255,... { 147 }
-        0,1,4,7,8,10,255,... { 148 }
-        0,1,4,7,9,10,255,... { 149 }
-        0,1,5,7,9,10,255,... { 150 }
-        0,2,3,5,6,10,255,... { 151 }
-        0,2,3,5,6,11,255,... { 152 }
-        0,2,3,5,6,9,255,... { 153 }
-        0,2,3,5,7,10,255,... { 154 }
-        0,2,3,5,7,11,255,... { 155 }
-        0,2,3,5,7,9,255,... { 156 }
-        0,2,3,5,9,10,255,... { 157 }
-        0,2,3,5,9,11,255,... { 158 }
-        0,2,3,6,8,11,255,... { 159 }
-        0,2,3,7,9,10,255,... { 160 }
-        0,2,3,7,9,11,255,... { 161 }
-        0,2,4,5,9,10,255,... { 162 }
-        0,2,4,6,7,10,255,... { 163 }
-        0,2,4,6,7,11,255,... { 164 }
-        0,2,4,6,7,9,255,... { 165 }
-        0,2,4,6,8,10,255,... { 166 }
-        0,2,4,6,8,11,255,... { 167 }
-        0,2,4,6,9,10,255,... { 168 }
-        0,2,4,6,9,11,255,... { 169 }
-        0,2,4,7,9,10,255,... { 170 }
-        0,2,4,7,9,11,255,... { 171 }
-        0,2,5,7,9,10,255,... { 172 }
-        0,3,4,6,7,10,255,... { 173 }
-        0,3,4,6,8,10,255,... { 174 }
-        0,3,4,6,9,10,255,... { 175 }
-        0,3,4,7,8,10,255,... { 176 }
-        0,3,4,7,9,10,255,... { 177 }
-        0,3,5,6,8,9,255,... { 178 }
-        0,4,5,7,9,10,255,... { 179 }
+        0,0xff,0xff,0xff,0xff,0xff,0xff,... { 0 }
+        0,1,0xff,0xff,0xff,0xff,0xff,... { 1 }
+        0,2,0xff,0xff,0xff,0xff,0xff,... { 2 }
+        0,3,0xff,0xff,0xff,0xff,0xff,... { 3 }
+        0,4,0xff,0xff,0xff,0xff,0xff,... { 4 }
+        0,5,0xff,0xff,0xff,0xff,0xff,... { 5 }
+        0,6,0xff,0xff,0xff,0xff,0xff,... { 6 }
+        0,7,0xff,0xff,0xff,0xff,0xff,... { 7 }
+        0,8,0xff,0xff,0xff,0xff,0xff,... { 8 }
+        0,9,0xff,0xff,0xff,0xff,0xff,... { 9 }
+        0,10,0xff,0xff,0xff,0xff,0xff,... { 10 }
+        0,11,0xff,0xff,0xff,0xff,0xff,... { 11 }
+        0,2,4,0xff,0xff,0xff,0xff,... { 12 }
+        0,2,7,0xff,0xff,0xff,0xff,... { 13 }
+        0,3,10,0xff,0xff,0xff,0xff,... { 14 }
+        0,3,6,0xff,0xff,0xff,0xff,... { 15 }
+        0,3,7,0xff,0xff,0xff,0xff,... { 16 }
+        0,4,10,0xff,0xff,0xff,0xff,... { 17 }
+        0,4,11,0xff,0xff,0xff,0xff,... { 18 }
+        0,4,6,0xff,0xff,0xff,0xff,... { 19 }
+        0,4,7,0xff,0xff,0xff,0xff,... { 20 }
+        0,4,8,0xff,0xff,0xff,0xff,... { 21 }
+        0,5,10,0xff,0xff,0xff,0xff,... { 22 }
+        0,5,7,0xff,0xff,0xff,0xff,... { 23 }
+        0,7,10,0xff,0xff,0xff,0xff,... { 24 }
+        0,7,11,0xff,0xff,0xff,0xff,... { 25 }
+        0,1,4,10,0xff,0xff,0xff,... { 26 }
+        0,1,4,7,0xff,0xff,0xff,... { 27 }
+        0,1,4,9,0xff,0xff,0xff,... { 28 }
+        0,1,5,10,0xff,0xff,0xff,... { 29 }
+        0,2,3,10,0xff,0xff,0xff,... { 30 }
+        0,2,3,7,0xff,0xff,0xff,... { 31 }
+        0,2,3,8,0xff,0xff,0xff,... { 32 }
+        0,2,3,9,0xff,0xff,0xff,... { 33 }
+        0,2,4,10,0xff,0xff,0xff,... { 34 }
+        0,2,4,11,0xff,0xff,0xff,... { 35 }
+        0,2,4,7,0xff,0xff,0xff,... { 36 }
+        0,2,4,9,0xff,0xff,0xff,... { 37 }
+        0,2,5,10,0xff,0xff,0xff,... { 38 }
+        0,2,5,8,0xff,0xff,0xff,... { 39 }
+        0,2,5,9,0xff,0xff,0xff,... { 40 }
+        0,2,7,10,0xff,0xff,0xff,... { 41 }
+        0,2,7,11,0xff,0xff,0xff,... { 42 }
+        0,2,7,9,0xff,0xff,0xff,... { 43 }
+        0,3,4,10,0xff,0xff,0xff,... { 44 }
+        0,3,4,7,0xff,0xff,0xff,... { 45 }
+        0,3,5,10,0xff,0xff,0xff,... { 46 }
+        0,3,5,7,0xff,0xff,0xff,... { 47 }
+        0,3,5,8,0xff,0xff,0xff,... { 48 }
+        0,3,6,10,0xff,0xff,0xff,... { 49 }
+        0,3,6,11,0xff,0xff,0xff,... { 50 }
+        0,3,6,9,0xff,0xff,0xff,... { 51 }
+        0,3,7,10,0xff,0xff,0xff,... { 52 }
+        0,3,7,11,0xff,0xff,0xff,... { 53 }
+        0,3,7,9,0xff,0xff,0xff,... { 54 }
+        0,3,8,11,0xff,0xff,0xff,... { 55 }
+        0,3,8,9,0xff,0xff,0xff,... { 56 }
+        0,3,9,10,0xff,0xff,0xff,... { 57 }
+        0,3,9,11,0xff,0xff,0xff,... { 58 }
+        0,4,5,10,0xff,0xff,0xff,... { 59 }
+        0,4,6,10,0xff,0xff,0xff,... { 60 }
+        0,4,6,11,0xff,0xff,0xff,... { 61 }
+        0,4,6,7,0xff,0xff,0xff,... { 62 }
+        0,4,6,9,0xff,0xff,0xff,... { 63 }
+        0,4,7,10,0xff,0xff,0xff,... { 64 }
+        0,4,7,11,0xff,0xff,0xff,... { 65 }
+        0,4,7,9,0xff,0xff,0xff,... { 66 }
+        0,4,8,10,0xff,0xff,0xff,... { 67 }
+        0,4,8,11,0xff,0xff,0xff,... { 68 }
+        0,4,9,10,0xff,0xff,0xff,... { 69 }
+        0,4,9,11,0xff,0xff,0xff,... { 70 }
+        0,5,6,9,0xff,0xff,0xff,... { 71 }
+        0,5,7,10,0xff,0xff,0xff,... { 72 }
+        0,5,7,11,0xff,0xff,0xff,... { 73 }
+        0,5,8,10,0xff,0xff,0xff,... { 74 }
+        0,5,8,9,0xff,0xff,0xff,... { 75 }
+        0,5,9,10,0xff,0xff,0xff,... { 76 }
+        0,1,3,4,10,0xff,0xff,... { 77 }
+        0,1,3,5,10,0xff,0xff,... { 78 }
+        0,1,3,7,10,0xff,0xff,... { 79 }
+        0,1,4,6,10,0xff,0xff,... { 80 }
+        0,1,4,7,10,0xff,0xff,... { 81 }
+        0,1,4,8,10,0xff,0xff,... { 82 }
+        0,1,4,9,10,0xff,0xff,... { 83 }
+        0,1,5,7,10,0xff,0xff,... { 84 }
+        0,1,5,8,10,0xff,0xff,... { 85 }
+        0,1,5,9,10,0xff,0xff,... { 86 }
+        0,2,3,5,10,0xff,0xff,... { 87 }
+        0,2,3,5,11,0xff,0xff,... { 88 }
+        0,2,3,5,7,0xff,0xff,... { 89 }
+        0,2,3,5,9,0xff,0xff,... { 90 }
+        0,2,3,6,10,0xff,0xff,... { 91 }
+        0,2,3,6,11,0xff,0xff,... { 92 }
+        0,2,3,6,9,0xff,0xff,... { 93 }
+        0,2,3,7,10,0xff,0xff,... { 94 }
+        0,2,3,7,11,0xff,0xff,... { 95 }
+        0,2,3,7,11,0xff,0xff,... { 96 }
+        0,2,3,7,9,0xff,0xff,... { 97 }
+        0,2,3,8,11,0xff,0xff,... { 98 }
+        0,2,3,9,11,0xff,0xff,... { 99 }
+        0,2,4,5,10,0xff,0xff,... { 100 }
+        0,2,4,6,10,0xff,0xff,... { 101 }
+        0,2,4,6,11,0xff,0xff,... { 102 }
+        0,2,4,6,7,0xff,0xff,... { 103 }
+        0,2,4,6,9,0xff,0xff,... { 104 }
+        0,2,4,7,10,0xff,0xff,... { 105 }
+        0,2,4,7,11,0xff,0xff,... { 106 }
+        0,2,4,7,9,0xff,0xff,... { 107 }
+        0,2,4,8,10,0xff,0xff,... { 108 }
+        0,2,4,8,11,0xff,0xff,... { 109 }
+        0,2,4,9,10,0xff,0xff,... { 110 }
+        0,2,4,9,11,0xff,0xff,... { 111 }
+        0,2,5,6,10,0xff,0xff,... { 112 }
+        0,2,5,7,10,0xff,0xff,... { 113 }
+        0,2,5,7,11,0xff,0xff,... { 114 }
+        0,2,5,8,10,0xff,0xff,... { 115 }
+        0,2,5,9,10,0xff,0xff,... { 116 }
+        0,3,4,6,10,0xff,0xff,... { 117 }
+        0,3,4,7,10,0xff,0xff,... { 118 }
+        0,3,4,8,10,0xff,0xff,... { 119 }
+        0,3,4,9,10,0xff,0xff,... { 120 }
+        0,3,5,6,10,0xff,0xff,... { 121 }
+        0,3,5,6,11,0xff,0xff,... { 122 }
+        0,3,5,6,9,0xff,0xff,... { 123 }
+        0,3,5,7,10,0xff,0xff,... { 124 }
+        0,3,6,7,10,0xff,0xff,... { 125 }
+        0,3,6,8,10,0xff,0xff,... { 126 }
+        0,3,6,8,9,0xff,0xff,... { 127 }
+        0,3,6,9,11,0xff,0xff,... { 128 }
+        0,3,7,9,10,0xff,0xff,... { 129 }
+        0,3,7,9,11,0xff,0xff,... { 130 }
+        0,4,5,7,10,0xff,0xff,... { 131 }
+        0,4,6,7,10,0xff,0xff,... { 132 }
+        0,4,6,7,11,0xff,0xff,... { 133 }
+        0,4,6,7,9,0xff,0xff,... { 134 }
+        0,4,6,8,11,0xff,0xff,... { 135 }
+        0,4,6,9,10,0xff,0xff,... { 136 }
+        0,4,7,8,11,0xff,0xff,... { 137 }
+        0,4,7,9,10,0xff,0xff,... { 138 }
+        0,4,7,9,11,0xff,0xff,... { 139 }
+        0,1,3,4,6,10,0xff,... { 140 }
+        0,1,3,4,7,10,0xff,... { 141 }
+        0,1,3,4,8,10,0xff,... { 142 }
+        0,1,3,5,8,10,0xff,... { 143 }
+        0,1,3,6,8,10,0xff,... { 144 }
+        0,1,4,6,7,10,0xff,... { 145 }
+        0,1,4,6,8,10,0xff,... { 146 }
+        0,1,4,6,9,10,0xff,... { 147 }
+        0,1,4,7,8,10,0xff,... { 148 }
+        0,1,4,7,9,10,0xff,... { 149 }
+        0,1,5,7,9,10,0xff,... { 150 }
+        0,2,3,5,6,10,0xff,... { 151 }
+        0,2,3,5,6,11,0xff,... { 152 }
+        0,2,3,5,6,9,0xff,... { 153 }
+        0,2,3,5,7,10,0xff,... { 154 }
+        0,2,3,5,7,11,0xff,... { 155 }
+        0,2,3,5,7,9,0xff,... { 156 }
+        0,2,3,5,9,10,0xff,... { 157 }
+        0,2,3,5,9,11,0xff,... { 158 }
+        0,2,3,6,8,11,0xff,... { 159 }
+        0,2,3,7,9,10,0xff,... { 160 }
+        0,2,3,7,9,11,0xff,... { 161 }
+        0,2,4,5,9,10,0xff,... { 162 }
+        0,2,4,6,7,10,0xff,... { 163 }
+        0,2,4,6,7,11,0xff,... { 164 }
+        0,2,4,6,7,9,0xff,... { 165 }
+        0,2,4,6,8,10,0xff,... { 166 }
+        0,2,4,6,8,11,0xff,... { 167 }
+        0,2,4,6,9,10,0xff,... { 168 }
+        0,2,4,6,9,11,0xff,... { 169 }
+        0,2,4,7,9,10,0xff,... { 170 }
+        0,2,4,7,9,11,0xff,... { 171 }
+        0,2,5,7,9,10,0xff,... { 172 }
+        0,3,4,6,7,10,0xff,... { 173 }
+        0,3,4,6,8,10,0xff,... { 174 }
+        0,3,4,6,9,10,0xff,... { 175 }
+        0,3,4,7,8,10,0xff,... { 176 }
+        0,3,4,7,9,10,0xff,... { 177 }
+        0,3,5,6,8,9,0xff,... { 178 }
+        0,4,5,7,9,10,0xff,... { 179 }
         0,1,3,4,6,7,10,... { 180 }
         0,1,3,4,6,8,10,... { 181 }
         0,1,3,4,6,9,10,... { 182 }
         0,1,3,4,7,8,10,... { 183 }
         0,1,3,4,7,9,10,... { 184 }
-        0,1,3,4,9,10,255,... { 185 }
-        0,1,3,5,7,8,10,... { 186 }
-        0,1,4,6,7,8,10,... { 187 }
-        0,1,4,6,7,9,10,... { 188 }
-        0,2,3,5,6,9,11,... { 189 }
-        0,2,3,5,7,9,10,... { 190 }
-        0,2,3,6,7,9,10,... { 191 }
-        0,2,4,5,7,9,10,... { 192 }
-        0,2,4,5,7,9,11,... { 193 }
-        0,2,4,6,7,9,10,... { 194 }
-        0,2,4,6,7,9,11,... { 195 }
-        0,2,4,6,8,9,11,... { 196 }
-        0,3,4,6,7,9,10,... { 197 }
-        0,2,4,5,7,9,11,... { 198 }
-        0,2,3,5,7,9,10,... { 199 }
-        0,1,3,5,7,8,10,... { 200 }
-        0,2,4,6,7,9,11,... { 201 }
-        0,2,4,5,7,9,10,... { 202 }
-        0,2,3,5,7,8,10,... { 203 }
-        0,1,3,5,6,8,10)    { 204 }
+        0,1,3,5,7,8,10,... { 185 }
+        0,1,4,6,7,8,10,... { 186 }
+        0,1,4,6,7,9,10,... { 187 }
+        0,2,3,5,6,9,11,... { 188 }
+        0,2,3,5,7,9,10,... { 189 }
+        0,2,3,6,7,9,10,... { 190 }
+        0,2,4,5,7,9,10,... { 191 }
+        0,2,4,5,7,9,11,... { 192 }
+        0,2,4,6,7,9,10,... { 193 }
+        0,2,4,6,7,9,11,... { 194 }
+        0,2,4,6,8,9,11,... { 195 }
+        0,3,4,6,7,9,10)    { 196 }
 
     // "C","F","Bb","Eb","Ab","Db","Gb","Cb","C#","F#","B","E","A","D","G"
     // 0: N/A, 1:#, 2:b, 3:N, 4:Cb,Fb 5:E#,B#
@@ -808,6 +786,103 @@ on init
         1,2,3,2,1,2,3,2,1,2,3,2,...
         1,2)
 
+    declare const MAX_CHORDS := 4096
+
+    family notes
+        declare _note[AVAILABLE_NUM]
+        declare size
+        declare _main_chord
+        declare _top[6]
+        declare _top_array[6 * AVAILABLE_NUM]
+        declare _top_array_size[6]
+        declare _bottom[6]
+        declare _bottom_array[6 * AVAILABLE_NUM]
+        declare _bottom_array_size[6]
+
+        property array
+            function get(idx) -> result
+                result := notes._note[idx]
+            end function
+            function set(idx, value)
+                notes._note[idx] := value
+            end function
+        end property
+        family chord
+            property main
+                function get() -> result
+                    result := notes._main_chord
+                end function
+                function set(value)
+                    notes._main_chord := value
+                end function
+            end property
+            family sub
+                property top
+                    function get(idx) -> result
+                        result := notes._top[idx]
+                    end function
+                    function set(idx, value)
+                        notes._top[idx] := value
+                    end function
+                end property
+                property top_array
+                    function get(num, idx) -> result
+                        result := notes._top_array[num * AVAILABLE_NUM + idx]
+                    end function
+                    function set(num, idx, value)
+                        notes._top_array[num * AVAILABLE_NUM + idx] := value
+                    end function
+                end property
+                property top_array_size
+                    function get(idx) -> result
+                        result := notes._top_array_size[idx]
+                    end function
+                    function set(idx, value)
+                        notes._top_array_size[idx] := value
+                    end function
+                end property
+                property bottom
+                    function get(idx) -> result
+                        result := notes._bottom[idx]
+                    end function
+                    function set(idx, value)
+                        notes._bottom[idx] := value
+                    end function
+                end property
+            end family
+        end family
+        declare _chord[7 * 7] := (0xff)
+        property chord
+            function get(num, param) -> result
+                result := notes._chord[num * 7 + param]
+            end function
+            function set(sig, param, value)
+                notes._chord[num * 7 + param] := value
+            end function
+        end property
+    end family
+
+    family sigs
+        declare !_chord[12 * MAX_CHORDS]
+        declare _available[12 * MAX_CHORDS] := (0)
+        property chord
+            function get(sig, param) -> result
+                result := sigs._chord[sig * MAX_CHORDS + param]
+            end function
+            function set(sig, param, value)
+                sigs._chord[sig * MAX_CHORDS + param] := value
+            end function
+        end property
+        property available
+            function get(sig, param) -> result
+                result := sigs._available[sig * MAX_CHORDS + param]
+            end function
+            function set(sig, param, value)
+                sigs._available[sig * MAX_CHORDS + param] := value
+            end function
+        end property
+    end family
+
     declare all_chord[NUM_OF_NOTE*NUM_OF_CHORD]
     declare temp_chord := 0b
 
@@ -815,7 +890,28 @@ on init
         for j := 0 to NUM_OF_CHORD - 1
             temp_chord := 0b
             for k := 0 to NUM_OF_KEY - 1
-                if base_chord[j*NUM_OF_KEY + k] # 0xFF
+                if base_chord[j*NUM_OF_KEY + k] # 0xff
+                    temp_chord := temp_chord .or. sh_left(1b, (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE)
+                end if
+            end for
+            sigs[i].chord[temp_chord] := ckeynotes[i] & " " & chord_names[j]
+            sigs[i].available[temp_chord] := 1
+        end for
+    end for
+
+    // for i := 0 to NUM_OF_NOTE - 1
+    //     for j := 0 to MAX_CHORDS - 1
+    //         if sigs[i].available[j] = 1
+    //             print(i & " - " & j & " chord = " & sigs[i].chord[j])
+    //         end if
+    //     end for
+    // end for
+
+    for i := 0 to NUM_OF_NOTE - 1
+        for j := 0 to NUM_OF_CHORD - 1
+            temp_chord := 0b
+            for k := 0 to NUM_OF_KEY - 1
+                if base_chord[j*NUM_OF_KEY + k] # 0xff
                     temp_chord := temp_chord .or. sh_left(1b, (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE)
                 end if
             end for
@@ -832,12 +928,23 @@ end on
 on note
     ignore_event(EVENT_ID)
     pgs_set_key_val(KEY_CHANGED, 0, 1)
+    kstart := KSP_TIMER
     call khordie_update_active_notes
+    print("P khordie_update_active_notes : " & KSP_TIMER - kstart)
+    kstart := KSP_TIMER
     call khordie_show_notes_on_staff
+    print("P khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
+    kstart := KSP_TIMER
+    call khordie_show_chord
+    print("P khordie_show_chord : " & KSP_TIMER - kstart)
+    kstart := KSP_TIMER
     khordie_show_piano(EVENT_NOTE, 0)
+    print("P khordie_show_piano : " & KSP_TIMER - kstart)
+    kstart := KSP_TIMER
     khordie_show_notes(EVENT_NOTE, 0)
+    print("P khordie_show_notes : " & KSP_TIMER - kstart)
     if is_sustain = 1
-        sustain_notes[EVENT_NOTE] := 0xFF
+        sustain_notes[EVENT_NOTE] := 0xff
     end if
 end on
 
@@ -845,10 +952,21 @@ on release
     ignore_event(EVENT_ID)
     if is_sustain = 0
         pgs_set_key_val(KEY_CHANGED, 0, 1)
+        kstart := KSP_TIMER
         call khordie_update_active_notes
+        print("R khordie_update_active_notes : " & KSP_TIMER - kstart)
+        kstart := KSP_TIMER
         call khordie_show_notes_on_staff
+        print("R khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
+        kstart := KSP_TIMER
+        call khordie_show_chord
+        print("R khordie_show_chord : " & KSP_TIMER - kstart)
+        kstart := KSP_TIMER
         khordie_show_piano(EVENT_NOTE, 1)
+        print("R khordie_show_piano : " & KSP_TIMER - kstart)
+        kstart := KSP_TIMER
         khordie_show_notes(EVENT_NOTE, 1)
+        print("R khordie_show_notes : " & KSP_TIMER - kstart)
     else
         sustain_notes[EVENT_NOTE] := EVENT_NOTE
     end if
@@ -862,7 +980,7 @@ on controller
             is_sustain := 1
             set_text(sustain, "Sustain")
             for i := 0 to NUM_OF_ALL_KEY - 1
-                sustain_notes[i] := 0xFF
+                sustain_notes[i] := 0xff
             end for
         else
             print("on controller 2: " & %CC[64])
@@ -870,13 +988,13 @@ on controller
             set_text(sustain, "")
             pgs_set_key_val(SUSTAIN_RELEASE,0,1)
             for i := 0 to NUM_OF_ALL_KEY - 1
-                if sustain_notes[i] # 0xFF
+                if sustain_notes[i] # 0xff
                     if get_key_color(sustain_notes[i]) = KEY_COLOR_BLUE
                         set_key_color(sustain_notes[i], KEY_COLOR_WARM_YELLOW)
                     else
                         set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
                     end if
-                    sustain_notes[i] := 0xFF
+                    sustain_notes[i] := 0xff
                     bnotes[i]->text := ""
                 end if
             end for
@@ -892,12 +1010,12 @@ on pgs_changed
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
             call khordie_remove_all_chord
-        else if pgs_get_key_val(KEY_CHANGED, 0) = 1
-            wait(KEYTIME)
-            reset_ksp_timer
-            kstart := KSP_TIMER
-            call khordie_show_chord
-            print("on pgs_changed : KEY_CHANGED ================== : " & KSP_TIMER - kstart)
+        // else if pgs_get_key_val(KEY_CHANGED, 0) = 1
+        //     wait(KEYTIME)
+        //     reset_ksp_timer
+        //     kstart := KSP_TIMER
+        //     call new_khordie_show_chord
+        //     print("on pgs_changed : KEY_CHANGED ================== : " & KSP_TIMER - kstart)
         end if
     end if
 end on
@@ -934,12 +1052,12 @@ on ui_control(scale_knob)
 end on
 
 function khordie_update_active_notes
-    status.notes := concat(empty_notes)
-    status.length := 0
+    notes._note := concat(empty_notes)
+    notes.size := 0
     for i := 0 to NUM_OF_ALL_KEY - 1
         if %KEY_DOWN[i] = 1
-            status.notes[status.length] := i
-            inc(status.length)
+            notes.array[notes.size] := i
+            inc(notes.size)
         end if
     end for
 end function
@@ -1021,21 +1139,21 @@ end function
 
 function khordie_show_notes_on_staff
     call khordie_remove_all_notes
-    declare snotes[AVAILABLE_NUM] := (0xFF)
-    declare dnotes[AVAILABLE_NUM] := (0xFF)
-    declare tnotes[AVAILABLE_NUM*2] := (0xFF)
+    declare snotes[AVAILABLE_NUM] := (0xff)
+    declare dnotes[AVAILABLE_NUM] := (0xff)
+    declare tnotes[AVAILABLE_NUM*2] := (0xff)
     if is_sustain = 1
-        tnotes := concat(status.notes, snotes)
+        tnotes := concat(notes._note, snotes)
         sort(tnotes, 0)
         dnotes := concat(empty_notes)
         for i := 0 to AVAILABLE_NUM - 1
-            if search(dnotes, tnotes[i]) = -1 and tnotes[i] # 0xFF
+            if search(dnotes, tnotes[i]) = -1 and tnotes[i] # 0xff
                 dnotes[i] := tnotes[i]
             end if
         end for
         sort(dnotes, 0)
     else
-        dnotes := concat(status.notes)
+        dnotes := concat(notes._note)
     end if
     snotes := concat(dnotes)
 
@@ -1048,7 +1166,7 @@ function khordie_show_notes_on_staff
     j := 0
     n := 0
     for i := 0 to num_elements(dnotes) - 1
-        if dnotes[i] # 0xFF
+        if dnotes[i] # 0xff
             index := khordie_get_index_by_key(dnotes[i])
             current := dnotes[i]*NOTE_INDEX+POS_Y+index
             if i > 0
@@ -1126,167 +1244,90 @@ function khordie_show_notes_on_staff
     end for
  end function
 
-macro declare_chord (#n#)
-    family chord#n#
-        declare active := 0
-        declare bot_chordbase := 0
-        declare top_chordbase := 0
-        declare bot_keycount := 0
-        declare top_keycount := 0
-        declare bot_chordindex[NUM_OF_NOTE*2] := (0xFF)
-        declare !bot_chordname[NUM_OF_NOTE] := ("")
-        declare top_chordindex[NUM_OF_NOTE*2] := (0xFF)
-        declare !top_chordname[NUM_OF_NOTE] := ("")
-        declare @last_topchord := ""
-        declare @last_botchord := ""
-        declare bot_chord := 0
-        declare top_chord := 0
-        declare topindex := 0
-    end family
-end macro
+function khordie_show_main_chord
+    declare count := 0
+    declare break := 0
+    declare @signature := ""
 
-macro make_chord (#n#)
-    if #n# = 0
-       divide := status.length
-    else
-       divide := #n# + 2
-    end if
-    if status.length > divide or #n# = 0
-        chord#n#.active := 1
-        chord#n#.bot_chordbase := status.notes[0] mod NUM_OF_NOTE
-        chord#n#.top_chordbase := status.notes[status.length - divide] mod NUM_OF_NOTE
-        @chord#n#.last_topchord := ""
-        @chord#n#.last_botchord := ""
-        for i := 0 to NUM_OF_NOTE*2 - 1
-            chord#n#.top_chordindex[i] := 0xFF
-            chord#n#.bot_chordindex[i] := 0xFF
-        end for
-        chord#n#.bot_chord := 0
-        chord#n#.top_chord := 0
-        chord#n#.topindex := 0
-        if status.length - divide <= 7
-            n := 0
-        else
-            n := (status.length - divide) - 7
-        end if
-        for i := 0 + n to status.length - divide - 1
-            if status.notes[i] # 0xFF
-                chord#n#.bot_chord := chord#n#.bot_chord .or. sh_left(1b, status.notes[i] mod NUM_OF_NOTE)
-            end if
-            inc(chord#n#.bot_keycount)
-        end for
-        for i := status.length - divide to status.length - divide + 7 - 1
-            if status.notes[i] # 0xFF
-                chord#n#.top_chord := chord#n#.top_chord .or. sh_left(1b, status.notes[i] mod NUM_OF_NOTE)
-            end if
-            inc(chord#n#.top_keycount)
-        end for
-        print(#n# & " create bottom chord : " & chord#n#.bot_chord)
-        print(#n# & " create top chord : " & chord#n#.top_chord)
-    end if
-end macro
-
-macro search_chord (#n#)
-    if chord#n#.active = 1
-        if chord#n#.bot_chord = ref_chord
-            chord#n#.bot_chordindex[k] := k
-            chord#n#.bot_chordindex[k+NUM_OF_NOTE] := j
-            if j = 0 and chord#n#.bot_keycount = 1
-                !chord#n#.bot_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k]
+    notes.chord.main := 0
+    for i := 0 to notes.size - 1
+        notes.chord.main := notes.chord.main .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
+    end for
+     while break = 0
+         if sigs[notes.array[count] mod NUM_OF_NOTE].available[notes.chord.main] = 1
+             if (notes.array[count] = notes.array[0])
+                add_text_line(main, sigs[notes.array[count] mod NUM_OF_NOTE].chord[notes.chord.main])
             else
-                if chord#n#.bot_chordbase = k
-                    !chord#n#.bot_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j]
+                signature := khordie_get_name_by_key(notes.array[0])
+                add_text_line(main, sigs[notes.array[count] mod NUM_OF_NOTE].chord[notes.chord.main] & " / " & signature)
+            end if
+            break := 1
+        end if
+        inc(count)
+        if count >= notes.size and break = 0
+            signature := khordie_get_name_by_key(notes.array[0])
+            add_text_line(main, signature & NC)
+            break := 1
+        end if
+    end while
+ end function
+
+macro khordie_show_sub_chord (#n#)
+    div := #n# + 2
+    if notes.size - div >= 1
+        top_chord := 0
+        bottom_chord := 0
+        count := 0
+        break := 0
+        top_found := 0
+        bottom_found := 0
+        top_test := ""
+        bottom_test := ""
+
+        { bottom }
+        for i := 0 to notes.size - div - 1
+            bottom_chord := bottom_chord .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
+            bottom_test := bottom_test & "," & notes.array[i]
+        end for
+
+        while break = 0
+            if sigs[notes.array[count] mod NUM_OF_NOTE].available[bottom_chord] = 1
+                if notes.size - div = 1
+                    bottom_test := khordie_get_name_by_key(notes.array[count])
                 else
-                    !chord#n#.bot_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j] & " / " & ckeynotes[ckey*NUM_OF_NOTE+chord#n#.bot_chordbase]
+                    bottom_test := sigs[notes.array[count] mod NUM_OF_NOTE].chord[bottom_chord]
                 end if
+                break := 1
+                bottom_found := 1
             end if
-            print(#n# & " found bottom chord : " & !chord#n#.bot_chordname[k] & " - " & chord#n#.bot_chord)
-        end if
-        if chord#n#.top_chord = ref_chord
-            chord#n#.top_chordindex[k] := k
-            chord#n#.top_chordindex[k+NUM_OF_NOTE] := j
-
-            if j = 0 and chord#n#.top_keycount = 1
-                !chord#n#.top_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k]
-            else
-                if chord#n#.top_chordbase = k or #n# # 0
-                    !chord#n#.top_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j]
-                else
-                    !chord#n#.top_chordname[k] := ckeynotes[ckey*NUM_OF_NOTE+k] & " " & chord_names[j] & " / " & ckeynotes[ckey*NUM_OF_NOTE+chord#n#.top_chordbase]
-                end if
+            inc(count)
+            if count >= notes.size - div and break = 0
+                break := 1
             end if
-            print(#n# & " found top chord: " & !chord#n#.top_chordname[k] & " - " & chord#n#.top_chord)
-        end if
-    end if
-end macro
+        end while
 
-macro display_chord (#n#)
-    if chord#n#.active = 1
-        show := 0
-        print(#n# & " bottom index1 (" & chord#n#.bot_chordbase & ") " & "(0)" & chord#n#.bot_chordindex[0] & ",(1)" & chord#n#.bot_chordindex[1] & ",(2)" & chord#n#.bot_chordindex[2] & ",(3)" & chord#n#.bot_chordindex[3] & ",(4)" & chord#n#.bot_chordindex[4] & ",(5)" & chord#n#.bot_chordindex[5] & ",(6)" & chord#n#.bot_chordindex[6] & ",(7)" & chord#n#.bot_chordindex[7] & ",(8)" & chord#n#.bot_chordindex[8] & ",(9)" & chord#n#.bot_chordindex[9] & ",(10)"& chord#n#.bot_chordindex[10] & ",(11)" & chord#n#.bot_chordindex[11])
-        print(#n# & " bottom index2 (" & chord#n#.bot_chordbase & ") " & "(12)" & chord#n#.bot_chordindex[12] & ",(13)" & chord#n#.bot_chordindex[13] & ",(14)" & chord#n#.bot_chordindex[14] & ",(15)" & chord#n#.bot_chordindex[15] & ",(16)" & chord#n#.bot_chordindex[16] & ",(17)" & chord#n#.bot_chordindex[17] & ",(18)" & chord#n#.bot_chordindex[18] & ",(19)" & chord#n#.bot_chordindex[19] & ",(20)" & chord#n#.bot_chordindex[20] & ",(21)" & chord#n#.bot_chordindex[21] & ",(22)"& chord#n#.bot_chordindex[22] & ",(23)" & chord#n#.bot_chordindex[23])
-        print(#n# & " bottom chord (" & chord#n#.bot_chordbase & ") " & "(0)" & !chord#n#.bot_chordname[0] & ",(1)" & !chord#n#.bot_chordname[1] & ",(2)" & !chord#n#.bot_chordname[2] & ",(3)" & !chord#n#.bot_chordname[3] & ",(4)" & !chord#n#.bot_chordname[4] & ",(5)" & !chord#n#.bot_chordname[5] & ",(6)" & !chord#n#.bot_chordname[6] & ",(7)" & !chord#n#.bot_chordname[7] & ",(8)" & !chord#n#.bot_chordname[8] & ",(9)" & !chord#n#.bot_chordname[9] & ",(10)"& !chord#n#.bot_chordname[10] & ",(11)" & !chord#n#.bot_chordname[11])
-        print(#n# & " top index1 (" & chord#n#.top_chordbase & ") " & "(0)" & chord#n#.top_chordindex[0] & ",(1)" & chord#n#.top_chordindex[1] & ",(2)" & chord#n#.top_chordindex[2] & ",(3)" & chord#n#.top_chordindex[3] & ",(4)" & chord#n#.top_chordindex[4] & ",(5)" & chord#n#.top_chordindex[5] & ",(6)" & chord#n#.top_chordindex[6] & ",(7)" & chord#n#.top_chordindex[7] & ",(8)" & chord#n#.top_chordindex[8] & ",(9)" & chord#n#.top_chordindex[9] & ",(10)"& chord#n#.top_chordindex[10] & ",(11)" & chord#n#.top_chordindex[11])
-        print(#n# & " top index2 (" & chord#n#.top_chordbase & ") " & "(12)" & chord#n#.top_chordindex[12] & ",(13)" & chord#n#.top_chordindex[13] & ",(14)" & chord#n#.top_chordindex[14] & ",(15)" & chord#n#.top_chordindex[15] & ",(16)" & chord#n#.top_chordindex[16] & ",(17)" & chord#n#.top_chordindex[17] & ",(18)" & chord#n#.top_chordindex[18] & ",(19)" & chord#n#.top_chordindex[19] & ",(20)" & chord#n#.top_chordindex[20] & ",(21)" & chord#n#.top_chordindex[21] & ",(22)"& chord#n#.top_chordindex[22] & ",(23)" & chord#n#.top_chordindex[23])
-        print(#n# & " top chord (" & chord#n#.top_chordbase & ") " & "(0)" & !chord#n#.top_chordname[0] & ",(1)" & !chord#n#.top_chordname[1] & ",(2)" & !chord#n#.top_chordname[2] & ",(3)" & !chord#n#.top_chordname[3] & ",(4)" & !chord#n#.top_chordname[4] & ",(5)" & !chord#n#.top_chordname[5] & ",(6)" & !chord#n#.top_chordname[6] & ",(7)" & !chord#n#.top_chordname[7] & ",(8)" & !chord#n#.top_chordname[8] & ",(9)" & !chord#n#.top_chordname[9] & ",(10)"& !chord#n#.top_chordname[10] & ",(11)" & !chord#n#.top_chordname[11])
+        count := notes.size - div
+        break := 0
+        { top }
+        for i := notes.size - div to notes.size - 1
+            top_chord := top_chord .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
+            top_test := top_test & "," & notes.array[i]
+        end for
 
-        if chord#n#.top_chordindex[chord#n#.top_chordbase] # 0xFF
-            @chord#n#.last_topchord := !chord#n#.top_chordname[chord#n#.top_chordbase]
-            chord#n#.topindex := chord#n#.top_chordbase
-            show := 1
-        else
-            break := 0
-            for n := 1 to NUM_OF_NOTE
-                if chord#n#.top_chordindex[(chord#n#.top_chordbase+n) mod NUM_OF_NOTE] # 0xFF and break = 0
-                    chord#n#.topindex := (chord#n#.top_chordbase+n) mod NUM_OF_NOTE
-                    @chord#n#.last_topchord := !chord#n#.top_chordname[chord#n#.topindex]
-                    break := 1
-                    show := 1
-                end if
-            end for
-            if break = 0 and #n# = 0
-                @chord#n#.last_topchord := ckeynotes[ckey*NUM_OF_NOTE+chord#n#.top_chordbase] & NC
-                show := 1
+        while break = 0
+            if sigs[notes.array[count] mod NUM_OF_NOTE].available[top_chord] = 1
+                top_test := sigs[notes.array[count] mod NUM_OF_NOTE].chord[top_chord]
+                break := 1
+                top_found := 1
             end if
-        end if
-
-        if chord#n#.bot_chordindex[chord#n#.bot_chordbase] # 0xFF
-            @chord#n#.last_botchord := !chord#n#.bot_chordname[chord#n#.bot_chordbase]
-        else
-            break := 0
-            for n := 1 to NUM_OF_NOTE
-                if chord#n#.bot_chordindex[(chord#n#.bot_chordbase+n) mod NUM_OF_NOTE] # 0xFF and break = 0
-                    @chord#n#.last_botchord := !chord#n#.bot_chordname[(chord#n#.bot_chordbase+n) mod NUM_OF_NOTE]
-                    break := 1
-                end if
-            end for
-            if show = 1 and break = 0
-                @chord#n#.last_botchord := ckeynotes[ckey*NUM_OF_NOTE+chord#n#.bot_chordbase] & NC
+            inc(count)
+            if count >= notes.size and break = 0
+                break := 1
             end if
-        end if
+        end while
 
-        print(#n# & " baselist : " & baselist[0] & " " & baselist[1] & " " & baselist[2] & " " & baselist[3] & " " & baselist[4] & " " & baselist[5] & " "& baselist[6])
-        print(#n# & " chordlist : " & chordlist[0] & " " & chordlist[1] & " " & chordlist[2] & " " & chordlist[3] & " " & chordlist[4] & " " & chordlist[5] & " "& chordlist[6])
-        print ("(" & #n# & ") Top: " & @chord#n#.last_topchord & " Bottom: " & @chord#n#.last_botchord)
-
-        if show = 1
-            print("===> " & "(" & #n# & ") start check")
-            for n := 0 to #n# - 1
-                print("->" & chord#n#.top_chordindex[chord#n#.topindex] & " == " & baselist[n] & " , " & chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE] & " == " & chordlist[n])
-                if chord#n#.top_chordindex[chord#n#.topindex] = baselist[n] and chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE] = chordlist[n]
-                    print("already exist")
-                    show := 0
-                end if
-            end for
-            if show = 1
-                baselist[#n#] := chord#n#.top_chordindex[chord#n#.topindex]
-                chordlist[#n#] := chord#n#.top_chordindex[chord#n#.topindex+NUM_OF_NOTE]
-                if #n# = 0
-                    add_text_line(main, @chord#n#.last_topchord)
-                else
-                    add_text_line(sub, @chord#n#.last_topchord & " / " & @chord#n#.last_botchord)
-                end if
-            end if
+        if top_found = 1 and bottom_found = 1
+            add_text_line(sub, top_test & " / " & bottom_test)
         end if
     end if
 end macro
@@ -1294,44 +1335,37 @@ end macro
 function khordie_show_chord
     call khordie_remove_all_chord
 
-    if status.length <= 1
-        exit
-    end if
-
+    declare count := 0
     declare break := 0
-    declare show := 0
-    declare baselist[NUM_OF_KEY] := (0)
-    declare chordlist[NUM_OF_KEY] := (0)
-    declare divide := 0
-    declare ckey := 0
 
-    for i := 0 to NUM_OF_KEY - 1
-        baselist[i] := 0xFF
-        chordlist[i] := 0xFF
-    end for
+    declare div := 0
+    declare top_chord := 0
+    declare bottom_chord := 0
 
+    declare @top_test := ""
+    declare @bottom_test := ""
+
+    declare top_found := 0
+    declare bottom_found := 0
+
+    if notes.size >= 2
+        call khordie_show_main_chord
+    end if
+    if notes.size >= 4
+        iterate_macro(khordie_show_sub_chord) := 1 to 6
+    end if
+end function
+
+function khordie_get_name_by_key (note) -> result
     select (key)
         case 0
-            ckey := 0
+            i := 0
         case 1 to 7
-            ckey := 1
+            i := 1
         case 8 to 14
-            ckey := 2
+            i := 2
     end select
-
-    iterate_macro(declare_chord) := 0 to 6
-    iterate_macro(make_chord) := 0 to 6
-
-    k := status.notes[0] mod NUM_OF_NOTE
-    for i := 0 to NUM_OF_NOTE - 1
-        for j := 0 to NUM_OF_CHORD - 1
-            declare ref_chord := all_chord[k*NUM_OF_CHORD+j]
-            iterate_macro(search_chord) := 0 to 6
-        end for
-        print(k & " search chord time: " & KSP_TIMER)
-        k := (k + 1) mod NUM_OF_NOTE
-    end for
-    iterate_macro(display_chord) := 0 to 6
+    result := ckeynotes[i * NUM_OF_NOTE + (note mod NUM_OF_NOTE)]
 end function
 
 function khordie_set_color_piano (k, s)
