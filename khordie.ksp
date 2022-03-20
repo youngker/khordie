@@ -153,7 +153,7 @@ on init
     set_control_par(get_ui_id(sustain),$CONTROL_PAR_HEIGHT, 30)
     set_text(sustain,"")
     hide_part(sustain,$HIDE_PART_BG)
-    move_control_px(sustain, 0, 350)
+    move_control_px(sustain, STAFF_X, 350)
 
     declare ui_label key_name(1,1)
     set_control_par(get_ui_id(key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
@@ -1202,14 +1202,14 @@ function khordie_update_active_notes
 
     if is_sustain = 1
         for i := 0 to NUM_OF_ALL_KEY - 1
-            if sustain_notes[i] # 0xff
+            if sustain_notes[i] # 0xff and notes.size < AVAILABLE_NUM
                 notes.array[notes.size] := i
                 inc(notes.size)
             end if
         end for
     else
         for i := 0 to NUM_OF_ALL_KEY - 1
-            if %KEY_DOWN[i] = 1
+            if %KEY_DOWN[i] = 1 and notes.size < AVAILABLE_NUM
                 notes.array[notes.size] := i
                 inc(notes.size)
             end if
