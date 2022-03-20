@@ -1,5 +1,5 @@
-define AVAILABLE_NUM:= 50
-define NUM_OF_CHORD := 197
+define AVAILABLE_NUM:= 70
+define NUM_OF_CHORD := 196
 define NUM_OF_KEY := 7
 define NUM_OF_NOTE := 12
 define NUM_OF_ALL_KEY := 128
@@ -405,34 +405,231 @@ on init
     chord_names[166] := "9(#5b5)"
     chord_names[167] := "Maj9(b5#5)"
     chord_names[168] := "9(13)#11"
-    chord_names[169] := "Maj13(#11)"
-    chord_names[170] := "9(13)"
-    chord_names[171] := "Maj9(13)"
-    chord_names[172] := "13sus"
-    chord_names[173] := "7(#9#11)"
-    chord_names[174] := "7(#9#11b13)"
-    chord_names[175] := "13(#9#11)"
-    chord_names[176] := "7#9b13(add5)"
-    chord_names[177] := "13(#9)"
-    chord_names[178] := "dim7(11b13)"
-    chord_names[179] := "13sus4(add3)"
-    chord_names[180] := "7(b9#9#11)"
-    chord_names[181] := "7alt"
-    chord_names[182] := "13(b9#9#11)"
-    chord_names[183] := "7(b9#9b13)"
-    chord_names[184] := "13(b9#9)"
-    chord_names[185] := "7sus(b9#9b13)"
-    chord_names[186] := "7b9#11b13"
-    chord_names[187] := "13(b9#11)"
-    chord_names[188] := "dim(add M7,9,11)"
-    chord_names[189] := "Maj13(9,11)"
-    chord_names[190] := "Maj13(9,#11)"
-    chord_names[191] := "13sus4(add3)"
-    chord_names[192] := "Maj13(add4)"
-    chord_names[193] := "9(13)#11"
-    chord_names[194] := "Maj13(#11)"
-    chord_names[195] := "Maj13(b5#5)"
-    chord_names[196] := "13(#9#11)"
+    chord_names[169] := "9(13)"
+    chord_names[170] := "Maj9(13)"
+    chord_names[171] := "13sus"
+    chord_names[172] := "7(#9#11)"
+    chord_names[173] := "7(#9#11b13)"
+    chord_names[174] := "13(#9#11)"
+    chord_names[175] := "7#9b13(add5)"
+    chord_names[176] := "13(#9)"
+    chord_names[177] := "dim7(11b13)"
+    chord_names[178] := "13sus4(add3)"
+    chord_names[179] := "7(b9#9#11)"
+    chord_names[180] := "7alt"
+    chord_names[181] := "13(b9#9#11)"
+    chord_names[182] := "7(b9#9b13)"
+    chord_names[183] := "13(b9#9)"
+    chord_names[184] := "7sus(b9#9b13)"
+    chord_names[185] := "7b9#11b13"
+    chord_names[186] := "13(b9#11)"
+    chord_names[187] := "dim(add M7,9,11)"
+    chord_names[188] := "Maj13(9,11)"
+    chord_names[189] := "Maj13(9,#11)"
+    chord_names[190] := "13sus4(add3)"
+    chord_names[191] := "Maj13(add4)"
+    chord_names[192] := "9(13)#11"
+    chord_names[193] := "Maj13(#11)"
+    chord_names[194] := "Maj13(b5#5)"
+    chord_names[195] := "13(#9#11)"
+
+    declare !chord_sub_names[NUM_OF_CHORD]
+    chord_sub_names[0] := "Octave"
+    chord_sub_names[1] := "minor 2nd"
+    chord_sub_names[2] := "Major 2nd"
+    chord_sub_names[3] := "minor 3rd"
+    chord_sub_names[4] := "Major 3rd"
+    chord_sub_names[5] := "Perfect 4th"
+    chord_sub_names[6] := "Tritone"
+    chord_sub_names[7] := "Perfect 5th"
+    chord_sub_names[8] := "minor 6th"
+    chord_sub_names[9] := "Major 6th"
+    chord_sub_names[10] := "minor 7th"
+    chord_sub_names[11] := "Major 7th"
+    chord_sub_names[12] := "Maj(add2)"
+    chord_sub_names[13] := "Sus2"
+    chord_sub_names[14] := "min7"
+    chord_sub_names[15] := "dim"
+    chord_sub_names[16] := "min"
+    chord_sub_names[17] := "7"
+    chord_sub_names[18] := "Maj7"
+    chord_sub_names[19] := "Maj(b5)"
+    chord_sub_names[20] := ""
+    chord_sub_names[21] := "Aug"
+    chord_sub_names[22] := "7sus4"
+    chord_sub_names[23] := "Sus4"
+    chord_sub_names[24] := "7(no3)"
+    chord_sub_names[25] := "Maj7"
+    chord_sub_names[26] := "7b9(no5)"
+    chord_sub_names[27] := "Maj(add b9)"
+    chord_sub_names[28] := "(#9)"
+    chord_sub_names[29] := "7sus4(b9)"
+    chord_sub_names[30] := "min9"
+    chord_sub_names[31] := "min(add2)"
+    chord_sub_names[32] := "Maj(add b5)"
+    chord_sub_names[33] := "min6/9"
+    chord_sub_names[34] := "7(9)"
+    chord_sub_names[35] := "Maj9 no 5th"
+    chord_sub_names[36] := "Maj(add2)"
+    chord_sub_names[37] := "6/9"
+    chord_sub_names[38] := "9sus4"
+    chord_sub_names[39] := "min6"
+    chord_sub_names[40] := "Maj6"
+    chord_sub_names[41] := "7Sus2"
+    chord_sub_names[42] := "Maj7 Sus2"
+    chord_sub_names[43] := "6/9(no3)"
+    chord_sub_names[44] := "7#9(no5)"
+    chord_sub_names[45] := "(add#9)"
+    chord_sub_names[46] := "min7(4)"
+    chord_sub_names[47] := "min(add4/11)"
+    chord_sub_names[48] := "Maj6"
+    chord_sub_names[49] := "min7b5"
+    chord_sub_names[50] := "dim(Maj7)"
+    chord_sub_names[51] := "dim7"
+    chord_sub_names[52] := "min7"
+    chord_sub_names[53] := "minMaj7"
+    chord_sub_names[54] := "min6"
+    chord_sub_names[55] := "dim(Maj7#5)"
+    chord_sub_names[56] := "dim(Maj7)"
+    chord_sub_names[57] := "min7(13)"
+    chord_sub_names[58] := "minMaj7(13)"
+    chord_sub_names[59] := "7(add4)"
+    chord_sub_names[60] := "7b5"
+    chord_sub_names[61] := "Maj7b5"
+    chord_sub_names[62] := "Maj(add b5)"
+    chord_sub_names[63] := "min6"
+    chord_sub_names[64] := "7"
+    chord_sub_names[65] := "Maj7"
+    chord_sub_names[66] := "Maj6"
+    chord_sub_names[67] := "7#5"
+    chord_sub_names[68] := "Maj7#5"
+    chord_sub_names[69] := "7(13 no5)"
+    chord_sub_names[70] := "Maj7(13)"
+    chord_sub_names[71] := "dim(Maj7)"
+    chord_sub_names[72] := "7Sus4"
+    chord_sub_names[73] := "Maj7 Sus4"
+    chord_sub_names[74] := "min(add4/11)"
+    chord_sub_names[75] := "(add#9)"
+    chord_sub_names[76] := "7sus4(13)"
+    chord_sub_names[77] := "7(#9#9)"
+    chord_sub_names[78] := "7sus4(b9b3)"
+    chord_sub_names[79] := "minb9"
+    chord_sub_names[80] := "7(b9b5)"
+    chord_sub_names[81] := "7(b9)"
+    chord_sub_names[82] := "7(b9#5)"
+    chord_sub_names[83] := "13(b9)"
+    chord_sub_names[84] := "7sus4(b9)"
+    chord_sub_names[85] := "7sus4(b9b13)"
+    chord_sub_names[86] := "13sus(b9)"
+    chord_sub_names[87] := "min9(11)"
+    chord_sub_names[88] := "minMaj9(11)"
+    chord_sub_names[89] := "min(add2/4)"
+    chord_sub_names[90] := "min6/9/11"
+    chord_sub_names[91] := "min9(b5)"
+    chord_sub_names[92] := "dimMaj7(9)"
+    chord_sub_names[93] := "dim7(9)"
+    chord_sub_names[94] := "min9"
+    chord_sub_names[95] := "min(Maj9)"
+    chord_sub_names[96] := "minMaj7(9)"
+    chord_sub_names[97] := "min6/9"
+    chord_sub_names[98] := "dimMaj9(#5)"
+    chord_sub_names[99] := "minMaj9(13)"
+    chord_sub_names[100] := "9sus4(add3)"
+    chord_sub_names[101] := "9(#11)"
+    chord_sub_names[102] := "Maj9(b5)"
+    chord_sub_names[103] := "Maj7(add2,#11)"
+    chord_sub_names[104] := "6/9(#11)"
+    chord_sub_names[105] := "9"
+    chord_sub_names[106] := "Maj9"
+    chord_sub_names[107] := "6/9"
+    chord_sub_names[108] := "9(#5)"
+    chord_sub_names[109] := "Maj9(#5)"
+    chord_sub_names[110] := "9(13)"
+    chord_sub_names[111] := "Maj9(13)"
+    chord_sub_names[112] := "min11(b5)"
+    chord_sub_names[113] := "9sus4"
+    chord_sub_names[114] := "Maj9sus4"
+    chord_sub_names[115] := "9sus4(b13)"
+    chord_sub_names[116] := "13sus"
+    chord_sub_names[117] := "7(#9b5)"
+    chord_sub_names[118] := "7(#9)"
+    chord_sub_names[119] := "7(#9#5)"
+    chord_sub_names[120] := "13(#9)"
+    chord_sub_names[121] := "min7b5(11)"
+    chord_sub_names[122] := "dimMaj7(11)"
+    chord_sub_names[123] := "dim7(11)"
+    chord_sub_names[124] := "min7(11)"
+    chord_sub_names[125] := "min7(#11)"
+    chord_sub_names[126] := "min7b5(b13)"
+    chord_sub_names[127] := "dim7(add #5)"
+    chord_sub_names[128] := "dim7(add M7)"
+    chord_sub_names[129] := "min7(13)"
+    chord_sub_names[130] := "minMaj7(13)"
+    chord_sub_names[131] := "7(add11)"
+    chord_sub_names[132] := "7(#11)"
+    chord_sub_names[133] := "Maj7(#11)"
+    chord_sub_names[134] := "6(#11)"
+    chord_sub_names[135] := "Maj7(b5#5)"
+    chord_sub_names[136] := "13#11"
+    chord_sub_names[137] := "Maj7(add #5)"
+    chord_sub_names[138] := "13(no 9)"
+    chord_sub_names[139] := "Maj13(no9)"
+    chord_sub_names[140] := "7(b9#9b5)"
+    chord_sub_names[141] := "7(b9#9)"
+    chord_sub_names[142] := "7(b9#9#5)"
+    chord_sub_names[143] := "7sus(b9#9b13)"
+    chord_sub_names[144] := "min7b5(b9b13)"
+    chord_sub_names[145] := "7(b9#11)"
+    chord_sub_names[146] := "7(b9b5b13)"
+    chord_sub_names[147] := "13(b9#11)"
+    chord_sub_names[148] := "7b9b13(add5)"
+    chord_sub_names[149] := "13(b9)"
+    chord_sub_names[150] := "13sus(b9)"
+    chord_sub_names[151] := "min7b5(9,11)"
+    chord_sub_names[152] := "dimMaj7(9/11)"
+    chord_sub_names[153] := "dim7(9/11)"
+    chord_sub_names[154] := "min9(11)"
+    chord_sub_names[155] := "min9/11(Maj7)"
+    chord_sub_names[156] := "min6/9(11)"
+    chord_sub_names[157] := "min9(11,13)"
+    chord_sub_names[158] := "minMaj11(13)"
+    chord_sub_names[159] := "dimM9(#5)"
+    chord_sub_names[160] := "min9(13)"
+    chord_sub_names[161] := "min(Maj9/13)"
+    chord_sub_names[162] := "13sus4(add3)"
+    chord_sub_names[163] := "9(#11)"
+    chord_sub_names[164] := "Maj9(#11)"
+    chord_sub_names[165] := "6/9(#11)"
+    chord_sub_names[166] := "9(#5b5)"
+    chord_sub_names[167] := "Maj9(b5#5)"
+    chord_sub_names[168] := "9(13)#11"
+    chord_sub_names[169] := "9(13)"
+    chord_sub_names[170] := "Maj9(13)"
+    chord_sub_names[171] := "13sus"
+    chord_sub_names[172] := "7(#9#11)"
+    chord_sub_names[173] := "7(#9#11b13)"
+    chord_sub_names[174] := "13(#9#11)"
+    chord_sub_names[175] := "7#9b13(add5)"
+    chord_sub_names[176] := "13(#9)"
+    chord_sub_names[177] := "dim7(11b13)"
+    chord_sub_names[178] := "13sus4(add3)"
+    chord_sub_names[179] := "7(b9#9#11)"
+    chord_sub_names[180] := "7alt"
+    chord_sub_names[181] := "13(b9#9#11)"
+    chord_sub_names[182] := "7(b9#9b13)"
+    chord_sub_names[183] := "13(b9#9)"
+    chord_sub_names[184] := "7sus(b9#9b13)"
+    chord_sub_names[185] := "7b9#11b13"
+    chord_sub_names[186] := "13(b9#11)"
+    chord_sub_names[187] := "dim(add M7,9,11)"
+    chord_sub_names[188] := "Maj13(9,11)"
+    chord_sub_names[189] := "Maj13(9,#11)"
+    chord_sub_names[190] := "13sus4(add3)"
+    chord_sub_names[191] := "Maj13(add4)"
+    chord_sub_names[192] := "9(13)#11"
+    chord_sub_names[193] := "Maj13(#11)"
+    chord_sub_names[194] := "Maj13(b5#5)"
+    chord_sub_names[195] := "13(#9#11)"
 
     declare base_chord[NUM_OF_CHORD*NUM_OF_KEY] := (...
         0,0xff,0xff,0xff,0xff,0xff,0xff,... { 0 }
@@ -604,34 +801,33 @@ on init
         0,2,4,6,8,10,0xff,... { 166 }
         0,2,4,6,8,11,0xff,... { 167 }
         0,2,4,6,9,10,0xff,... { 168 }
-        0,2,4,6,9,11,0xff,... { 169 }
-        0,2,4,7,9,10,0xff,... { 170 }
-        0,2,4,7,9,11,0xff,... { 171 }
-        0,2,5,7,9,10,0xff,... { 172 }
-        0,3,4,6,7,10,0xff,... { 173 }
-        0,3,4,6,8,10,0xff,... { 174 }
-        0,3,4,6,9,10,0xff,... { 175 }
-        0,3,4,7,8,10,0xff,... { 176 }
-        0,3,4,7,9,10,0xff,... { 177 }
-        0,3,5,6,8,9,0xff,... { 178 }
-        0,4,5,7,9,10,0xff,... { 179 }
-        0,1,3,4,6,7,10,... { 180 }
-        0,1,3,4,6,8,10,... { 181 }
-        0,1,3,4,6,9,10,... { 182 }
-        0,1,3,4,7,8,10,... { 183 }
-        0,1,3,4,7,9,10,... { 184 }
-        0,1,3,5,7,8,10,... { 185 }
-        0,1,4,6,7,8,10,... { 186 }
-        0,1,4,6,7,9,10,... { 187 }
-        0,2,3,5,6,9,11,... { 188 }
-        0,2,3,5,7,9,10,... { 189 }
-        0,2,3,6,7,9,10,... { 190 }
-        0,2,4,5,7,9,10,... { 191 }
-        0,2,4,5,7,9,11,... { 192 }
-        0,2,4,6,7,9,10,... { 193 }
-        0,2,4,6,7,9,11,... { 194 }
-        0,2,4,6,8,9,11,... { 195 }
-        0,3,4,6,7,9,10)    { 196 }
+        0,2,4,7,9,10,0xff,... { 169 }
+        0,2,4,7,9,11,0xff,... { 170 }
+        0,2,5,7,9,10,0xff,... { 171 }
+        0,3,4,6,7,10,0xff,... { 172 }
+        0,3,4,6,8,10,0xff,... { 173 }
+        0,3,4,6,9,10,0xff,... { 174 }
+        0,3,4,7,8,10,0xff,... { 175 }
+        0,3,4,7,9,10,0xff,... { 176 }
+        0,3,5,6,8,9,0xff,... { 177 }
+        0,4,5,7,9,10,0xff,... { 178 }
+        0,1,3,4,6,7,10,... { 179 }
+        0,1,3,4,6,8,10,... { 180 }
+        0,1,3,4,6,9,10,... { 181 }
+        0,1,3,4,7,8,10,... { 182 }
+        0,1,3,4,7,9,10,... { 183 }
+        0,1,3,5,7,8,10,... { 184 }
+        0,1,4,6,7,8,10,... { 185 }
+        0,1,4,6,7,9,10,... { 186 }
+        0,2,3,5,6,9,11,... { 187 }
+        0,2,3,5,7,9,10,... { 188 }
+        0,2,3,6,7,9,10,... { 189 }
+        0,2,4,5,7,9,10,... { 190 }
+        0,2,4,5,7,9,11,... { 191 }
+        0,2,4,6,7,9,10,... { 192 }
+        0,2,4,6,7,9,11,... { 193 }
+        0,2,4,6,8,9,11,... { 194 }
+        0,3,4,6,7,9,10)    { 195 }
 
     // "C","F","Bb","Eb","Ab","Db","Gb","Cb","C#","F#","B","E","A","D","G"
     // 0: N/A, 1:#, 2:b, 3:N, 4:Cb,Fb 5:E#,B#
@@ -789,15 +985,11 @@ on init
     declare const MAX_CHORDS := 4096
 
     family notes
-        declare _note[AVAILABLE_NUM]
-        declare size
+        declare _note[AVAILABLE_NUM] := (0xff)
+        declare size := 0
         declare _main_chord
         declare _top[6]
-        declare _top_array[6 * AVAILABLE_NUM]
-        declare _top_array_size[6]
         declare _bottom[6]
-        declare _bottom_array[6 * AVAILABLE_NUM]
-        declare _bottom_array_size[6]
 
         property array
             function get(idx) -> result
@@ -825,22 +1017,6 @@ on init
                         notes._top[idx] := value
                     end function
                 end property
-                property top_array
-                    function get(num, idx) -> result
-                        result := notes._top_array[num * AVAILABLE_NUM + idx]
-                    end function
-                    function set(num, idx, value)
-                        notes._top_array[num * AVAILABLE_NUM + idx] := value
-                    end function
-                end property
-                property top_array_size
-                    function get(idx) -> result
-                        result := notes._top_array_size[idx]
-                    end function
-                    function set(idx, value)
-                        notes._top_array_size[idx] := value
-                    end function
-                end property
                 property bottom
                     function get(idx) -> result
                         result := notes._bottom[idx]
@@ -851,26 +1027,26 @@ on init
                 end property
             end family
         end family
-        declare _chord[7 * 7] := (0xff)
-        property chord
-            function get(num, param) -> result
-                result := notes._chord[num * 7 + param]
-            end function
-            function set(sig, param, value)
-                notes._chord[num * 7 + param] := value
-            end function
-        end property
     end family
 
     family sigs
-        declare !_chord[12 * MAX_CHORDS]
-        declare _available[12 * MAX_CHORDS] := (0)
+        declare !_chord[NUM_OF_NOTE * MAX_CHORDS]
+        declare !_sub_chord[NUM_OF_NOTE * MAX_CHORDS]
+        declare _available[NUM_OF_NOTE * MAX_CHORDS] := (0)
         property chord
             function get(sig, param) -> result
                 result := sigs._chord[sig * MAX_CHORDS + param]
             end function
             function set(sig, param, value)
                 sigs._chord[sig * MAX_CHORDS + param] := value
+            end function
+        end property
+        property subchord
+            function get(sig, param) -> result
+                result := sigs._sub_chord[sig * MAX_CHORDS + param]
+            end function
+            function set(sig, param, value)
+                sigs._sub_chord[sig * MAX_CHORDS + param] := value
             end function
         end property
         property available
@@ -883,7 +1059,6 @@ on init
         end property
     end family
 
-    declare all_chord[NUM_OF_NOTE*NUM_OF_CHORD]
     declare temp_chord := 0b
 
     for i := 0 to NUM_OF_NOTE - 1
@@ -895,6 +1070,7 @@ on init
                 end if
             end for
             sigs[i].chord[temp_chord] := ckeynotes[i] & " " & chord_names[j]
+            sigs[i].subchord[temp_chord] := ckeynotes[i] & " " & chord_sub_names[j]
             sigs[i].available[temp_chord] := 1
         end for
     end for
@@ -907,68 +1083,51 @@ on init
     //     end for
     // end for
 
-    for i := 0 to NUM_OF_NOTE - 1
-        for j := 0 to NUM_OF_CHORD - 1
-            temp_chord := 0b
-            for k := 0 to NUM_OF_KEY - 1
-                if base_chord[j*NUM_OF_KEY + k] # 0xff
-                    temp_chord := temp_chord .or. sh_left(1b, (base_chord[j*NUM_OF_KEY + k] + i) mod NUM_OF_NOTE)
-                end if
-            end for
-            all_chord[i*NUM_OF_CHORD + j] := temp_chord
-        end for
-    end for
-
-    pgs_create_key(SUSTAIN_RELEASE, 1)
-    pgs_create_key(KEY_CHANGED, 1)
 //    SET_CONDITION(NO_SYS_SCRIPT_PEDAL)
     khordie_set_color_piano(0, 0)
 end on
 
 on note
     ignore_event(EVENT_ID)
-    pgs_set_key_val(KEY_CHANGED, 0, 1)
-    kstart := KSP_TIMER
-    call khordie_update_active_notes
-    print("P khordie_update_active_notes : " & KSP_TIMER - kstart)
-    kstart := KSP_TIMER
-    call khordie_show_notes_on_staff
-    print("P khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
-    kstart := KSP_TIMER
-    call khordie_show_chord
-    print("P khordie_show_chord : " & KSP_TIMER - kstart)
-    kstart := KSP_TIMER
-    khordie_show_piano(EVENT_NOTE, 0)
-    print("P khordie_show_piano : " & KSP_TIMER - kstart)
-    kstart := KSP_TIMER
-    khordie_show_notes(EVENT_NOTE, 0)
-    print("P khordie_show_notes : " & KSP_TIMER - kstart)
     if is_sustain = 1
-        sustain_notes[EVENT_NOTE] := 0xff
+        sustain_notes[EVENT_NOTE] := EVENT_NOTE
     end if
+    // kstart := KSP_TIMER
+    call khordie_update_active_notes
+    // print("P khordie_update_active_notes : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    call khordie_show_notes_on_staff
+    // print("P khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    call khordie_show_chord
+    // print("P khordie_show_chord : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    khordie_show_piano(EVENT_NOTE, 0)
+    // print("P khordie_show_piano : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    khordie_show_notes(EVENT_NOTE, 0)
+    // print("P khordie_show_notes : " & KSP_TIMER - kstart)
 end on
 
 on release
     ignore_event(EVENT_ID)
+
+    // kstart := KSP_TIMER
+    call khordie_update_active_notes
+    // print("R khordie_update_active_notes : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    call khordie_show_notes_on_staff
+    // print("R khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
+    // kstart := KSP_TIMER
+    call khordie_show_chord
+    // print("R khordie_show_chord : " & KSP_TIMER - kstart)
     if is_sustain = 0
-        pgs_set_key_val(KEY_CHANGED, 0, 1)
-        kstart := KSP_TIMER
-        call khordie_update_active_notes
-        print("R khordie_update_active_notes : " & KSP_TIMER - kstart)
-        kstart := KSP_TIMER
-        call khordie_show_notes_on_staff
-        print("R khordie_show_notes_on_staff : " & KSP_TIMER - kstart)
-        kstart := KSP_TIMER
-        call khordie_show_chord
-        print("R khordie_show_chord : " & KSP_TIMER - kstart)
-        kstart := KSP_TIMER
+        // kstart := KSP_TIMER
         khordie_show_piano(EVENT_NOTE, 1)
-        print("R khordie_show_piano : " & KSP_TIMER - kstart)
-        kstart := KSP_TIMER
+        // print("R khordie_show_piano : " & KSP_TIMER - kstart)
+        // kstart := KSP_TIMER
         khordie_show_notes(EVENT_NOTE, 1)
-        print("R khordie_show_notes : " & KSP_TIMER - kstart)
-    else
-        sustain_notes[EVENT_NOTE] := EVENT_NOTE
+        // print("R khordie_show_notes : " & KSP_TIMER - kstart)
     end if
 end on
 
@@ -976,46 +1135,32 @@ on controller
     if $CC_NUM = 64
         ignore_controller
         if %CC[64] = 127
-            print("on controller 1: " & %CC[64])
+            // print("on controller 1: " & %CC[64])
             is_sustain := 1
             set_text(sustain, "Sustain")
             for i := 0 to NUM_OF_ALL_KEY - 1
                 sustain_notes[i] := 0xff
             end for
-        else
-            print("on controller 2: " & %CC[64])
-            is_sustain := 0
-            set_text(sustain, "")
-            pgs_set_key_val(SUSTAIN_RELEASE,0,1)
-            for i := 0 to NUM_OF_ALL_KEY - 1
-                if sustain_notes[i] # 0xff
-                    if get_key_color(sustain_notes[i]) = KEY_COLOR_BLUE
-                        set_key_color(sustain_notes[i], KEY_COLOR_WARM_YELLOW)
-                    else
-                        set_key_color(sustain_notes[i], KEY_COLOR_INACTIVE)
-                    end if
-                    sustain_notes[i] := 0xff
-                    bnotes[i]->text := ""
+            for i := 0 to AVAILABLE_NUM - 1
+                if notes._note[i] # 0xff
+                    sustain_notes[notes._note[i]] := 1
                 end if
             end for
-        end if
-    end if
-end on
-
-on pgs_changed
-    if pgs_key_exists(SUSTAIN_RELEASE) and pgs_key_exists(KEY_CHANGED)
-        if pgs_get_key_val(SUSTAIN_RELEASE, 0) = 1
-            print("on pgs_changed : SUSTAIN_RELEASE ================== : " & $NI_CALLBACK_ID)
-            pgs_set_key_val(SUSTAIN_RELEASE, 0, 0)
+        else
+            // print("on controller 2: " & %CC[64])
+            is_sustain := 0
+            set_text(sustain, "")
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
             call khordie_remove_all_chord
-        // else if pgs_get_key_val(KEY_CHANGED, 0) = 1
-        //     wait(KEYTIME)
-        //     reset_ksp_timer
-        //     kstart := KSP_TIMER
-        //     call new_khordie_show_chord
-        //     print("on pgs_changed : KEY_CHANGED ================== : " & KSP_TIMER - kstart)
+            for i := 0 to NUM_OF_ALL_KEY - 2
+                if get_key_color(i) = KEY_COLOR_BLUE or get_key_color(i) = KEY_COLOR_WARM_YELLOW
+                    set_key_color(i, KEY_COLOR_WARM_YELLOW)
+                else
+                    set_key_color(i, KEY_COLOR_INACTIVE)
+                end if
+                bnotes[i]->text := ""
+            end for
         end if
     end if
 end on
@@ -1054,12 +1199,22 @@ end on
 function khordie_update_active_notes
     notes._note := concat(empty_notes)
     notes.size := 0
-    for i := 0 to NUM_OF_ALL_KEY - 1
-        if %KEY_DOWN[i] = 1
-            notes.array[notes.size] := i
-            inc(notes.size)
-        end if
-    end for
+
+    if is_sustain = 1
+        for i := 0 to NUM_OF_ALL_KEY - 1
+            if sustain_notes[i] # 0xff
+                notes.array[notes.size] := i
+                inc(notes.size)
+            end if
+        end for
+    else
+        for i := 0 to NUM_OF_ALL_KEY - 1
+            if %KEY_DOWN[i] = 1
+                notes.array[notes.size] := i
+                inc(notes.size)
+            end if
+        end for
+    end if
 end function
 
 function khordie_remove_all_notes
@@ -1111,7 +1266,7 @@ function khordie_show_piano (event_note, release)
             set_key_color(event_note, KEY_COLOR_RED)
         end if
     else
-        if get_key_color(event_note) = KEY_COLOR_BLUE
+        if get_key_color(event_note) = KEY_COLOR_BLUE or get_key_color(event_note) = KEY_COLOR_WARM_YELLOW
             set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
         else
             set_key_color(event_note, KEY_COLOR_INACTIVE)
@@ -1139,24 +1294,6 @@ end function
 
 function khordie_show_notes_on_staff
     call khordie_remove_all_notes
-    declare snotes[AVAILABLE_NUM] := (0xff)
-    declare dnotes[AVAILABLE_NUM] := (0xff)
-    declare tnotes[AVAILABLE_NUM*2] := (0xff)
-    if is_sustain = 1
-        tnotes := concat(notes._note, snotes)
-        sort(tnotes, 0)
-        dnotes := concat(empty_notes)
-        for i := 0 to AVAILABLE_NUM - 1
-            if search(dnotes, tnotes[i]) = -1 and tnotes[i] # 0xff
-                dnotes[i] := tnotes[i]
-            end if
-        end for
-        sort(dnotes, 0)
-    else
-        dnotes := concat(notes._note)
-    end if
-    snotes := concat(dnotes)
-
     declare line_pos[4] := (0,-2,5,12)
     declare index := 0
     declare prev_index := 0
@@ -1165,15 +1302,16 @@ function khordie_show_notes_on_staff
     declare long := 0
     j := 0
     n := 0
-    for i := 0 to num_elements(dnotes) - 1
-        if dnotes[i] # 0xff
-            index := khordie_get_index_by_key(dnotes[i])
-            current := dnotes[i]*NOTE_INDEX+POS_Y+index
+
+    for i := 0 to num_elements(notes._note) - 1
+        if notes._note[i] # 0xff
+            index := khordie_get_index_by_key(notes._note[i])
+            current := notes._note[i]*NOTE_INDEX+POS_Y+index
             if i > 0
-                prev_index := khordie_get_index_by_key(dnotes[i-1])
-                previous := dnotes[i-1]*NOTE_INDEX+POS_Y+prev_index
+                prev_index := khordie_get_index_by_key(notes._note[i-1])
+                previous := notes._note[i-1]*NOTE_INDEX+POS_Y+prev_index
             end if
-            select signature[(dnotes[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
+            select signature[(notes._note[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
                 case 1
                     sharp[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
                     sharp[i]->pos_y := note_pos[current] - 10
@@ -1209,7 +1347,7 @@ function khordie_show_notes_on_staff
                 note[i]->pos_x := NOTE_POS_X
             end if
 
-            declare pline := note_pos[dnotes[i]*NOTE_INDEX+index]
+            declare pline := note_pos[notes._note[i]*NOTE_INDEX+index]
             if pline # 0
                 declare pos := note_pos[current] + line_pos[pline]
                 if pos = line_pos_y[9]
@@ -1253,9 +1391,9 @@ function khordie_show_main_chord
     for i := 0 to notes.size - 1
         notes.chord.main := notes.chord.main .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
     end for
-     while break = 0
-         if sigs[notes.array[count] mod NUM_OF_NOTE].available[notes.chord.main] = 1
-             if (notes.array[count] = notes.array[0])
+    while break = 0
+        if sigs[notes.array[count] mod NUM_OF_NOTE].available[notes.chord.main] = 1
+            if (notes.array[count] = notes.array[0])
                 add_text_line(main, sigs[notes.array[count] mod NUM_OF_NOTE].chord[notes.chord.main])
             else
                 signature := khordie_get_name_by_key(notes.array[0])
@@ -1273,7 +1411,7 @@ function khordie_show_main_chord
  end function
 
 macro khordie_show_sub_chord (#n#)
-    div := #n# + 2
+    div := #n# + 3
     if notes.size - div >= 1
         top_chord := 0
         bottom_chord := 0
@@ -1281,53 +1419,77 @@ macro khordie_show_sub_chord (#n#)
         break := 0
         top_found := 0
         bottom_found := 0
-        top_test := ""
-        bottom_test := ""
+        top_chord_name := ""
+        bottom_chord_name := ""
 
         { bottom }
         for i := 0 to notes.size - div - 1
             bottom_chord := bottom_chord .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
-            bottom_test := bottom_test & "," & notes.array[i]
         end for
+        notes.chord.sub.bottom[#n#] := bottom_chord
 
         while break = 0
             if sigs[notes.array[count] mod NUM_OF_NOTE].available[bottom_chord] = 1
                 if notes.size - div = 1
-                    bottom_test := khordie_get_name_by_key(notes.array[count])
+                    bottom_chord_name := khordie_get_name_by_key(notes.array[count])
                 else
-                    bottom_test := sigs[notes.array[count] mod NUM_OF_NOTE].chord[bottom_chord]
+                    if (notes.array[count] = notes.array[0])
+                        bottom_chord_name := sigs[notes.array[count] mod NUM_OF_NOTE].subchord[bottom_chord]
+                    else
+                        signature := khordie_get_name_by_key(notes.array[0])
+                        bottom_chord_name := sigs[notes.array[count] mod NUM_OF_NOTE].subchord[bottom_chord] & " / " & signature
+                    end if
                 end if
                 break := 1
                 bottom_found := 1
             end if
             inc(count)
             if count >= notes.size - div and break = 0
+                bottom_chord_name := khordie_get_name_by_key(notes.array[0])
+                bottom_chord_name := bottom_chord_name & NC
                 break := 1
             end if
         end while
 
         count := notes.size - div
         break := 0
+        duplicated := 0
+
         { top }
         for i := notes.size - div to notes.size - 1
             top_chord := top_chord .or. sh_left(1b, notes.array[i] mod NUM_OF_NOTE)
-            top_test := top_test & "," & notes.array[i]
         end for
 
-        while break = 0
-            if sigs[notes.array[count] mod NUM_OF_NOTE].available[top_chord] = 1
-                top_test := sigs[notes.array[count] mod NUM_OF_NOTE].chord[top_chord]
-                break := 1
-                top_found := 1
-            end if
-            inc(count)
-            if count >= notes.size and break = 0
-                break := 1
-            end if
-        end while
+        if notes.chord.main = top_chord
+            duplicated := 1
+        end if
 
-        if top_found = 1 and bottom_found = 1
-            add_text_line(sub, top_test & " / " & bottom_test)
+        for i := 0 to 5
+            if notes.chord.sub.top[i] = top_chord
+                duplicated := 1
+            end if
+        end for
+
+        if duplicated = 0
+            notes.chord.sub.top[#n#] := top_chord
+
+            while break = 0
+                if sigs[notes.array[count] mod NUM_OF_NOTE].available[top_chord] = 1
+                    top_chord_name := sigs[notes.array[count] mod NUM_OF_NOTE].subchord[top_chord]
+                    break := 1
+                    top_found := 1
+                end if
+                inc(count)
+                if count >= notes.size and break = 0
+                    top_chord_name := khordie_get_name_by_key(notes.array[notes.size - div])
+                    top_chord_name := top_chord_name & NC
+                    break := 1
+                end if
+            end while
+
+            if top_found = 1 or bottom_found = 1
+                add_text_line(sub, top_chord_name & " / " & bottom_chord_name)
+            end if
         end if
     end if
 end macro
@@ -1337,13 +1499,15 @@ function khordie_show_chord
 
     declare count := 0
     declare break := 0
+    declare duplicated := 0
 
     declare div := 0
     declare top_chord := 0
     declare bottom_chord := 0
 
-    declare @top_test := ""
-    declare @bottom_test := ""
+    declare @top_chord_name := ""
+    declare @bottom_chord_name := ""
+    declare @signature := ""
 
     declare top_found := 0
     declare bottom_found := 0
@@ -1352,7 +1516,10 @@ function khordie_show_chord
         call khordie_show_main_chord
     end if
     if notes.size >= 4
-        iterate_macro(khordie_show_sub_chord) := 1 to 6
+        for i := 0 to 5
+            notes.chord.sub.top[i] := 0
+        end for
+        iterate_macro(khordie_show_sub_chord) := 0 to 5
     end if
 end function
 
