@@ -1,8 +1,8 @@
-define AVAILABLE_NUM:= 70
+define NUM_OF_ALL_KEY := 128
 define NUM_OF_CHORD := 196
 define NUM_OF_KEY := 7
 define NUM_OF_NOTE := 12
-define NUM_OF_ALL_KEY := 128
+
 
 define NOTE_INDEX := 10
 define POS_Y := 4
@@ -28,7 +28,7 @@ define KEYTIME := 100000
 on init
     activate_logger("C:/Users/youngker/log.nka")
 
-    declare empty_notes[AVAILABLE_NUM] := (0xff)
+    declare empty_notes[NUM_OF_ALL_KEY] := (0xff)
     declare sustain_notes[NUM_OF_ALL_KEY] := (0xff)
     declare is_sustain := 0
     declare key
@@ -47,30 +47,17 @@ on init
     set_ui_height_px(450)
     set_ui_color(9FFFFFFh)
 
-    declare ui_label note[AVAILABLE_NUM] (1,1)
-    for i := 0 to AVAILABLE_NUM - 1
+    declare ui_label note[NUM_OF_ALL_KEY] (1,1)
+    for i := 0 to NUM_OF_ALL_KEY - 1
         note[i]->picture := "note"
         note[i]->text := ""
         note[i]->hide := HIDE_PART_BG
     end for
 
-    declare ui_label sharp[AVAILABLE_NUM] (1,1)
-    for i := 0 to AVAILABLE_NUM -1
-        sharp[i]->picture := "sharp"
-        sharp[i]->text := ""
-        sharp[i]->hide := HIDE_PART_BG
-    end for
-    declare ui_label flat[AVAILABLE_NUM] (1,1)
-    for i := 0 to AVAILABLE_NUM - 1
-        flat[i]->picture := "flat"
-        flat[i]->text := ""
-        flat[i]->hide := HIDE_PART_BG
-    end for
-    declare ui_label natural[AVAILABLE_NUM] (1,1)
-    for i := 0 to AVAILABLE_NUM - 1
-        natural[i]->picture := "natural"
-        natural[i]->text := ""
-        natural[i]->hide := HIDE_PART_BG
+    declare ui_label accidental[NUM_OF_ALL_KEY] (1,1)
+    for i := 0 to NUM_OF_ALL_KEY -1
+        accidental[i]->text := ""
+        accidental[i]->hide := HIDE_PART_BG
     end for
 
     declare key_pos[2, NUM_OF_KEYS-1, 2] := (...
@@ -975,7 +962,7 @@ on init
         {126} NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,...
         {127} NA,NA,NA,NA,NA,NA,NA,NA,NA,NA)
 
-    declare position[AVAILABLE_NUM] := (...
+    declare position[NUM_OF_ALL_KEY] := (...
         1,2,3,2,1,2,3,2,1,2,3,2,...
         1,2,3,2,1,2,3,2,1,2,3,2,...
         1,2,3,2,1,2,3,2,1,2,3,2,...
@@ -985,7 +972,7 @@ on init
     declare const MAX_CHORDS := 4096
 
     family notes
-        declare _note[AVAILABLE_NUM] := (0xff)
+        declare _note[NUM_OF_ALL_KEY] := (0xff)
         declare size := 0
         declare _main_chord
         declare _top[6]
@@ -1104,9 +1091,6 @@ on note
     // kstart := KSP_TIMER
     khordie_show_piano(EVENT_NOTE, 0)
     // print("P khordie_show_piano : " & KSP_TIMER - kstart)
-    // kstart := KSP_TIMER
-    khordie_show_notes(EVENT_NOTE, 0)
-    // print("P khordie_show_notes : " & KSP_TIMER - kstart)
 end on
 
 on release
@@ -1125,9 +1109,6 @@ on release
         // kstart := KSP_TIMER
         khordie_show_piano(EVENT_NOTE, 1)
         // print("R khordie_show_piano : " & KSP_TIMER - kstart)
-        // kstart := KSP_TIMER
-        khordie_show_notes(EVENT_NOTE, 1)
-        // print("R khordie_show_notes : " & KSP_TIMER - kstart)
     end if
 end on
 
@@ -1141,7 +1122,7 @@ on controller
             for i := 0 to NUM_OF_ALL_KEY - 1
                 sustain_notes[i] := 0xff
             end for
-            for i := 0 to AVAILABLE_NUM - 1
+            for i := 0 to NUM_OF_ALL_KEY - 1
                 if notes._note[i] # 0xff
                     sustain_notes[notes._note[i]] := 1
                 end if
@@ -1152,7 +1133,7 @@ on controller
             set_text(sustain, "")
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
-            call khordie_remove_all_chord
+            call khordie_show_chord
             for i := 0 to NUM_OF_ALL_KEY - 2
                 if get_key_color(i) = KEY_COLOR_BLUE or get_key_color(i) = KEY_COLOR_WARM_YELLOW
                     set_key_color(i, KEY_COLOR_WARM_YELLOW)
@@ -1160,6 +1141,9 @@ on controller
                     set_key_color(i, KEY_COLOR_INACTIVE)
                 end if
                 bnotes[i]->text := ""
+            end for
+            for i := 0 to notes.size - 1
+                khordie_show_piano(notes.array[i], 0)
             end for
         end if
     end if
@@ -1202,14 +1186,14 @@ function khordie_update_active_notes
 
     if is_sustain = 1
         for i := 0 to NUM_OF_ALL_KEY - 1
-            if sustain_notes[i] # 0xff and notes.size < AVAILABLE_NUM
+            if sustain_notes[i] # 0xff
                 notes.array[notes.size] := i
                 inc(notes.size)
             end if
         end for
     else
         for i := 0 to NUM_OF_ALL_KEY - 1
-            if %KEY_DOWN[i] = 1 and notes.size < AVAILABLE_NUM
+            if %KEY_DOWN[i] = 1
                 notes.array[notes.size] := i
                 inc(notes.size)
             end if
@@ -1218,11 +1202,9 @@ function khordie_update_active_notes
 end function
 
 function khordie_remove_all_notes
-    for i := 0 to AVAILABLE_NUM - 1
+    for i := 0 to NUM_OF_ALL_KEY - 1
         note[i]->hide := HIDE_PART_BG
-        sharp[i]->hide := HIDE_PART_BG
-        flat[i]->hide := HIDE_PART_BG
-        natural[i]->hide := HIDE_PART_BG
+        accidental[i]->hide := HIDE_PART_BG
     end for
     for i := 0 to 16 - 1
         line[i]->hide := HIDE_PART_BG
@@ -1265,17 +1247,6 @@ function khordie_show_piano (event_note, release)
         else
             set_key_color(event_note, KEY_COLOR_RED)
         end if
-    else
-        if get_key_color(event_note) = KEY_COLOR_BLUE or get_key_color(event_note) = KEY_COLOR_WARM_YELLOW
-            set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
-        else
-            set_key_color(event_note, KEY_COLOR_INACTIVE)
-        end if
-    end if
-end function
-
-function khordie_show_notes (event_note, release)
-    if release = 0
         if keyoffset[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)] = 1 and note_pos[event_note*NOTE_INDEX+9] = 0
             bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8] - 4
         else
@@ -1288,6 +1259,11 @@ function khordie_show_notes (event_note, release)
         end if
         bnotes[event_note]->text := keynotes[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)]
     else
+        if get_key_color(event_note) = KEY_COLOR_BLUE or get_key_color(event_note) = KEY_COLOR_WARM_YELLOW
+            set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
+        else
+            set_key_color(event_note, KEY_COLOR_INACTIVE)
+        end if
         bnotes[event_note]->text := ""
     end if
 end function
@@ -1313,19 +1289,22 @@ function khordie_show_notes_on_staff
             end if
             select signature[(notes._note[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
                 case 1
-                    sharp[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    sharp[i]->pos_y := note_pos[current] - 10
-                    sharp[i]->hide := HIDE_PART_NOTHING
+                    accidental[i]->picture := "sharp"
+                    accidental[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    accidental[i]->pos_y := note_pos[current] - 10
+                    accidental[i]->hide := HIDE_PART_NOTHING
                     inc(j)
                 case 2
-                    flat[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    flat[i]->pos_y := note_pos[current] - 16
-                    flat[i]->hide := HIDE_PART_NOTHING
+                    accidental[i]->picture := "flat"
+                    accidental[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    accidental[i]->pos_y := note_pos[current] - 16
+                    accidental[i]->hide := HIDE_PART_NOTHING
                     inc(j)
                 case 3
-                    natural[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
-                    natural[i]->pos_y := note_pos[current] - 10
-                    natural[i]->hide := HIDE_PART_NOTHING
+                    accidental[i]->picture := "natural"
+                    accidental[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
+                    accidental[i]->pos_y := note_pos[current] - 10
+                    accidental[i]->hide := HIDE_PART_NOTHING
                     inc(j)
             end select
             declare n_search := 0
