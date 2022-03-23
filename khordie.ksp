@@ -25,6 +25,11 @@ define SIG_POS_X := 18
 define NC := " n.c."
 define KEYTIME := 100000
 
+define COLOR_AVAILABLE   := $KEY_COLOR_TURQUOISE
+define COLOR_UNAVAILABLE := $KEY_COLOR_PLUM
+define COLOR_ACTIVE      := $KEY_COLOR_BLUE
+define COLOR_INACTIVE    := $KEY_COLOR_INACTIVE
+
 on init
     activate_logger("C:/Users/youngker/log.nka")
 
@@ -173,7 +178,7 @@ on init
 
     declare !scales[] := ("Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian", "Whole tone", "Pentatonic")
 
-    declare key_to_index[] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
+    declare key_to_index[] := (0, 7, 2, 9, 4, 11, 6, 1, 11, 6, 1, 8, 3, 10, 5)
 
                              {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11}
     declare scale_array[] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1,... {Ionian}
@@ -1116,29 +1121,26 @@ on controller
     if $CC_NUM = 64
         ignore_controller
         if %CC[64] = 127
-            // print("on controller 1: " & %CC[64])
             is_sustain := 1
             set_text(sustain, "Sustain")
             for i := 0 to NUM_OF_ALL_KEY - 1
                 sustain_notes[i] := 0xff
             end for
-            for i := 0 to NUM_OF_ALL_KEY - 1
-                if notes._note[i] # 0xff
-                    sustain_notes[notes._note[i]] := 1
-                end if
+            for i := 0 to notes.size - 1
+                j := notes.array[i]
+                sustain_notes[j] := j
             end for
         else
-            // print("on controller 2: " & %CC[64])
             is_sustain := 0
             set_text(sustain, "")
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
             call khordie_show_chord
             for i := 0 to NUM_OF_ALL_KEY - 2
-                if get_key_color(i) = KEY_COLOR_BLUE or get_key_color(i) = KEY_COLOR_WARM_YELLOW
-                    set_key_color(i, KEY_COLOR_WARM_YELLOW)
+                if get_key_color(i) = COLOR_ACTIVE or get_key_color(i) = COLOR_AVAILABLE
+                    set_key_color(i, COLOR_AVAILABLE)
                 else
-                    set_key_color(i, KEY_COLOR_INACTIVE)
+                    set_key_color(i, COLOR_INACTIVE)
                 end if
                 bnotes[i]->text := ""
             end for
@@ -1242,10 +1244,10 @@ end function
 
 function khordie_show_piano (event_note, release)
     if release = 0
-        if get_key_color(event_note) = KEY_COLOR_WARM_YELLOW or get_key_color(event_note) = KEY_COLOR_BLUE
-            set_key_color(event_note, KEY_COLOR_BLUE)
+        if get_key_color(event_note) = COLOR_AVAILABLE or get_key_color(event_note) = COLOR_ACTIVE
+            set_key_color(event_note, COLOR_ACTIVE)
         else
-            set_key_color(event_note, KEY_COLOR_RED)
+            set_key_color(event_note, COLOR_UNAVAILABLE)
         end if
         if keyoffset[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)] = 1 and note_pos[event_note*NOTE_INDEX+9] = 0
             bnotes[event_note]->pos_x := note_pos[event_note*NOTE_INDEX+8] - 4
@@ -1259,10 +1261,10 @@ function khordie_show_piano (event_note, release)
         end if
         bnotes[event_note]->text := keynotes[key*NUM_OF_NOTE+(event_note mod NUM_OF_NOTE)]
     else
-        if get_key_color(event_note) = KEY_COLOR_BLUE or get_key_color(event_note) = KEY_COLOR_WARM_YELLOW
-            set_key_color(event_note, KEY_COLOR_WARM_YELLOW)
+        if get_key_color(event_note) = COLOR_ACTIVE or get_key_color(event_note) = COLOR_AVAILABLE
+            set_key_color(event_note, COLOR_AVAILABLE)
         else
-            set_key_color(event_note, KEY_COLOR_INACTIVE)
+            set_key_color(event_note, COLOR_INACTIVE)
         end if
         bnotes[event_note]->text := ""
     end if
@@ -1514,12 +1516,12 @@ function khordie_get_name_by_key (note) -> result
     result := ckeynotes[i * NUM_OF_NOTE + (note mod NUM_OF_NOTE)]
 end function
 
-function khordie_set_color_piano (k, s)
-    for i := 20 to NUM_OF_ALL_KEY - 1
-        if scale_array[NUM_OF_NOTE * s + (i - key_to_index[k]) mod NUM_OF_NOTE] = 1
-            set_key_color(i, KEY_COLOR_WARM_YELLOW)
+function khordie_set_color_piano (key, scale)
+    for i := 0 to NUM_OF_ALL_KEY - 1
+        if scale_array[NUM_OF_NOTE * scale + (i + key_to_index[key]) mod NUM_OF_NOTE] = 1
+            set_key_color(i, COLOR_AVAILABLE)
         else
-            set_key_color(i, KEY_COLOR_INACTIVE)
+            set_key_color(i, COLOR_INACTIVE)
         end if
     end for
 end function
