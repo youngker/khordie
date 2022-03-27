@@ -1136,13 +1136,10 @@ on controller
             call khordie_update_active_notes
             call khordie_show_notes_on_staff
             call khordie_show_chord
-            for i := 0 to NUM_OF_ALL_KEY - 2
-                if get_key_color(i) = COLOR_ACTIVE or get_key_color(i) = COLOR_AVAILABLE
-                    set_key_color(i, COLOR_AVAILABLE)
-                else
-                    set_key_color(i, COLOR_INACTIVE)
+            for i := 0 to NUM_OF_ALL_KEY - 1
+                if sustain_notes[i] # 0xff
+                    khordie_show_piano(i, 1)
                 end if
-                bnotes[i]->text := ""
             end for
             for i := 0 to notes.size - 1
                 khordie_show_piano(notes.array[i], 0)
@@ -1281,15 +1278,15 @@ function khordie_show_notes_on_staff
     j := 0
     n := 0
 
-    for i := 0 to num_elements(notes._note) - 1
-        if notes._note[i] # 0xff
-            index := khordie_get_index_by_key(notes._note[i])
-            current := notes._note[i]*NOTE_INDEX+POS_Y+index
+    for i := 0 to notes.size - 1
+        if notes.array[i] # 0xff
+            index := khordie_get_index_by_key(notes.array[i])
+            current := notes.array[i]*NOTE_INDEX+POS_Y+index
             if i > 0
-                prev_index := khordie_get_index_by_key(notes._note[i-1])
-                previous := notes._note[i-1]*NOTE_INDEX+POS_Y+prev_index
+                prev_index := khordie_get_index_by_key(notes.array[i-1])
+                previous := notes.array[i-1]*NOTE_INDEX+POS_Y+prev_index
             end if
-            select signature[(notes._note[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
+            select signature[(notes.array[i] mod NUM_OF_NOTE)*NUM_OF_KEYS + key]
                 case 1
                     accidental[i]->picture := "sharp"
                     accidental[i]->pos_x := NOTE_POS_X - (position[j] * SIG_POS_X)
@@ -1328,7 +1325,7 @@ function khordie_show_notes_on_staff
                 note[i]->pos_x := NOTE_POS_X
             end if
 
-            declare pline := note_pos[notes._note[i]*NOTE_INDEX+index]
+            declare pline := note_pos[notes.array[i]*NOTE_INDEX+index]
             if pline # 0
                 declare pos := note_pos[current] + line_pos[pline]
                 if pos = line_pos_y[9]
