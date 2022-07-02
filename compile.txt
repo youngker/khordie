@@ -1,4 +1,4 @@
-{ Compiled on Sun Mar 20 16:58:32 2022 }
+{ Compiled on Sat Jul  2 17:27:24 2022 }
 on init
 declare $concat_it
 declare $concat_offset
@@ -13,7 +13,7 @@ declare $logger_previous_count
 declare @logger_filepath
 declare $LOGGER_ASYNC_ID
 @logger_filepath := "C:/Users/youngker/log.nka"
-declare %empty_notes[70] := (255)
+declare %empty_notes[128] := (255)
 declare %sustain_notes[128] := (255)
 declare $is_sustain := 0
 declare $key
@@ -30,7 +30,7 @@ make_perfview
 set_script_title("Khordie")
 set_ui_height_px(450)
 set_ui_color(16777215)
-declare %note[70]
+declare %note[128]
 declare ui_label $note0(1, 1) 
 declare ui_label $note1(1, 1) 
 declare ui_label $note2(1, 1) 
@@ -101,265 +101,214 @@ declare ui_label $note66(1, 1)
 declare ui_label $note67(1, 1) 
 declare ui_label $note68(1, 1) 
 declare ui_label $note69(1, 1) 
+declare ui_label $note70(1, 1) 
+declare ui_label $note71(1, 1) 
+declare ui_label $note72(1, 1) 
+declare ui_label $note73(1, 1) 
+declare ui_label $note74(1, 1) 
+declare ui_label $note75(1, 1) 
+declare ui_label $note76(1, 1) 
+declare ui_label $note77(1, 1) 
+declare ui_label $note78(1, 1) 
+declare ui_label $note79(1, 1) 
+declare ui_label $note80(1, 1) 
+declare ui_label $note81(1, 1) 
+declare ui_label $note82(1, 1) 
+declare ui_label $note83(1, 1) 
+declare ui_label $note84(1, 1) 
+declare ui_label $note85(1, 1) 
+declare ui_label $note86(1, 1) 
+declare ui_label $note87(1, 1) 
+declare ui_label $note88(1, 1) 
+declare ui_label $note89(1, 1) 
+declare ui_label $note90(1, 1) 
+declare ui_label $note91(1, 1) 
+declare ui_label $note92(1, 1) 
+declare ui_label $note93(1, 1) 
+declare ui_label $note94(1, 1) 
+declare ui_label $note95(1, 1) 
+declare ui_label $note96(1, 1) 
+declare ui_label $note97(1, 1) 
+declare ui_label $note98(1, 1) 
+declare ui_label $note99(1, 1) 
+declare ui_label $note100(1, 1) 
+declare ui_label $note101(1, 1) 
+declare ui_label $note102(1, 1) 
+declare ui_label $note103(1, 1) 
+declare ui_label $note104(1, 1) 
+declare ui_label $note105(1, 1) 
+declare ui_label $note106(1, 1) 
+declare ui_label $note107(1, 1) 
+declare ui_label $note108(1, 1) 
+declare ui_label $note109(1, 1) 
+declare ui_label $note110(1, 1) 
+declare ui_label $note111(1, 1) 
+declare ui_label $note112(1, 1) 
+declare ui_label $note113(1, 1) 
+declare ui_label $note114(1, 1) 
+declare ui_label $note115(1, 1) 
+declare ui_label $note116(1, 1) 
+declare ui_label $note117(1, 1) 
+declare ui_label $note118(1, 1) 
+declare ui_label $note119(1, 1) 
+declare ui_label $note120(1, 1) 
+declare ui_label $note121(1, 1) 
+declare ui_label $note122(1, 1) 
+declare ui_label $note123(1, 1) 
+declare ui_label $note124(1, 1) 
+declare ui_label $note125(1, 1) 
+declare ui_label $note126(1, 1) 
+declare ui_label $note127(1, 1) 
 $preproc_i := 0
-while ($preproc_i<=69)
+while ($preproc_i<=127)
 %note[$preproc_i] := get_ui_id($note0)+$preproc_i
 inc($preproc_i)
 end while
 $i := 0
-while ($i<70)
+while ($i<128)
 set_control_par_str(%note[$i],$CONTROL_PAR_PICTURE,"note")
 set_control_par_str(%note[$i],$CONTROL_PAR_TEXT,"")
 set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
 inc($i)
 end while
-declare %sharp[70]
-declare ui_label $sharp0(1, 1) 
-declare ui_label $sharp1(1, 1) 
-declare ui_label $sharp2(1, 1) 
-declare ui_label $sharp3(1, 1) 
-declare ui_label $sharp4(1, 1) 
-declare ui_label $sharp5(1, 1) 
-declare ui_label $sharp6(1, 1) 
-declare ui_label $sharp7(1, 1) 
-declare ui_label $sharp8(1, 1) 
-declare ui_label $sharp9(1, 1) 
-declare ui_label $sharp10(1, 1) 
-declare ui_label $sharp11(1, 1) 
-declare ui_label $sharp12(1, 1) 
-declare ui_label $sharp13(1, 1) 
-declare ui_label $sharp14(1, 1) 
-declare ui_label $sharp15(1, 1) 
-declare ui_label $sharp16(1, 1) 
-declare ui_label $sharp17(1, 1) 
-declare ui_label $sharp18(1, 1) 
-declare ui_label $sharp19(1, 1) 
-declare ui_label $sharp20(1, 1) 
-declare ui_label $sharp21(1, 1) 
-declare ui_label $sharp22(1, 1) 
-declare ui_label $sharp23(1, 1) 
-declare ui_label $sharp24(1, 1) 
-declare ui_label $sharp25(1, 1) 
-declare ui_label $sharp26(1, 1) 
-declare ui_label $sharp27(1, 1) 
-declare ui_label $sharp28(1, 1) 
-declare ui_label $sharp29(1, 1) 
-declare ui_label $sharp30(1, 1) 
-declare ui_label $sharp31(1, 1) 
-declare ui_label $sharp32(1, 1) 
-declare ui_label $sharp33(1, 1) 
-declare ui_label $sharp34(1, 1) 
-declare ui_label $sharp35(1, 1) 
-declare ui_label $sharp36(1, 1) 
-declare ui_label $sharp37(1, 1) 
-declare ui_label $sharp38(1, 1) 
-declare ui_label $sharp39(1, 1) 
-declare ui_label $sharp40(1, 1) 
-declare ui_label $sharp41(1, 1) 
-declare ui_label $sharp42(1, 1) 
-declare ui_label $sharp43(1, 1) 
-declare ui_label $sharp44(1, 1) 
-declare ui_label $sharp45(1, 1) 
-declare ui_label $sharp46(1, 1) 
-declare ui_label $sharp47(1, 1) 
-declare ui_label $sharp48(1, 1) 
-declare ui_label $sharp49(1, 1) 
-declare ui_label $sharp50(1, 1) 
-declare ui_label $sharp51(1, 1) 
-declare ui_label $sharp52(1, 1) 
-declare ui_label $sharp53(1, 1) 
-declare ui_label $sharp54(1, 1) 
-declare ui_label $sharp55(1, 1) 
-declare ui_label $sharp56(1, 1) 
-declare ui_label $sharp57(1, 1) 
-declare ui_label $sharp58(1, 1) 
-declare ui_label $sharp59(1, 1) 
-declare ui_label $sharp60(1, 1) 
-declare ui_label $sharp61(1, 1) 
-declare ui_label $sharp62(1, 1) 
-declare ui_label $sharp63(1, 1) 
-declare ui_label $sharp64(1, 1) 
-declare ui_label $sharp65(1, 1) 
-declare ui_label $sharp66(1, 1) 
-declare ui_label $sharp67(1, 1) 
-declare ui_label $sharp68(1, 1) 
-declare ui_label $sharp69(1, 1) 
+declare %accidental[128]
+declare ui_label $accidental0(1, 1) 
+declare ui_label $accidental1(1, 1) 
+declare ui_label $accidental2(1, 1) 
+declare ui_label $accidental3(1, 1) 
+declare ui_label $accidental4(1, 1) 
+declare ui_label $accidental5(1, 1) 
+declare ui_label $accidental6(1, 1) 
+declare ui_label $accidental7(1, 1) 
+declare ui_label $accidental8(1, 1) 
+declare ui_label $accidental9(1, 1) 
+declare ui_label $accidental10(1, 1) 
+declare ui_label $accidental11(1, 1) 
+declare ui_label $accidental12(1, 1) 
+declare ui_label $accidental13(1, 1) 
+declare ui_label $accidental14(1, 1) 
+declare ui_label $accidental15(1, 1) 
+declare ui_label $accidental16(1, 1) 
+declare ui_label $accidental17(1, 1) 
+declare ui_label $accidental18(1, 1) 
+declare ui_label $accidental19(1, 1) 
+declare ui_label $accidental20(1, 1) 
+declare ui_label $accidental21(1, 1) 
+declare ui_label $accidental22(1, 1) 
+declare ui_label $accidental23(1, 1) 
+declare ui_label $accidental24(1, 1) 
+declare ui_label $accidental25(1, 1) 
+declare ui_label $accidental26(1, 1) 
+declare ui_label $accidental27(1, 1) 
+declare ui_label $accidental28(1, 1) 
+declare ui_label $accidental29(1, 1) 
+declare ui_label $accidental30(1, 1) 
+declare ui_label $accidental31(1, 1) 
+declare ui_label $accidental32(1, 1) 
+declare ui_label $accidental33(1, 1) 
+declare ui_label $accidental34(1, 1) 
+declare ui_label $accidental35(1, 1) 
+declare ui_label $accidental36(1, 1) 
+declare ui_label $accidental37(1, 1) 
+declare ui_label $accidental38(1, 1) 
+declare ui_label $accidental39(1, 1) 
+declare ui_label $accidental40(1, 1) 
+declare ui_label $accidental41(1, 1) 
+declare ui_label $accidental42(1, 1) 
+declare ui_label $accidental43(1, 1) 
+declare ui_label $accidental44(1, 1) 
+declare ui_label $accidental45(1, 1) 
+declare ui_label $accidental46(1, 1) 
+declare ui_label $accidental47(1, 1) 
+declare ui_label $accidental48(1, 1) 
+declare ui_label $accidental49(1, 1) 
+declare ui_label $accidental50(1, 1) 
+declare ui_label $accidental51(1, 1) 
+declare ui_label $accidental52(1, 1) 
+declare ui_label $accidental53(1, 1) 
+declare ui_label $accidental54(1, 1) 
+declare ui_label $accidental55(1, 1) 
+declare ui_label $accidental56(1, 1) 
+declare ui_label $accidental57(1, 1) 
+declare ui_label $accidental58(1, 1) 
+declare ui_label $accidental59(1, 1) 
+declare ui_label $accidental60(1, 1) 
+declare ui_label $accidental61(1, 1) 
+declare ui_label $accidental62(1, 1) 
+declare ui_label $accidental63(1, 1) 
+declare ui_label $accidental64(1, 1) 
+declare ui_label $accidental65(1, 1) 
+declare ui_label $accidental66(1, 1) 
+declare ui_label $accidental67(1, 1) 
+declare ui_label $accidental68(1, 1) 
+declare ui_label $accidental69(1, 1) 
+declare ui_label $accidental70(1, 1) 
+declare ui_label $accidental71(1, 1) 
+declare ui_label $accidental72(1, 1) 
+declare ui_label $accidental73(1, 1) 
+declare ui_label $accidental74(1, 1) 
+declare ui_label $accidental75(1, 1) 
+declare ui_label $accidental76(1, 1) 
+declare ui_label $accidental77(1, 1) 
+declare ui_label $accidental78(1, 1) 
+declare ui_label $accidental79(1, 1) 
+declare ui_label $accidental80(1, 1) 
+declare ui_label $accidental81(1, 1) 
+declare ui_label $accidental82(1, 1) 
+declare ui_label $accidental83(1, 1) 
+declare ui_label $accidental84(1, 1) 
+declare ui_label $accidental85(1, 1) 
+declare ui_label $accidental86(1, 1) 
+declare ui_label $accidental87(1, 1) 
+declare ui_label $accidental88(1, 1) 
+declare ui_label $accidental89(1, 1) 
+declare ui_label $accidental90(1, 1) 
+declare ui_label $accidental91(1, 1) 
+declare ui_label $accidental92(1, 1) 
+declare ui_label $accidental93(1, 1) 
+declare ui_label $accidental94(1, 1) 
+declare ui_label $accidental95(1, 1) 
+declare ui_label $accidental96(1, 1) 
+declare ui_label $accidental97(1, 1) 
+declare ui_label $accidental98(1, 1) 
+declare ui_label $accidental99(1, 1) 
+declare ui_label $accidental100(1, 1) 
+declare ui_label $accidental101(1, 1) 
+declare ui_label $accidental102(1, 1) 
+declare ui_label $accidental103(1, 1) 
+declare ui_label $accidental104(1, 1) 
+declare ui_label $accidental105(1, 1) 
+declare ui_label $accidental106(1, 1) 
+declare ui_label $accidental107(1, 1) 
+declare ui_label $accidental108(1, 1) 
+declare ui_label $accidental109(1, 1) 
+declare ui_label $accidental110(1, 1) 
+declare ui_label $accidental111(1, 1) 
+declare ui_label $accidental112(1, 1) 
+declare ui_label $accidental113(1, 1) 
+declare ui_label $accidental114(1, 1) 
+declare ui_label $accidental115(1, 1) 
+declare ui_label $accidental116(1, 1) 
+declare ui_label $accidental117(1, 1) 
+declare ui_label $accidental118(1, 1) 
+declare ui_label $accidental119(1, 1) 
+declare ui_label $accidental120(1, 1) 
+declare ui_label $accidental121(1, 1) 
+declare ui_label $accidental122(1, 1) 
+declare ui_label $accidental123(1, 1) 
+declare ui_label $accidental124(1, 1) 
+declare ui_label $accidental125(1, 1) 
+declare ui_label $accidental126(1, 1) 
+declare ui_label $accidental127(1, 1) 
 $preproc_i := 0
-while ($preproc_i<=69)
-%sharp[$preproc_i] := get_ui_id($sharp0)+$preproc_i
+while ($preproc_i<=127)
+%accidental[$preproc_i] := get_ui_id($accidental0)+$preproc_i
 inc($preproc_i)
 end while
 $i := 0
-while ($i<70)
-set_control_par_str(%sharp[$i],$CONTROL_PAR_PICTURE,"sharp")
-set_control_par_str(%sharp[$i],$CONTROL_PAR_TEXT,"")
-set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-inc($i)
-end while
-declare %flat[70]
-declare ui_label $flat0(1, 1) 
-declare ui_label $flat1(1, 1) 
-declare ui_label $flat2(1, 1) 
-declare ui_label $flat3(1, 1) 
-declare ui_label $flat4(1, 1) 
-declare ui_label $flat5(1, 1) 
-declare ui_label $flat6(1, 1) 
-declare ui_label $flat7(1, 1) 
-declare ui_label $flat8(1, 1) 
-declare ui_label $flat9(1, 1) 
-declare ui_label $flat10(1, 1) 
-declare ui_label $flat11(1, 1) 
-declare ui_label $flat12(1, 1) 
-declare ui_label $flat13(1, 1) 
-declare ui_label $flat14(1, 1) 
-declare ui_label $flat15(1, 1) 
-declare ui_label $flat16(1, 1) 
-declare ui_label $flat17(1, 1) 
-declare ui_label $flat18(1, 1) 
-declare ui_label $flat19(1, 1) 
-declare ui_label $flat20(1, 1) 
-declare ui_label $flat21(1, 1) 
-declare ui_label $flat22(1, 1) 
-declare ui_label $flat23(1, 1) 
-declare ui_label $flat24(1, 1) 
-declare ui_label $flat25(1, 1) 
-declare ui_label $flat26(1, 1) 
-declare ui_label $flat27(1, 1) 
-declare ui_label $flat28(1, 1) 
-declare ui_label $flat29(1, 1) 
-declare ui_label $flat30(1, 1) 
-declare ui_label $flat31(1, 1) 
-declare ui_label $flat32(1, 1) 
-declare ui_label $flat33(1, 1) 
-declare ui_label $flat34(1, 1) 
-declare ui_label $flat35(1, 1) 
-declare ui_label $flat36(1, 1) 
-declare ui_label $flat37(1, 1) 
-declare ui_label $flat38(1, 1) 
-declare ui_label $flat39(1, 1) 
-declare ui_label $flat40(1, 1) 
-declare ui_label $flat41(1, 1) 
-declare ui_label $flat42(1, 1) 
-declare ui_label $flat43(1, 1) 
-declare ui_label $flat44(1, 1) 
-declare ui_label $flat45(1, 1) 
-declare ui_label $flat46(1, 1) 
-declare ui_label $flat47(1, 1) 
-declare ui_label $flat48(1, 1) 
-declare ui_label $flat49(1, 1) 
-declare ui_label $flat50(1, 1) 
-declare ui_label $flat51(1, 1) 
-declare ui_label $flat52(1, 1) 
-declare ui_label $flat53(1, 1) 
-declare ui_label $flat54(1, 1) 
-declare ui_label $flat55(1, 1) 
-declare ui_label $flat56(1, 1) 
-declare ui_label $flat57(1, 1) 
-declare ui_label $flat58(1, 1) 
-declare ui_label $flat59(1, 1) 
-declare ui_label $flat60(1, 1) 
-declare ui_label $flat61(1, 1) 
-declare ui_label $flat62(1, 1) 
-declare ui_label $flat63(1, 1) 
-declare ui_label $flat64(1, 1) 
-declare ui_label $flat65(1, 1) 
-declare ui_label $flat66(1, 1) 
-declare ui_label $flat67(1, 1) 
-declare ui_label $flat68(1, 1) 
-declare ui_label $flat69(1, 1) 
-$preproc_i := 0
-while ($preproc_i<=69)
-%flat[$preproc_i] := get_ui_id($flat0)+$preproc_i
-inc($preproc_i)
-end while
-$i := 0
-while ($i<70)
-set_control_par_str(%flat[$i],$CONTROL_PAR_PICTURE,"flat")
-set_control_par_str(%flat[$i],$CONTROL_PAR_TEXT,"")
-set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-inc($i)
-end while
-declare %natural[70]
-declare ui_label $natural0(1, 1) 
-declare ui_label $natural1(1, 1) 
-declare ui_label $natural2(1, 1) 
-declare ui_label $natural3(1, 1) 
-declare ui_label $natural4(1, 1) 
-declare ui_label $natural5(1, 1) 
-declare ui_label $natural6(1, 1) 
-declare ui_label $natural7(1, 1) 
-declare ui_label $natural8(1, 1) 
-declare ui_label $natural9(1, 1) 
-declare ui_label $natural10(1, 1) 
-declare ui_label $natural11(1, 1) 
-declare ui_label $natural12(1, 1) 
-declare ui_label $natural13(1, 1) 
-declare ui_label $natural14(1, 1) 
-declare ui_label $natural15(1, 1) 
-declare ui_label $natural16(1, 1) 
-declare ui_label $natural17(1, 1) 
-declare ui_label $natural18(1, 1) 
-declare ui_label $natural19(1, 1) 
-declare ui_label $natural20(1, 1) 
-declare ui_label $natural21(1, 1) 
-declare ui_label $natural22(1, 1) 
-declare ui_label $natural23(1, 1) 
-declare ui_label $natural24(1, 1) 
-declare ui_label $natural25(1, 1) 
-declare ui_label $natural26(1, 1) 
-declare ui_label $natural27(1, 1) 
-declare ui_label $natural28(1, 1) 
-declare ui_label $natural29(1, 1) 
-declare ui_label $natural30(1, 1) 
-declare ui_label $natural31(1, 1) 
-declare ui_label $natural32(1, 1) 
-declare ui_label $natural33(1, 1) 
-declare ui_label $natural34(1, 1) 
-declare ui_label $natural35(1, 1) 
-declare ui_label $natural36(1, 1) 
-declare ui_label $natural37(1, 1) 
-declare ui_label $natural38(1, 1) 
-declare ui_label $natural39(1, 1) 
-declare ui_label $natural40(1, 1) 
-declare ui_label $natural41(1, 1) 
-declare ui_label $natural42(1, 1) 
-declare ui_label $natural43(1, 1) 
-declare ui_label $natural44(1, 1) 
-declare ui_label $natural45(1, 1) 
-declare ui_label $natural46(1, 1) 
-declare ui_label $natural47(1, 1) 
-declare ui_label $natural48(1, 1) 
-declare ui_label $natural49(1, 1) 
-declare ui_label $natural50(1, 1) 
-declare ui_label $natural51(1, 1) 
-declare ui_label $natural52(1, 1) 
-declare ui_label $natural53(1, 1) 
-declare ui_label $natural54(1, 1) 
-declare ui_label $natural55(1, 1) 
-declare ui_label $natural56(1, 1) 
-declare ui_label $natural57(1, 1) 
-declare ui_label $natural58(1, 1) 
-declare ui_label $natural59(1, 1) 
-declare ui_label $natural60(1, 1) 
-declare ui_label $natural61(1, 1) 
-declare ui_label $natural62(1, 1) 
-declare ui_label $natural63(1, 1) 
-declare ui_label $natural64(1, 1) 
-declare ui_label $natural65(1, 1) 
-declare ui_label $natural66(1, 1) 
-declare ui_label $natural67(1, 1) 
-declare ui_label $natural68(1, 1) 
-declare ui_label $natural69(1, 1) 
-$preproc_i := 0
-while ($preproc_i<=69)
-%natural[$preproc_i] := get_ui_id($natural0)+$preproc_i
-inc($preproc_i)
-end while
-$i := 0
-while ($i<70)
-set_control_par_str(%natural[$i],$CONTROL_PAR_PICTURE,"natural")
-set_control_par_str(%natural[$i],$CONTROL_PAR_TEXT,"")
-set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+while ($i<128)
+set_control_par_str(%accidental[$i],$CONTROL_PAR_TEXT,"")
+set_control_par(%accidental[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
 inc($i)
 end while
 declare %_key_pos[2*(15-1)*2] := (20+50, 115+23, 20+57, 115+2, 20+64, 115+30, 20+71, 115+9, 20+78, 115+37, 20+85, 115+16, 20+92, 115+44, 20+50, 115+125, 20+57, 115+104, 20+64, 115+132, 20+71, 115+111, 20+78, 115+139, 20+85, 115+118, 20+92, 115+146, 20+50, 115+1, 20+57, 115+22, 20+64, 115-6, 20+71, 115+15, 20+78, 115+37, 20+85, 115+8, 20+92, ...
@@ -653,7 +602,7 @@ set_control_par(get_ui_id($sustain),$CONTROL_PAR_WIDTH,70)
 set_control_par(get_ui_id($sustain),$CONTROL_PAR_HEIGHT,30)
 set_text($sustain,"")
 hide_part($sustain,$HIDE_PART_BG)
-move_control_px($sustain,0,350)
+move_control_px($sustain,20,350)
 declare ui_label $key_name(1, 1) 
 set_control_par(get_ui_id($key_name),$CONTROL_PAR_FONT_TYPE,get_font_id("sfont"))
 set_control_par(get_ui_id($key_name),$CONTROL_PAR_WIDTH,110)
@@ -702,7 +651,7 @@ declare !scales[9]
 !scales[7] := "Whole tone"
 !scales[8] := "Pentatonic"
 declare const $scales__SIZE := 9
-declare %key_to_index[15] := (0, 5, 10, 3, 8, 1, 6, 11, 1, 6, 11, 4, 9, 2, 7)
+declare %key_to_index[15] := (0, 7, 2, 9, 4, 11, 6, 1, 11, 6, 1, 8, 3, 10, 5)
 declare const $key_to_index__SIZE := 15
 declare %scale_array[108] := (1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, ...
 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, ...
@@ -1400,10 +1349,10 @@ declare %note_pos[128*10] := (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-declare %position[70] := (1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, ...
+declare %position[128] := (1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, 2, 3, 2, 1, ...
 2, 3, 2, 1, 2, 3, 2, 1, 2)
 declare const $MAX_CHORDS := 4096
-declare %notes___note[70] := (255)
+declare %notes___note[128] := (255)
 declare $notes__size := 0
 declare $notes___main_chord
 declare %notes___top[6]
@@ -1432,10 +1381,10 @@ inc($j)
 end while
 inc($i)
 end while
-$i := 20
+$i := 0
 while ($i<128)
-if (%scale_array[12*0+(($i-%key_to_index[0]) mod 12)]=1)
-set_key_color($i,$KEY_COLOR_WARM_YELLOW)
+if (%scale_array[12*0+(($i+%key_to_index[0]) mod 12)]=1)
+set_key_color($i,$KEY_COLOR_TURQUOISE)
 else
 set_key_color($i,$KEY_COLOR_INACTIVE)
 end if
@@ -1465,6 +1414,187 @@ declare $_n_search := 0
 declare $_pline
 declare $_pos
 end on
+function khordie_update_active_notes
+$concat_it := 0
+while ($concat_it<num_elements(%empty_notes))
+%notes___note[$concat_it] := %empty_notes[$concat_it]
+inc($concat_it)
+end while
+$notes__size := 0
+if ($is_sustain=1)
+$i := 0
+while ($i<128)
+if (%sustain_notes[$i] # 255)
+%notes___note[$notes__size] := $i
+inc($notes__size)
+end if
+inc($i)
+end while
+else
+$i := 0
+while ($i<128)
+if (%KEY_DOWN[$i]=1)
+%notes___note[$notes__size] := $i
+inc($notes__size)
+end if
+inc($i)
+end while
+end if
+end function
+function khordie_remove_all_notes
+$i := 0
+while ($i<128)
+set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+set_control_par(%accidental[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+inc($i)
+end while
+$i := 0
+while ($i<16)
+set_control_par(%line[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+set_control_par(%line2[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+inc($i)
+end while
+end function
+function khordie_show_notes_on_staff
+call khordie_remove_all_notes
+$_index := 0
+$_prev_index := 0
+$_current := 0
+$_previous := 0
+$_long := 0
+$j := 0
+$n := 0
+$i := 0
+while ($i<$notes__size)
+if (%notes___note[$i] # 255)
+select ($key)
+case 0
+if (%signature[%notes___note[$i] mod 12*15+$key]=1)
+$_index := 1
+else
+$_index := 0
+end if
+case 1 to 7
+if (%signature[%notes___note[$i] mod 12*15+$key]=4)
+$_index := 2
+else
+$_index := 0
+end if
+case 8 to 14
+if (%signature[%notes___note[$i] mod 12*15+$key]=5)
+$_index := 3
+else
+$_index := 1
+end if
+end select
+$_current := %notes___note[$i]*10+4+$_index
+if ($i>0)
+select ($key)
+case 0
+if (%signature[%notes___note[$i-1] mod 12*15+$key]=1)
+$_prev_index := 1
+else
+$_prev_index := 0
+end if
+case 1 to 7
+if (%signature[%notes___note[$i-1] mod 12*15+$key]=4)
+$_prev_index := 2
+else
+$_prev_index := 0
+end if
+case 8 to 14
+if (%signature[%notes___note[$i-1] mod 12*15+$key]=5)
+$_prev_index := 3
+else
+$_prev_index := 1
+end if
+end select
+$_previous := %notes___note[$i-1]*10+4+$_prev_index
+end if
+select (%signature[%notes___note[$i] mod 12*15+$key])
+case 1
+set_control_par_str(%accidental[$i],$CONTROL_PAR_PICTURE,"sharp")
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-10)
+set_control_par(%accidental[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+inc($j)
+case 2
+set_control_par_str(%accidental[$i],$CONTROL_PAR_PICTURE,"flat")
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-16)
+set_control_par(%accidental[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+inc($j)
+case 3
+set_control_par_str(%accidental[$i],$CONTROL_PAR_PICTURE,"natural")
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
+set_control_par(%accidental[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-10)
+set_control_par(%accidental[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+inc($j)
+end select
+$_n_search := 0
+if ($i>0 and (%note_pos[$_previous]=%note_pos[$_current]))
+set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+20)
+$_long := 1
+else
+if ($i>0 and (%note_pos[$_previous]=(%note_pos[$_current]+7)))
+$k := $i
+while ($k>=0)
+if (get_control_par(%note[$k],$CONTROL_PAR_POS_Y)=(%note_pos[$_current]+7) and (get_control_par(%note[$k],$CONTROL_PAR_POS_X)=200))
+$_n_search := 1
+end if
+dec($k)
+end while
+if ($_n_search=1)
+set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+12)
+else
+set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
+end if
+else
+set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
+end if
+end if
+$_pline := %note_pos[%notes___note[$i]*10+$_index]
+if ($_pline # 0)
+$_pos := %note_pos[$_current]+%_line_pos[$_pline]
+if ($_pos=%line_pos_y[9])
+set_control_par(%line[9],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+if ($_long=1)
+set_control_par(%line2[9],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+end if
+else
+if (%line_pos_y[0]<=$_pos and ($_pos<=%line_pos_y[8]))
+$l := 0
+while ($l<=8)
+if (%note_pos[$_current]+%_line_pos[$_pline]<=%line_pos_y[$l])
+set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+if ($_long=1)
+set_control_par(%line2[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+end if
+end if
+inc($l)
+end while
+else
+if (%line_pos_y[10]<=$_pos and ($_pos<=%line_pos_y[15]))
+$l := 10
+while ($l<=15)
+if (%note_pos[$_current]+%_line_pos[$_pline]>=%line_pos_y[$l])
+set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+if ($_long=1)
+set_control_par(%line2[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+end if
+end if
+inc($l)
+end while
+end if
+end if
+end if
+end if
+set_control_par(%note[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current])
+set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+end if
+inc($i)
+end while
+end function
 function khordie_remove_all_chord
 set_text($main,"")
 set_text($sub,"")
@@ -2185,186 +2315,6 @@ end if
 end if
 end if
 end function
-function khordie_update_active_notes
-$concat_it := 0
-while ($concat_it<num_elements(%empty_notes))
-%notes___note[$concat_it] := %empty_notes[$concat_it]
-inc($concat_it)
-end while
-$notes__size := 0
-if ($is_sustain=1)
-$i := 0
-while ($i<128)
-if (%sustain_notes[$i] # 255)
-%notes___note[$notes__size] := $i
-inc($notes__size)
-end if
-inc($i)
-end while
-else
-$i := 0
-while ($i<128)
-if (%KEY_DOWN[$i]=1)
-%notes___note[$notes__size] := $i
-inc($notes__size)
-end if
-inc($i)
-end while
-end if
-end function
-function khordie_remove_all_notes
-$i := 0
-while ($i<70)
-set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-inc($i)
-end while
-$i := 0
-while ($i<16)
-set_control_par(%line[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-set_control_par(%line2[$i],$CONTROL_PAR_HIDE,$HIDE_PART_BG)
-inc($i)
-end while
-end function
-function khordie_show_notes_on_staff
-call khordie_remove_all_notes
-$_index := 0
-$_prev_index := 0
-$_current := 0
-$_previous := 0
-$_long := 0
-$j := 0
-$n := 0
-$i := 0
-while ($i<num_elements(%notes___note))
-if (%notes___note[$i] # 255)
-select ($key)
-case 0
-if (%signature[%notes___note[$i] mod 12*15+$key]=1)
-$_index := 1
-else
-$_index := 0
-end if
-case 1 to 7
-if (%signature[%notes___note[$i] mod 12*15+$key]=4)
-$_index := 2
-else
-$_index := 0
-end if
-case 8 to 14
-if (%signature[%notes___note[$i] mod 12*15+$key]=5)
-$_index := 3
-else
-$_index := 1
-end if
-end select
-$_current := %notes___note[$i]*10+4+$_index
-if ($i>0)
-select ($key)
-case 0
-if (%signature[%notes___note[$i-1] mod 12*15+$key]=1)
-$_prev_index := 1
-else
-$_prev_index := 0
-end if
-case 1 to 7
-if (%signature[%notes___note[$i-1] mod 12*15+$key]=4)
-$_prev_index := 2
-else
-$_prev_index := 0
-end if
-case 8 to 14
-if (%signature[%notes___note[$i-1] mod 12*15+$key]=5)
-$_prev_index := 3
-else
-$_prev_index := 1
-end if
-end select
-$_previous := %notes___note[$i-1]*10+4+$_prev_index
-end if
-select (%signature[%notes___note[$i] mod 12*15+$key])
-case 1
-set_control_par(%sharp[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
-set_control_par(%sharp[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-10)
-set_control_par(%sharp[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-inc($j)
-case 2
-set_control_par(%flat[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
-set_control_par(%flat[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-16)
-set_control_par(%flat[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-inc($j)
-case 3
-set_control_par(%natural[$i],$CONTROL_PAR_POS_X,200-(%position[$j]*18))
-set_control_par(%natural[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current]-10)
-set_control_par(%natural[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-inc($j)
-end select
-$_n_search := 0
-if ($i>0 and (%note_pos[$_previous]=%note_pos[$_current]))
-set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+20)
-$_long := 1
-else
-if ($i>0 and (%note_pos[$_previous]=(%note_pos[$_current]+7)))
-$k := $i
-while ($k>=0)
-if (get_control_par(%note[$k],$CONTROL_PAR_POS_Y)=(%note_pos[$_current]+7) and (get_control_par(%note[$k],$CONTROL_PAR_POS_X)=200))
-$_n_search := 1
-end if
-dec($k)
-end while
-if ($_n_search=1)
-set_control_par(%note[$i],$CONTROL_PAR_POS_X,get_control_par(%note[$i-1],$CONTROL_PAR_POS_X)+12)
-else
-set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
-end if
-else
-set_control_par(%note[$i],$CONTROL_PAR_POS_X,200)
-end if
-end if
-$_pline := %note_pos[%notes___note[$i]*10+$_index]
-if ($_pline # 0)
-$_pos := %note_pos[$_current]+%_line_pos[$_pline]
-if ($_pos=%line_pos_y[9])
-set_control_par(%line[9],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-if ($_long=1)
-set_control_par(%line2[9],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-end if
-else
-if (%line_pos_y[0]<=$_pos and ($_pos<=%line_pos_y[8]))
-$l := 0
-while ($l<=8)
-if (%note_pos[$_current]+%_line_pos[$_pline]<=%line_pos_y[$l])
-set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-if ($_long=1)
-set_control_par(%line2[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-end if
-end if
-inc($l)
-end while
-else
-if (%line_pos_y[10]<=$_pos and ($_pos<=%line_pos_y[15]))
-$l := 10
-while ($l<=15)
-if (%note_pos[$_current]+%_line_pos[$_pline]>=%line_pos_y[$l])
-set_control_par(%line[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-if ($_long=1)
-set_control_par(%line2[$l],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-end if
-end if
-inc($l)
-end while
-end if
-end if
-end if
-end if
-set_control_par(%note[$i],$CONTROL_PAR_POS_Y,%note_pos[$_current])
-set_control_par(%note[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
-end if
-inc($i)
-end while
-end function
 on note
 ignore_event($EVENT_ID)
 if ($is_sustain=1)
@@ -2374,19 +2324,11 @@ call khordie_update_active_notes
 call khordie_show_notes_on_staff
 call khordie_show_chord
 if (0=0)
-if (get_key_color($EVENT_NOTE)=$KEY_COLOR_WARM_YELLOW or (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE))
+if (get_key_color($EVENT_NOTE)=$KEY_COLOR_TURQUOISE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE))
 set_key_color($EVENT_NOTE,$KEY_COLOR_BLUE)
 else
-set_key_color($EVENT_NOTE,$KEY_COLOR_RED)
+set_key_color($EVENT_NOTE,$KEY_COLOR_PLUM)
 end if
-else
-if (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_WARM_YELLOW))
-set_key_color($EVENT_NOTE,$KEY_COLOR_WARM_YELLOW)
-else
-set_key_color($EVENT_NOTE,$KEY_COLOR_INACTIVE)
-end if
-end if
-if (0=0)
 if (%keyoffset[$key*12+($EVENT_NOTE mod 12)]=1 and (%note_pos[$EVENT_NOTE*10+9]=0))
 set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_X,%note_pos[$EVENT_NOTE*10+8]-4)
 else
@@ -2399,6 +2341,11 @@ set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_Y,430-10)
 end if
 set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,!keynotes[$key*12+($EVENT_NOTE mod 12)])
 else
+if (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_TURQUOISE))
+set_key_color($EVENT_NOTE,$KEY_COLOR_TURQUOISE)
+else
+set_key_color($EVENT_NOTE,$KEY_COLOR_INACTIVE)
+end if
 set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,"")
 end if
 end on
@@ -2409,19 +2356,11 @@ call khordie_show_notes_on_staff
 call khordie_show_chord
 if ($is_sustain=0)
 if (1=0)
-if (get_key_color($EVENT_NOTE)=$KEY_COLOR_WARM_YELLOW or (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE))
+if (get_key_color($EVENT_NOTE)=$KEY_COLOR_TURQUOISE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE))
 set_key_color($EVENT_NOTE,$KEY_COLOR_BLUE)
 else
-set_key_color($EVENT_NOTE,$KEY_COLOR_RED)
+set_key_color($EVENT_NOTE,$KEY_COLOR_PLUM)
 end if
-else
-if (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_WARM_YELLOW))
-set_key_color($EVENT_NOTE,$KEY_COLOR_WARM_YELLOW)
-else
-set_key_color($EVENT_NOTE,$KEY_COLOR_INACTIVE)
-end if
-end if
-if (1=0)
 if (%keyoffset[$key*12+($EVENT_NOTE mod 12)]=1 and (%note_pos[$EVENT_NOTE*10+9]=0))
 set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_X,%note_pos[$EVENT_NOTE*10+8]-4)
 else
@@ -2434,6 +2373,11 @@ set_control_par(%bnotes[$EVENT_NOTE],$CONTROL_PAR_POS_Y,430-10)
 end if
 set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,!keynotes[$key*12+($EVENT_NOTE mod 12)])
 else
+if (get_key_color($EVENT_NOTE)=$KEY_COLOR_BLUE or (get_key_color($EVENT_NOTE)=$KEY_COLOR_TURQUOISE))
+set_key_color($EVENT_NOTE,$KEY_COLOR_TURQUOISE)
+else
+set_key_color($EVENT_NOTE,$KEY_COLOR_INACTIVE)
+end if
 set_control_par_str(%bnotes[$EVENT_NOTE],$CONTROL_PAR_TEXT,"")
 end if
 end if
@@ -2450,10 +2394,9 @@ while ($i<128)
 inc($i)
 end while
 $i := 0
-while ($i<70)
-if (%notes___note[$i] # 255)
-%sustain_notes[%notes___note[$i]] := 1
-end if
+while ($i<$notes__size)
+$j := %notes___note[$i]
+%sustain_notes[$j] := $j
 inc($i)
 end while
 else
@@ -2461,15 +2404,65 @@ $is_sustain := 0
 set_text($sustain,"")
 call khordie_update_active_notes
 call khordie_show_notes_on_staff
-call khordie_remove_all_chord
+call khordie_show_chord
 $i := 0
-while ($i<=(128-2))
-if (get_key_color($i)=$KEY_COLOR_BLUE or (get_key_color($i)=$KEY_COLOR_WARM_YELLOW))
-set_key_color($i,$KEY_COLOR_WARM_YELLOW)
+while ($i<128)
+if (%sustain_notes[$i] # 255)
+if (1=0)
+if (get_key_color($i)=$KEY_COLOR_TURQUOISE or (get_key_color($i)=$KEY_COLOR_BLUE))
+set_key_color($i,$KEY_COLOR_BLUE)
+else
+set_key_color($i,$KEY_COLOR_PLUM)
+end if
+if (%keyoffset[$key*12+($i mod 12)]=1 and (%note_pos[$i*10+9]=0))
+set_control_par(%bnotes[$i],$CONTROL_PAR_POS_X,%note_pos[$i*10+8]-4)
+else
+set_control_par(%bnotes[$i],$CONTROL_PAR_POS_X,%note_pos[$i*10+8])
+end if
+if (%note_pos[$i*10+9]=0)
+set_control_par(%bnotes[$i],$CONTROL_PAR_POS_Y,430)
+else
+set_control_par(%bnotes[$i],$CONTROL_PAR_POS_Y,430-10)
+end if
+set_control_par_str(%bnotes[$i],$CONTROL_PAR_TEXT,!keynotes[$key*12+($i mod 12)])
+else
+if (get_key_color($i)=$KEY_COLOR_BLUE or (get_key_color($i)=$KEY_COLOR_TURQUOISE))
+set_key_color($i,$KEY_COLOR_TURQUOISE)
 else
 set_key_color($i,$KEY_COLOR_INACTIVE)
 end if
 set_control_par_str(%bnotes[$i],$CONTROL_PAR_TEXT,"")
+end if
+end if
+inc($i)
+end while
+$i := 0
+while ($i<$notes__size)
+if (0=0)
+if (get_key_color(%notes___note[$i])=$KEY_COLOR_TURQUOISE or (get_key_color(%notes___note[$i])=$KEY_COLOR_BLUE))
+set_key_color(%notes___note[$i],$KEY_COLOR_BLUE)
+else
+set_key_color(%notes___note[$i],$KEY_COLOR_PLUM)
+end if
+if (%keyoffset[$key*12+(%notes___note[$i] mod 12)]=1 and (%note_pos[%notes___note[$i]*10+9]=0))
+set_control_par(%bnotes[%notes___note[$i]],$CONTROL_PAR_POS_X,%note_pos[%notes___note[$i]*10+8]-4)
+else
+set_control_par(%bnotes[%notes___note[$i]],$CONTROL_PAR_POS_X,%note_pos[%notes___note[$i]*10+8])
+end if
+if (%note_pos[%notes___note[$i]*10+9]=0)
+set_control_par(%bnotes[%notes___note[$i]],$CONTROL_PAR_POS_Y,430)
+else
+set_control_par(%bnotes[%notes___note[$i]],$CONTROL_PAR_POS_Y,430-10)
+end if
+set_control_par_str(%bnotes[%notes___note[$i]],$CONTROL_PAR_TEXT,!keynotes[$key*12+(%notes___note[$i] mod 12)])
+else
+if (get_key_color(%notes___note[$i])=$KEY_COLOR_BLUE or (get_key_color(%notes___note[$i])=$KEY_COLOR_TURQUOISE))
+set_key_color(%notes___note[$i],$KEY_COLOR_TURQUOISE)
+else
+set_key_color(%notes___note[$i],$KEY_COLOR_INACTIVE)
+end if
+set_control_par_str(%bnotes[%notes___note[$i]],$CONTROL_PAR_TEXT,"")
+end if
 inc($i)
 end while
 end if
@@ -2478,10 +2471,10 @@ end on
 on ui_control($key_knob)
 $key := get_control_par(get_ui_id($key_knob),$CONTROL_PAR_VALUE)
 $scale := get_control_par(get_ui_id($scale_knob),$CONTROL_PAR_VALUE)
-$i := 20
+$i := 0
 while ($i<128)
-if (%scale_array[12*$scale+(($i-%key_to_index[$key]) mod 12)]=1)
-set_key_color($i,$KEY_COLOR_WARM_YELLOW)
+if (%scale_array[12*$scale+(($i+%key_to_index[$key]) mod 12)]=1)
+set_key_color($i,$KEY_COLOR_TURQUOISE)
 else
 set_key_color($i,$KEY_COLOR_INACTIVE)
 end if
@@ -2514,10 +2507,10 @@ end on
 on ui_control($scale_knob)
 $key := get_control_par(get_ui_id($key_knob),$CONTROL_PAR_VALUE)
 $scale := get_control_par(get_ui_id($scale_knob),$CONTROL_PAR_VALUE)
-$i := 20
+$i := 0
 while ($i<128)
-if (%scale_array[12*$scale+(($i-%key_to_index[$key]) mod 12)]=1)
-set_key_color($i,$KEY_COLOR_WARM_YELLOW)
+if (%scale_array[12*$scale+(($i+%key_to_index[$key]) mod 12)]=1)
+set_key_color($i,$KEY_COLOR_TURQUOISE)
 else
 set_key_color($i,$KEY_COLOR_INACTIVE)
 end if
